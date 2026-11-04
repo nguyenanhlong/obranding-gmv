@@ -54,6 +54,8 @@ src/
 
 Muốn đổi người phụ trách: sửa đúng các dòng trong `.github/CODEOWNERS` bằng một PR riêng.
 
+Checklist theo người: [`src/platform/TASKS.md`](src/platform/TASKS.md) · [`src/features/revenue/TASKS.md`](src/features/revenue/TASKS.md) · [`src/features/orders/TASKS.md`](src/features/orders/TASKS.md)
+
 Mỗi nhánh có file `TASKS.md` trong đúng scope của mình — tick dần khi làm.
 
 ## Đổi nguồn dữ liệu
