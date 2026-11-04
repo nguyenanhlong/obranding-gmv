@@ -1,29 +1,29 @@
 # CODEOWNERS — mỗi file đúng một owner.
-# Đổi slice thì chỉ sửa đúng 2 dòng của người đó, không sửa gì khác.
-# Lưu ý: cả 3 người phải có quyền write trên repo thì review mới được tính.
+# Đổi slice thì chỉ sửa đúng các dòng của người đó, không sửa gì khác.
+# Cả 3 người đều đã có quyền write nên review của owner được tính.
 
-# ---------------------------------------------------------------- FE-A
-/app/(growth)/growth/layout.tsx        @nguyenanhlong
-/app/(growth)/growth/page.tsx          @nguyenanhlong
-/app/(growth)/growth/error.tsx         @nguyenanhlong
-/app/(growth)/growth/_components/      @nguyenanhlong
-/app/api/reports/revalidate/           @nguyenanhlong
-/src/platform/                         @nguyenanhlong
-/src/contracts/                        @nguyenanhlong
+# ---------------------------------------------------------------- FE-A — Chinh (@shenny1255-cmyk)
+/app/(growth)/growth/layout.tsx        @shenny1255-cmyk
+/app/(growth)/growth/page.tsx          @shenny1255-cmyk
+/app/(growth)/growth/error.tsx         @shenny1255-cmyk
+/app/(growth)/growth/_components/      @shenny1255-cmyk
+/app/api/reports/revalidate/           @shenny1255-cmyk
+/src/platform/                         @shenny1255-cmyk
+/src/contracts/                        @shenny1255-cmyk
 
-# ---------------------------------------------------------------- FE-B
-/app/(growth)/growth/@revenue/         @phuckeo1231
-/app/api/reports/revenue/              @phuckeo1231
-/src/features/revenue/                 @phuckeo1231
+# ---------------------------------------------------------------- FE-B — Long (@nguyenanhlong)
+/app/(growth)/growth/@revenue/         @nguyenanhlong
+/app/api/reports/revenue/              @nguyenanhlong
+/src/features/revenue/                 @nguyenanhlong
 
-# ---------------------------------------------------------------- FE-C
-/app/(growth)/growth/@orders/          @shenny1255-cmyk
-/app/api/reports/orders/               @shenny1255-cmyk
-/app/api/reports/buyers/               @shenny1255-cmyk
-/src/features/orders/                  @shenny1255-cmyk
-/src/features/buyers/                  @shenny1255-cmyk
+# ---------------------------------------------------------------- FE-C — Phuc (@phuckeo1231)
+/app/(growth)/growth/@orders/          @phuckeo1231
+/app/api/reports/orders/               @phuckeo1231
+/app/api/reports/buyers/               @phuckeo1231
+/src/features/orders/                  @phuckeo1231
+/src/features/buyers/                  @phuckeo1231
 
-# ---------------------------------------------------------------- chung
+# ---------------------------------------------------------------- cấu hình chung — Tech Lead
 /.github/                              @nguyenanhlong
 /package.json                          @nguyenanhlong
 /package-lock.json                     @nguyenanhlong

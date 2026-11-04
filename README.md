@@ -48,11 +48,11 @@ src/
 
 | Nhánh | Owner | Phạm vi | Việc đầu tiên |
 |---|---|---|---|
-| `feat/fe-a-shell` | [@nguyenanhlong](https://github.com/nguyenanhlong) | `layout.tsx`, `_components/**`, `src/platform/**`, `src/contracts/**` | FilterBar điều hướng tức thì, UI kit, revalidate |
-| `feat/fe-b-revenue` | [@phuckeo1231](https://github.com/phuckeo1231) | `@revenue/**`, `src/features/revenue/**` | Growth chart + bảng theo sàn |
-| `feat/fe-c-orders` | [@shenny1255-cmyk](https://github.com/shenny1255-cmyk) | `@orders/**`, `src/features/orders/**`, `src/features/buyers/**` | KPI đơn, funnel, buyer, cohort |
+| `feat/fe-a-chinh` | **Chinh** — [@shenny1255-cmyk](https://github.com/shenny1255-cmyk) | `layout.tsx`, `_components/**`, `src/platform/**`, `src/contracts/**` | FilterBar điều hướng tức thì, UI kit, revalidate |
+| `feat/fe-b-long` | **Long** — [@nguyenanhlong](https://github.com/nguyenanhlong) | `@revenue/**`, `src/features/revenue/**` | Growth chart + bảng theo sàn |
+| `feat/fe-c-phuc` | **Phuc** — [@phuckeo1231](https://github.com/phuckeo1231) | `@orders/**`, `src/features/orders/**`, `src/features/buyers/**` | KPI đơn, funnel, buyer, cohort |
 
-Muốn đổi người phụ trách: sửa đúng 2 dòng trong `.github/CODEOWNERS` bằng một PR riêng.
+Muốn đổi người phụ trách: sửa đúng các dòng trong `.github/CODEOWNERS` bằng một PR riêng.
 
 Mỗi nhánh có file `TASKS.md` trong đúng scope của mình — tick dần khi làm.
 
