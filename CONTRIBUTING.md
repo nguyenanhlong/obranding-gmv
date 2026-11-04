@@ -32,7 +32,7 @@ Body nêu **vì sao**, không chỉ **cái gì**. Commit nhỏ, mỗi commit m�
 1. PR ≤ 400 dòng diff (không tính fixture/test).
 2. Điền đủ template, đặc biệt mục **Contract impact**.
 3. CI phải xanh: `verify` là check bắt buộc.
-4. Cần 1 approve từ owner của vùng bị chạm (CODEOWNERS).
+4. Cần **1 approve từ một trong hai người còn lại** (GitHub không cho tự approve PR của mình).
 5. Không tự merge PR của mình khi chạm `src/contracts/**` hoặc `src/platform/**`.
 
 ## 4. Ranh giới — điều tuyệt đối không làm
