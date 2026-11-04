@@ -1,31 +1,35 @@
 # CODEOWNERS — mỗi file đúng một owner.
-# Đổi slice thì chỉ sửa đúng các dòng của người đó, không sửa gì khác.
-# Cả 3 người đều đã có quyền write nên review của owner được tính.
 
 # ---------------------------------------------------------------- FE-A — Chinh (@shenny1255-cmyk)
-/app/(growth)/growth/layout.tsx        @shenny1255-cmyk
-/app/(growth)/growth/page.tsx          @shenny1255-cmyk
-/app/(growth)/growth/error.tsx         @shenny1255-cmyk
-/app/(growth)/growth/_components/      @shenny1255-cmyk
-/app/api/reports/revalidate/           @shenny1255-cmyk
-/src/platform/                         @shenny1255-cmyk
-/src/contracts/                        @shenny1255-cmyk
+/app/(admin)/layout.tsx                        @shenny1255-cmyk
+/app/(admin)/growth/page.tsx                   @shenny1255-cmyk
+/app/(admin)/growth/loading.tsx                @shenny1255-cmyk
+/app/(admin)/growth/error.tsx                  @shenny1255-cmyk
+/app/api/exports/growth/                       @shenny1255-cmyk
+/app/api/reports/revalidate/                   @shenny1255-cmyk
+/src/platform/                                 @shenny1255-cmyk
+/src/contracts/                                @shenny1255-cmyk
+/src/features/growth-overview/                 @shenny1255-cmyk
 
 # ---------------------------------------------------------------- FE-B — Long (@nguyenanhlong)
-/app/(growth)/growth/@revenue/         @nguyenanhlong
-/app/api/reports/revenue/              @nguyenanhlong
-/src/features/revenue/                 @nguyenanhlong
+/app/(admin)/growth/period/                    @nguyenanhlong
+/app/(admin)/orders/                           @nguyenanhlong
+/app/api/exports/period/                       @nguyenanhlong
+/src/features/period-detail/                   @nguyenanhlong
+/src/features/order-detail/                    @nguyenanhlong
 
 # ---------------------------------------------------------------- FE-C — Phuc (@phuckeo1231)
-/app/(growth)/growth/@orders/          @phuckeo1231
-/app/api/reports/orders/               @phuckeo1231
-/app/api/reports/buyers/               @phuckeo1231
-/src/features/orders/                  @phuckeo1231
-/src/features/buyers/                  @phuckeo1231
+/app/(admin)/growth/customers/                 @phuckeo1231
+/app/(admin)/growth/sellers/                   @phuckeo1231
+/app/api/exports/customer/                     @phuckeo1231
+/app/api/exports/seller/                       @phuckeo1231
+/src/features/buyer-detail/                    @phuckeo1231
+/src/features/seller-detail/                   @phuckeo1231
 
 # ---------------------------------------------------------------- cấu hình chung — Tech Lead
-/.github/                              @nguyenanhlong
-/package.json                          @nguyenanhlong
-/package-lock.json                     @nguyenanhlong
-/eslint.config.mjs                     @nguyenanhlong
-/tsconfig.json                         @nguyenanhlong
+/.github/                                      @nguyenanhlong
+/package.json                                  @nguyenanhlong
+/package-lock.json                             @nguyenanhlong
+/eslint.config.mjs                             @nguyenanhlong
+/tsconfig.json                                 @nguyenanhlong
+/docs/                                         @nguyenanhlong

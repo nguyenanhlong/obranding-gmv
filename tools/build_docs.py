@@ -420,13 +420,13 @@ def build_docx(blocks: list[dict]) -> None:
     r.font.color.rgb = NAVY
 
     p = doc.add_paragraph()
-    r = p.add_run("Doanh thu sàn · Đơn hàng · User mua hàng")
+    r = p.add_run("GMV · Đơn hàng · User mua hàng")
     r.font.size = Pt(16)
     r.font.color.rgb = GRAY
 
     p = doc.add_paragraph()
     p.paragraph_format.space_before = Pt(10)
-    r = p.add_run("Kế hoạch chia việc cho 3 FE trên Next.js 15 App Router\ntheo mô hình mỗi người một slice độc lập, không conflict khi merge")
+    r = p.add_run("Kế hoạch chia việc cho 3 FE theo 6 artboard của design\nmỗi người một màn hình, không conflict khi merge")
     r.font.size = Pt(11.5)
     r.font.color.rgb = INK
     p.paragraph_format.line_spacing = 1.4
@@ -436,9 +436,9 @@ def build_docx(blocks: list[dict]) -> None:
         ("Phiên bản", "1.0 — Draft"),
         ("Ngày", "04/11/2026"),
         ("Người lập", "Tech Lead Frontend"),
-        ("Team", "3 FE — FE-A Shell & Filter, FE-B Revenue, FE-C Orders & Buyers"),
+        ("Team", "Chinh (M1 + platform) · Long (M2 + M6) · Phuc (M4 + M5)"),
         ("Stack", "Next.js 15 App Router · TypeScript strict · Tailwind · shadcn/ui · Recharts · zod"),
-        ("Trạng thái", "Chờ chốt với Figma và BE trước khi code"),
+        ("Trạng thái", "Bản 2 — thay thế bản 1 (chia theo giả định, đã bỏ)"),
     ]
     t = doc.add_table(rows=0, cols=2)
     t.autofit = False
@@ -464,9 +464,9 @@ def build_docx(blocks: list[dict]) -> None:
     r.font.bold = True
     r.font.color.rgb = BLUE
     for line in (
-        "1 màn hình, 3 slice độc lập, mỗi file đúng một owner",
-        "10 endpoint, 3 sơ đồ luồng, kế hoạch triển khai 2 tuần",
-        "Chờ chốt: frame Figma và 8 câu hỏi kỹ thuật với BE",
+        "6 artboard: 1 hub + 3 màn chi tiết + 1 đặc tả số liệu",
+        "3 FE, mỗi người sở hữu trọn vẹn màn hình của mình",
+        "Còn 5 điểm cần chốt với BE (mục 11)",
     ):
         p = doc.add_paragraph()
         p.paragraph_format.space_after = Pt(3)
@@ -1243,8 +1243,9 @@ def main() -> None:
 
     print("Build DOCX ...")
     build_docx(blocks)
-    print("Build PPTX ...")
-    build_pptx()
+    if os.environ.get("BUILD_PPTX") == "1":
+        print("Build PPTX ...")
+        build_pptx()
     print("Xong.")
 
 

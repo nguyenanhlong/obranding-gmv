@@ -1,39 +1,27 @@
 import { describe, expect, it } from 'vitest';
 import {
+  DEFAULT_PERIOD,
   DEFAULT_RANGE_DAYS,
   FilterError,
   MAX_RANGE_DAYS,
-  comparisonRange,
-  daysBetween,
   filtersToQueryString,
   parseFilters,
-  shiftDays,
-  todayIn,
+  parsePositiveInt,
+  searchParamsToRecord,
 } from '../filters';
+import { addDays, diffDays, bucketOf, bucketRange, previousRange } from '@/platform/time';
 
 describe('parseFilters', () => {
-  it('không có tham số thì mặc định 30 ngày gần nhất', () => {
+  it('không có tham số thì mặc định 365 ngày gần nhất, chu kỳ tháng', () => {
     const f = parseFilters({});
-    expect(daysBetween(f.from, f.to)).toBe(DEFAULT_RANGE_DAYS);
-    expect(f.to).toBe(todayIn());
-    expect(f.granularity).toBe('day');
-    expect(f.compare).toBe('previous_period');
-    expect(f.marketplaces).toEqual([]);
+    expect(diffDays(f.from, f.to)).toBe(DEFAULT_RANGE_DAYS);
+    expect(f.period).toBe(DEFAULT_PERIOD);
+    expect(f.tz).toBe('Asia/Ho_Chi_Minh');
   });
 
-  it('nhận marketplaces dạng CSV và khử trùng lặp', () => {
-    const f = parseFilters({ marketplaces: 'shopee, tiktok ,shopee' });
-    expect(f.marketplaces).toEqual(['shopee', 'tiktok']);
-  });
-
-  it('nhận marketplaces dạng repeated param', () => {
-    const f = parseFilters({ marketplaces: ['lazada', 'tiki'] });
-    expect(f.marketplaces).toEqual(['lazada', 'tiki']);
-  });
-
-  it('granularity lạ thì rơi về day, không nổ', () => {
-    const f = parseFilters({ granularity: 'quarter' });
-    expect(f.granularity).toBe('day');
+  it('chu kỳ lạ rơi về mặc định, không ném lỗi', () => {
+    expect(parseFilters({ period: 'quarterly' }).period).toBe(DEFAULT_PERIOD);
+    expect(parseFilters({ period: 'quarter' }).period).toBe('quarter');
   });
 
   it('from > to thì ném FilterError', () => {
@@ -41,8 +29,8 @@ describe('parseFilters', () => {
   });
 
   it('vượt quá số ngày tối đa thì ném FilterError', () => {
-    const from = '2026-01-01';
-    const to = shiftDays(from, MAX_RANGE_DAYS + 1);
+    const from = '2025-01-01';
+    const to = addDays(from, MAX_RANGE_DAYS + 1);
     expect(() => parseFilters({ from, to })).toThrow(FilterError);
   });
 
@@ -51,31 +39,58 @@ describe('parseFilters', () => {
   });
 });
 
-describe('comparisonRange', () => {
-  const base = parseFilters({ from: '2026-10-01', to: '2026-10-10' });
-
-  it('previous_period lùi đúng độ dài kỳ', () => {
-    expect(comparisonRange(base)).toEqual({ from: '2026-09-21', to: '2026-09-30' });
-  });
-
-  it('previous_year lùi 365 ngày', () => {
-    expect(comparisonRange({ ...base, compare: 'previous_year' })).toEqual({
-      from: '2025-10-01',
-      to: '2025-10-10',
-    });
-  });
-
-  it('none thì không có kỳ so sánh', () => {
-    expect(comparisonRange({ ...base, compare: 'none' })).toBeNull();
+describe('filtersToQueryString', () => {
+  it('giữ đủ 4 tham số', () => {
+    const f = parseFilters({ from: '2026-01-01', to: '2026-03-31', period: 'quarter' });
+    const qs = filtersToQueryString(f);
+    expect(qs).toContain('from=2026-01-01');
+    expect(qs).toContain('to=2026-03-31');
+    expect(qs).toContain('period=quarter');
   });
 });
 
-describe('filtersToQueryString', () => {
-  it('giữ được nhiều marketplace', () => {
-    const f = parseFilters({ from: '2026-10-01', to: '2026-10-10', marketplaces: 'shopee,tiki' });
-    const qs = filtersToQueryString(f);
-    expect(qs).toContain('from=2026-10-01');
-    expect(qs).toContain('marketplaces=shopee');
-    expect(qs).toContain('marketplaces=tiki');
+describe('searchParamsToRecord', () => {
+  it('giữ repeated param thay vì lấy phần tử cuối', () => {
+    const rec = searchParamsToRecord(new URLSearchParams('a=1&a=2&b=3'));
+    expect(rec.a).toEqual(['1', '2']);
+    expect(rec.b).toBe('3');
+  });
+});
+
+describe('parsePositiveInt', () => {
+  it('chặn trần và giá trị âm', () => {
+    expect(parsePositiveInt('7', 1, 10)).toBe(7);
+    expect(parsePositiveInt('99', 1, 10)).toBe(10);
+    expect(parsePositiveInt('-3', 5)).toBe(5);
+    expect(parsePositiveInt(undefined, 3)).toBe(3);
+  });
+});
+
+describe('bucketOf', () => {
+  it('tháng, quý, năm, tuần', () => {
+    expect(bucketOf('2026-10-05', 'month')).toBe('2026-10');
+    expect(bucketOf('2026-10-05', 'quarter')).toBe('2026-Q4');
+    expect(bucketOf('2026-10-05', 'year')).toBe('2026');
+    expect(bucketOf('2026-10-05', 'week')).toBe('2026-10-05'); // thứ 2
+  });
+});
+
+describe('bucketRange', () => {
+  it('khoảng ngày của bucket tháng là đầu tháng đến cuối tháng', () => {
+    expect(bucketRange('2026-02', 'month')).toEqual({ from: '2026-02-01', to: '2026-02-28' });
+    expect(bucketRange('2026-01', 'month')).toEqual({ from: '2026-01-01', to: '2026-01-31' });
+  });
+
+  it('quý 4 kết thúc 31/12', () => {
+    expect(bucketRange('2026-Q4', 'quarter')).toEqual({ from: '2026-10-01', to: '2026-12-31' });
+  });
+});
+
+describe('previousRange', () => {
+  it('lùi đúng độ dài kỳ', () => {
+    expect(previousRange('2026-10-01', '2026-10-10')).toEqual({
+      from: '2026-09-21',
+      to: '2026-09-30',
+    });
   });
 });

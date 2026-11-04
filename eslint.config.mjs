@@ -20,13 +20,8 @@ export default tseslint.config(
 
   {
     files: ['**/*.{ts,tsx}'],
-    languageOptions: {
-      globals: {
-        React: 'readonly',
-      },
-    },
+    languageOptions: { globals: { React: 'readonly' } },
     rules: {
-      // TypeScript đã lo việc này
       'no-undef': 'off',
       '@typescript-eslint/no-unused-vars': [
         'error',
@@ -48,9 +43,11 @@ export default tseslint.config(
       'boundaries/elements': [
         { type: 'contracts', pattern: 'src/contracts/**' },
         { type: 'platform', pattern: 'src/platform/**' },
-        { type: 'feat-revenue', pattern: 'src/features/revenue/**' },
-        { type: 'feat-orders', pattern: 'src/features/orders/**' },
-        { type: 'feat-buyers', pattern: 'src/features/buyers/**' },
+        { type: 'feat-growth', pattern: 'src/features/growth-overview/**' },
+        { type: 'feat-period', pattern: 'src/features/period-detail/**' },
+        { type: 'feat-buyer', pattern: 'src/features/buyer-detail/**' },
+        { type: 'feat-seller', pattern: 'src/features/seller-detail/**' },
+        { type: 'feat-order', pattern: 'src/features/order-detail/**' },
         { type: 'app', pattern: 'app/**' },
       ],
     },
@@ -64,12 +61,22 @@ export default tseslint.config(
           rules: [
             { from: 'contracts', allow: [] },
             { from: 'platform', allow: ['contracts'] },
-            { from: 'feat-revenue', allow: ['contracts', 'platform', 'feat-revenue'] },
-            { from: 'feat-orders', allow: ['contracts', 'platform', 'feat-orders'] },
-            { from: 'feat-buyers', allow: ['contracts', 'platform', 'feat-buyers'] },
+            { from: 'feat-growth', allow: ['contracts', 'platform', 'feat-growth'] },
+            { from: 'feat-period', allow: ['contracts', 'platform', 'feat-period'] },
+            { from: 'feat-buyer', allow: ['contracts', 'platform', 'feat-buyer'] },
+            { from: 'feat-seller', allow: ['contracts', 'platform', 'feat-seller'] },
+            { from: 'feat-order', allow: ['contracts', 'platform', 'feat-order'] },
             {
               from: 'app',
-              allow: ['contracts', 'platform', 'feat-revenue', 'feat-orders', 'feat-buyers'],
+              allow: [
+                'contracts',
+                'platform',
+                'feat-growth',
+                'feat-period',
+                'feat-buyer',
+                'feat-seller',
+                'feat-order',
+              ],
             },
           ],
         },
@@ -79,9 +86,9 @@ export default tseslint.config(
         {
           patterns: [
             {
-              group: ['**/fixture', '**/fixture.ts', '**/*.mock'],
+              group: ['**/mock/dataset', '**/*.mock'],
               message:
-                'Không import fixture/mock ngoài server/source.ts. Dùng queries.ts của slice.',
+                'Không import dataset/mock ngoài server/source.ts hoặc server mock của chính slice.',
             },
           ],
         },
@@ -89,13 +96,13 @@ export default tseslint.config(
     },
   },
 
-  // server layer được phép chạm mock + fixture
+  // server layer được phép chạm mock
   {
-    files: ['src/features/*/server/source.ts', 'src/features/*/server/*.mock.ts'],
+    files: ['src/features/*/server/**'],
     rules: { 'no-restricted-imports': 'off' },
   },
 
-  // page/component không được tự đọc request (phải dùng parseFilters)
+  // component không được đọc request trực tiếp
   {
     files: ['src/features/*/components/**/*.{ts,tsx}', 'src/platform/**/*.{ts,tsx}'],
     rules: {
@@ -104,9 +111,8 @@ export default tseslint.config(
         {
           patterns: [
             {
-              group: ['next/headers', '**/fixture', '**/fixture.ts', '**/*.mock'],
-              message:
-                'Component không đọc request trực tiếp. Nhận filters qua props từ layout.',
+              group: ['next/headers', '**/mock/dataset', '**/*.mock'],
+              message: 'Component không đọc request và không chạm mock trực tiếp.',
             },
           ],
         },

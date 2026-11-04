@@ -19,7 +19,6 @@ export function DeltaBadge({ delta, className }: { delta: Delta; className?: str
         tone,
         className,
       )}
-      title={delta.compareTo ? `So với ${delta.compareTo.from} → ${delta.compareTo.to}` : undefined}
     >
       <span aria-hidden>{arrow}</span>
       {delta.pct === null ? 'mới' : formatSignedPercent(delta.pct)}

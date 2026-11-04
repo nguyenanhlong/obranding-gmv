@@ -1,44 +1,66 @@
 // Ring 0 — hợp đồng dùng chung. Chỉ được THÊM, không đổi tên field.
-// Owner: FE-A. Thay đổi phải là PR riêng có 2 reviewer.
+// Owner: FE-A (Chinh). Thay đổi phải là PR riêng có 2 reviewer.
 
 export type IsoDate = string; // 'YYYY-MM-DD'
-export type Currency = 'VND';
+export type IsoDateTime = string; // ISO 8601
 
-/** Số tiền luôn là số nguyên đơn vị nhỏ nhất (VND = đồng). Cấm string ở tầng view. */
-export type Money = { amount: number; currency: Currency };
+export type Money = { amount: number; currency: 'VND' };
 
-export type DateRange = { from: IsoDate; to: IsoDate };
+/** Chu kỳ gom số liệu — khớp filter "Xem theo" ở màn M1 */
+export type Period = 'day' | 'week' | 'month' | 'quarter' | 'year';
+
+export type OrderStatus =
+  | 'PENDING'
+  | 'PREPARING'
+  | 'COMPLETED'
+  | 'CANCELLED'
+  | 'NEEDS_RESOLUTION';
 
 export type DeltaDirection = 'up' | 'down' | 'flat';
 
 export type Delta = {
-  /** chênh tuyệt đối so với kỳ so sánh */
   value: number;
-  /** % thay đổi; null khi kỳ trước = 0 (không chia được) */
+  /** null khi kỳ trước = 0 — không được hiển thị 0% */
   pct: number | null;
   direction: DeltaDirection;
-  compareTo: DateRange | null;
 };
 
-export type Percent = number; // 0..1
-
-export type Paginated<T> = {
+export type Page<T> = {
   items: T[];
   total: number;
   page: number;
   pageSize: number;
 };
 
-export type Granularity = 'day' | 'week' | 'month';
-export type CompareMode = 'previous_period' | 'previous_year' | 'none';
+export type TabKey = 'orders' | 'buyers' | 'sellers';
 
-export type Marketplace = { id: string; name: string; logoUrl?: string };
+/**
+ * Một dòng đơn con (parent_order_id IS NOT NULL) — dùng chung cho
+ * bảng đơn ở M2 (chi tiết kỳ), M4 (chi tiết user), M5 (chi tiết nhà bán).
+ */
+export type OrderRow = {
+  id: string;
+  publicId: string;
+  placedAt: IsoDateTime;
+  status: OrderStatus;
+  sellerId: string;
+  sellerCode: string;
+  sellerName: string;
+  customerId: string;
+  customerName: string;
+  category: string;
+  region: string;
+  itemCount: number;
+  payment: 'COD' | 'PREPAID';
+  discounts: { label: string; amount: number }[];
+  total: Money;
+};
 
-/** Sắc thái trạng thái dùng cho cả đơn hàng và buyer */
-export type OrderStatus =
-  | 'pending'
-  | 'confirmed'
-  | 'shipping'
-  | 'delivered'
-  | 'cancelled'
-  | 'returned';
+/** Nhãn hiển thị cố định cho trạng thái đơn */
+export const ORDER_STATUS_LABEL: Record<OrderStatus, string> = {
+  PENDING: 'Chờ xử lý',
+  PREPARING: 'Chuẩn bị hàng',
+  COMPLETED: 'Hoàn thành',
+  CANCELLED: 'Đã huỷ',
+  NEEDS_RESOLUTION: 'Cần giải quyết',
+};

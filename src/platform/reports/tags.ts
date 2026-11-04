@@ -1,11 +1,12 @@
-// Cache tag theo slice. Chỉ thêm, không đổi tên tag cũ.
-// Owner: FE-A. BE gọi webhook với tag tương ứng để revalidate.
+// Cache tag theo màn hình. Chỉ thêm, không đổi tên tag cũ.
+// BE gọi POST /api/reports/revalidate với tag tương ứng.
 
 export const REPORT_TAGS = {
-  revenue: 'reports:revenue',
-  orders: 'reports:orders',
-  buyers: 'reports:buyers',
-  meta: 'reports:meta',
+  growth: 'reports:growth',
+  period: 'reports:period',
+  buyer: 'reports:buyer',
+  seller: 'reports:seller',
+  order: 'reports:order',
 } as const;
 
 export type ReportTag = (typeof REPORT_TAGS)[keyof typeof REPORT_TAGS];
