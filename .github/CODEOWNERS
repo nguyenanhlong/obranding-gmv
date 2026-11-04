@@ -1,6 +1,6 @@
 # CODEOWNERS — mỗi file đúng một owner.
-# TODO: thay @fe-b-username / @fe-c-username bằng username GitHub thật của 2 bạn.
-# Cho tới khi thay, các path đó không có owner hợp lệ và sẽ không tự request review.
+# Đổi slice thì chỉ sửa đúng 2 dòng của người đó, không sửa gì khác.
+# Lưu ý: cả 3 người phải có quyền write trên repo thì review mới được tính.
 
 # ---------------------------------------------------------------- FE-A
 /app/(growth)/growth/layout.tsx        @nguyenanhlong
@@ -12,16 +12,16 @@
 /src/contracts/                        @nguyenanhlong
 
 # ---------------------------------------------------------------- FE-B
-/app/(growth)/growth/@revenue/         @fe-b-username
-/app/api/reports/revenue/              @fe-b-username
-/src/features/revenue/                 @fe-b-username
+/app/(growth)/growth/@revenue/         @phuckeo1231
+/app/api/reports/revenue/              @phuckeo1231
+/src/features/revenue/                 @phuckeo1231
 
 # ---------------------------------------------------------------- FE-C
-/app/(growth)/growth/@orders/          @fe-c-username
-/app/api/reports/orders/               @fe-c-username
-/app/api/reports/buyers/               @fe-c-username
-/src/features/orders/                  @fe-c-username
-/src/features/buyers/                  @fe-c-username
+/app/(growth)/growth/@orders/          @shenny1255-cmyk
+/app/api/reports/orders/               @shenny1255-cmyk
+/app/api/reports/buyers/               @shenny1255-cmyk
+/src/features/orders/                  @shenny1255-cmyk
+/src/features/buyers/                  @shenny1255-cmyk
 
 # ---------------------------------------------------------------- chung
 /.github/                              @nguyenanhlong
