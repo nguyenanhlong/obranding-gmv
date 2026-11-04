@@ -27,22 +27,93 @@ npm run dev                    # http://localhost:3000/growth
 | M5 Chi tiết nhà bán | `/growth/sellers/[sellerId]` | Phuc | `src/features/seller-detail` |
 | M6 Chi tiết đơn | `/orders/[orderId]` | Long | `src/features/order-detail` |
 
-## Cấu trúc
+## Cấu trúc thư mục
+
+Mỗi dòng ghi rõ **ai sở hữu** — không ai sửa file của người khác.
 
 ```
-app/(admin)/
-├─ layout.tsx                    Chinh  sidebar + breadcrumb
-├─ growth/page.tsx               Chinh  M1
-├─ growth/period/page.tsx        Long   M2
-├─ growth/customers/[id]/page.tsx Phuc  M4
-├─ growth/sellers/[id]/page.tsx   Phuc  M5
-└─ orders/[orderId]/page.tsx      Long  M6
-
-src/
-├─ contracts/base.ts             OrderRow, Period, Delta, Money — Chinh sở hữu
-├─ platform/                     filter, UI kit, format, mock dataset, export — Chinh
-└─ features/<slice>/             contracts + server/ + components — owner của slice
+.
+├─ app/                                        ROUTE (Next.js App Router)
+│  ├─ (admin)/                                 nhóm route có sidebar
+│  │  ├─ layout.tsx                            Chinh   sidebar + breadcrumb + topbar
+│  │  ├─ growth/
+│  │  │  ├─ page.tsx                           Chinh   M1 — hub báo cáo tăng trưởng
+│  │  │  ├─ loading.tsx / error.tsx            Chinh   state của M1
+│  │  │  ├─ period/page.tsx                    Long    M2 — chi tiết kỳ
+│  │  │  ├─ customers/[customerId]/page.tsx    Phuc    M4 — chi tiết user
+│  │  │  └─ sellers/[sellerId]/page.tsx        Phuc    M5 — chi tiết nhà bán
+│  │  └─ orders/[orderId]/page.tsx             Long    M6 — chi tiết đơn
+│  └─ api/
+│     ├─ reports/revalidate/route.ts           Chinh   webhook BE gọi khi có số mới
+│     └─ exports/
+│        ├─ growth/route.ts                    Chinh   CSV của M1
+│        ├─ period/route.ts                    Long    CSV của M2
+│        ├─ customer/[customerId]/route.ts     Phuc    CSV của M4
+│        └─ seller/[sellerId]/route.ts         Phuc    CSV của M5
+│
+├─ src/
+│  ├─ contracts/base.ts                        Chinh   OrderRow, Period, Delta, Page, Money
+│  │                                                   Ring 0 — chỉ thêm, không đổi tên
+│  ├─ platform/                                Chinh   hạ tầng dùng chung
+│  │  ├─ reports/
+│  │  │  ├─ filters.ts                         parseFilters, parsePositiveInt, query string
+│  │  │  ├─ source.ts                          pickSource(mock, http) theo DATA_SOURCE
+│  │  │  ├─ http.ts                            reportFetch + auth + timeout 8s
+│  │  │  ├─ csv.ts                             toCsv + BOM UTF-8 cho Excel
+│  │  │  ├─ export.ts                          xlsx/pdf chưa hỗ trợ → 501
+│  │  │  └─ tags.ts                            cache tag theo màn
+│  │  ├─ mock/
+│  │  │  ├─ dataset.ts                         sinh ~4.000 đơn deterministic
+│  │  │  └─ aggregate.ts                       totalsOf, deltaOf, newBuyerRate, groupBy
+│  │  ├─ ui/                                   KpiCard, ChartFrame, DataTable, OrderTable,
+│  │  │                                        ReportFilter, EmptyState, DeltaBadge
+│  │  ├─ format/                               money · percent · date
+│  │  └─ time.ts                               addDays, bucketOf, bucketRange, previousRange
+│  └─ features/                                mỗi slice = 1 màn hình
+│     ├─ growth-overview/                      Chinh   M1
+│     ├─ period-detail/                        Long    M2
+│     ├─ buyer-detail/                         Phuc    M4
+│     ├─ seller-detail/                        Phuc    M5
+│     └─ order-detail/                         Long    M6
+│
+└─ docs/                                       plan.md · tasks/ · prompt-reanalysis.md
 ```
+
+### Một slice gồm những gì
+
+```
+src/features/<slice>/
+├─ contracts.ts          type view model + interface <X>Source  ← hợp đồng với BE
+├─ components/           UI của màn đó, chỉ nhận view model, không fetch
+└─ server/
+   ├─ <x>.mock.ts        đọc platform/mock/dataset.ts, tính toán — dùng khi DATA_SOURCE=mock
+   ├─ <x>.http.ts        implement <X>Source bằng reportFetch — thêm khi BE bàn giao
+   ├─ source.ts          pickSource(mock, http)     ← điểm đổi nguồn DUY NHẤT
+   └─ queries.ts         unstable_cache + tag       ← page gọi cái này
+```
+
+### Luồng một request
+
+```
+page.tsx
+  └─ getX(filters)          queries.ts   cache 60s, tag theo màn
+       └─ <X>Source         source.ts    chọn mock hay http theo DATA_SOURCE
+            ├─ <x>.mock.ts  đọc dataset, tính chỉ số
+            └─ <x>.http.ts  reportFetch → mapper → view model
+  └─ <Component>            components/  render view model, không biết dữ liệu từ đâu
+```
+
+### Bảng tra nhanh
+
+| Muốn sửa... | Vào file | Owner |
+|---|---|---|
+| Filter kỳ, validate ngày | `src/platform/reports/filters.ts` | Chinh |
+| Số liệu giả để dev | `src/platform/mock/dataset.ts` | Chinh |
+| Công thức một chỉ số | `src/features/<slice>/server/<x>.mock.ts` | owner của màn |
+| Nối BE thật | `src/features/<slice>/server/<x>.http.ts` + `source.ts` | owner của màn |
+| Cột/nhãn bảng đơn (dùng chung 3 màn) | `src/platform/ui/order-table.tsx` | Chinh |
+| Giao diện một màn | `src/features/<slice>/components/**` | owner của màn |
+| Thêm type dùng chung | `src/contracts/base.ts` (PR riêng) | Chinh |
 
 ## Ba nhánh
 
