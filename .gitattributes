@@ -1,0 +1,10 @@
+# Chuẩn hoá line ending để 3 máy (Windows/macOS) không tạo diff giả
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.docx binary
+*.pptx binary
+
+package-lock.json text eol=lf
+*.yml text eol=lf

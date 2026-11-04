@@ -1,0 +1,29 @@
+# dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# next
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+
+# env
+.env
+.env*.local
+
+# test / coverage
+coverage/
+
+# misc
+.DS_Store
+Thumbs.db
+.vercel
+*.log
+
+# python cache (docs tooling)
+__pycache__/
+
+# cache sơ đồ khi build lại docs
+docs/diagrams/

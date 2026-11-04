@@ -1,0 +1,31 @@
+# CODEOWNERS — mỗi file đúng một owner.
+# TODO: thay @fe-b-username / @fe-c-username bằng username GitHub thật của 2 bạn.
+# Cho tới khi thay, các path đó không có owner hợp lệ và sẽ không tự request review.
+
+# ---------------------------------------------------------------- FE-A
+/app/(growth)/growth/layout.tsx        @nguyenanhlong
+/app/(growth)/growth/page.tsx          @nguyenanhlong
+/app/(growth)/growth/error.tsx         @nguyenanhlong
+/app/(growth)/growth/_components/      @nguyenanhlong
+/app/api/reports/revalidate/           @nguyenanhlong
+/src/platform/                         @nguyenanhlong
+/src/contracts/                        @nguyenanhlong
+
+# ---------------------------------------------------------------- FE-B
+/app/(growth)/growth/@revenue/         @fe-b-username
+/app/api/reports/revenue/              @fe-b-username
+/src/features/revenue/                 @fe-b-username
+
+# ---------------------------------------------------------------- FE-C
+/app/(growth)/growth/@orders/          @fe-c-username
+/app/api/reports/orders/               @fe-c-username
+/app/api/reports/buyers/               @fe-c-username
+/src/features/orders/                  @fe-c-username
+/src/features/buyers/                  @fe-c-username
+
+# ---------------------------------------------------------------- chung
+/.github/                              @nguyenanhlong
+/package.json                          @nguyenanhlong
+/package-lock.json                     @nguyenanhlong
+/eslint.config.mjs                     @nguyenanhlong
+/tsconfig.json                         @nguyenanhlong

@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-50: oklch(0.97 0.02 254);
+  --color-brand-600: oklch(0.52 0.19 258);
+  --color-brand-700: oklch(0.45 0.17 258);
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  font-family:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    sans-serif;
+}
+
+/* số liệu luôn thẳng cột */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}

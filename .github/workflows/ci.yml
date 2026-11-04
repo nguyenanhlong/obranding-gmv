@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Typecheck · Lint · Test · Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    env:
+      DATA_SOURCE: mock
+      NEXT_TELEMETRY_DISABLED: '1'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint (boundaries)
+        run: npm run lint
+
+      - name: Unit test
+        run: npm run test
+
+      - name: Build
+        run: npm run build
+
+      - name: Tóm tắt
+        if: always()
+        run: |
+          echo "### Kết quả CI" >> $GITHUB_STEP_SUMMARY
+          echo "- ref: \`${{ github.ref_name }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- commit: \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- job status: \`${{ job.status }}\`" >> $GITHUB_STEP_SUMMARY
