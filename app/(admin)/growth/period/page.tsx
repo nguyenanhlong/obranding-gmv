@@ -10,6 +10,7 @@ import { OrderTable } from '@/platform/ui/order-table';
 import { ReportFilter } from '@/platform/ui/report-filter';
 import { DailyBars } from '@/features/period-detail/components/daily-bars';
 import { getPeriodDetail } from '@/features/period-detail/server/queries';
+import { PageSizeSelect } from '@/features/period-detail/components/page-size-select';
 
 export const dynamic = 'force-dynamic';
 
@@ -122,9 +123,6 @@ export default async function PeriodPage({ searchParams }: PageProps) {
           >
             Lọc
           </button>
-          <span className="ml-auto text-xs text-slate-500">
-            Hiển thị {pageSize} · trang {page}/{totalPages}
-          </span>
         </form>
 
         <OrderTable
@@ -132,25 +130,38 @@ export default async function PeriodPage({ searchParams }: PageProps) {
           variant="period"
           startIndex={(page - 1) * pageSize}
         />
+        <div className="mt-4 flex flex-wrap items=center justify-between gap-3 border-t border-slate-100 pt-3">
+          {/* Bên Trái: Phân trang */}
+          <div className="flex items-center gap-3">
+            <span className="text-sm text-slate-500">
+              Kết quả {formatCount(detail.orders.total)}
+            </span>
+            <PageSizeSelect value={pageSize} basePath="/growth/period" query={qs} />
+          </div>
+          {/* Bên Phải: Phân trang*/}
+          <div className="flex items-center gap-2">
+            <Link
+              href={`/growth/period?${qs}&page=${Math.max(1, page - 1)}&pageSize=${pageSize}`}
+              aria-disabled={page <= 1}
+              scroll={false}
+              className="inline-flex h-8 items-center rounded-md border border-slate-300 px-3 text-sm text-slate-700 hover:bg-slate-50 aria-disabled:pointer-events-none aria-disabled:opacity-40"
+            >
+              Trước
+            </Link>
 
-        <div className="mt-3 flex items-center gap-2 text-sm">
-          <Link
-            href={`/growth/period?${qs}&page=${Math.max(1, page - 1)}&pageSize=${pageSize}`}
-            className={`rounded border border-slate-300 px-3 py-1 ${
-              page <= 1 ? 'pointer-events-none opacity-40' : 'hover:bg-slate-50'
-            }`}
-          >
-            Trước
-          </Link>
-          <span className="text-xs text-slate-500">Trang {page}</span>
-          <Link
-            href={`/growth/period?${qs}&page=${Math.min(totalPages, page + 1)}&pageSize=${pageSize}`}
-            className={`rounded border border-slate-300 px-3 py-1 ${
-              page >= totalPages ? 'pointer-events-none opacity-40' : 'hover:bg-slate-50'
-            }`}
-          >
-            Tiếp tục
-          </Link>
+            <span className="px-1 text-sm text-slate-600 tabular-nums">
+              Trang {page}/{totalPages}
+            </span>
+
+            <Link
+              href={`/growth/period?${qs}&page=${Math.min(totalPages, page + 1)}&pageSize=${pageSize}`}
+              aria-disabled={page >= totalPages}
+              scroll={false}
+              className="inline-flex h-8 items-center rounded-md border border-slate-300 px-3 text-sm text-slate-700 hover:bg-slate-50 aria-disabled:pointer-events-none aria-disabled:opacity-40"
+            >
+              Tiếp tục
+            </Link>
+          </div>
         </div>
       </ChartFrame>
     </div>
