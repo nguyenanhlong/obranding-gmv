@@ -98,7 +98,7 @@ export default async function BuyerPage({ params, searchParams }: PageProps) {
           {detail.topSellers.map((s) => (
             <li key={s.sellerId} className="flex items-center justify-between gap-3">
               <Link
-                href={`/growth/sellers/${s.sellerId}`}
+                href={`/growth/sellers/${s.sellerId}?${qs}`}
                 className="truncate text-slate-700 hover:underline"
               >
                 {s.sellerName}
