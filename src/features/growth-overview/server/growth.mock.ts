@@ -1,6 +1,6 @@
 import 'server-only';
 import type { ReportFilters } from '@/platform/reports/filters';
-import { previousRange } from '@/platform/time';
+import { previousRange, todayIn } from '@/platform/time';
 import { deltaOf, filterRange, groupBy, totalsOf } from '@/platform/mock/aggregate';
 import { allOrders } from '@/platform/mock/dataset';
 import { bucketOf, bucketRange } from '@/platform/time';
@@ -19,7 +19,7 @@ function buildSeries(from: string, to: string, period: ReportFilters['period']):
     .sort(([a], [b]) => (a < b ? -1 : 1))
     .map(([, rows]) => totalsOf(rows).orders);
 
-  const today = new Date().toISOString().slice(0, 10);
+    const today = todayIn();
 
   return currentBuckets.map((bucket, i) => {
     const totals = totalsOf(current.get(bucket) ?? []);
