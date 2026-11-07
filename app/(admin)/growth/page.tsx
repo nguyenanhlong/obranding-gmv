@@ -53,7 +53,7 @@ export default async function GrowthPage({ searchParams }: PageProps) {
         </div>
       </div>
 
-      <ReportFilter filters={filters} />
+      <ReportFilter filters={filters} presets keep={{ topN: String(topN) }} />
 
       <nav className="flex gap-1 border-b border-slate-200" aria-label="Tab chỉ số">
         {TABS.map((tab, i) => (
