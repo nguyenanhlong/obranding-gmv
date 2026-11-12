@@ -93,33 +93,9 @@ const COPY_FILES = [
   // M6
   'src/features/order-detail/contracts.ts',
   'src/features/order-detail/server/order.mock.ts',
+  'src/features/order-detail/server/order.schema.ts',
+  'src/features/order-detail/server/order.mapper.ts',
 ];
-
-/** Chỉ giữ đúng field thuộc contract OrderRow khi xuất sample. */
-const ORDER_ROW_KEYS = [
-  'id',
-  'publicId',
-  'placedAt',
-  'status',
-  'sellerId',
-  'sellerCode',
-  'sellerName',
-  'customerId',
-  'customerName',
-  'category',
-  'region',
-  'itemCount',
-  'payment',
-  'discounts',
-  'total',
-] as const;
-
-function toOrderRow(row: object): Record<string, unknown> {
-  const source = row as Record<string, unknown>;
-  const out: Record<string, unknown> = {};
-  for (const key of ORDER_ROW_KEYS) out[key] = source[key];
-  return out;
-}
 
 function writeJson(relPath: string, data: unknown): void {
   const full = join(OUT, relPath);
@@ -248,10 +224,8 @@ async function main(): Promise<void> {
   if (firstOrder) {
     const orderDetail = await order.get(firstOrder.orderPublicId);
     if (orderDetail) {
-      writeJson('samples/m6-order-detail.json', {
-        ...orderDetail,
-        order: toOrderRow(orderDetail.order),
-      });
+      // API 5 — projection growthDrawer, đúng shape hợp đồng
+      writeJson('samples/m6-order-detail.json', orderDetail);
     }
   }
 

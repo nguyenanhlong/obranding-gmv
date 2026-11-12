@@ -1,80 +1,103 @@
 {
-  "order": {
-    "id": "order-5418",
-    "publicId": "2626093000005418AB",
-    "placedAt": "2026-09-30T22:15:14+07:00",
-    "status": "COMPLETED",
-    "sellerId": "seller-53",
-    "sellerCode": "SL0001364",
-    "sellerName": "CÔNG TY CỔ PHẦN CÀ PHÊ ĐẤT ĐỎ 6",
+  "orderPublicId": "2626093000005418AB",
+  "status": "COMPLETED",
+  "state": "COMPLETED",
+  "hasSanhBenefit": false,
+  "customer": {
     "customerId": "customer-105",
     "customerName": "Đỗ Thảo Mai",
-    "category": "Sở thích & sưu tầm",
-    "region": "Thành phố Hà Nội",
-    "itemCount": 3,
-    "payment": "COD",
-    "discounts": [
+    "maskedPhone": "091****248"
+  },
+  "seller": {
+    "sellerId": "seller-53",
+    "sellerCode": "SL0001364",
+    "sellerName": "CÔNG TY CỔ PHẦN CÀ PHÊ ĐẤT ĐỎ 6"
+  },
+  "regionName": "Thành phố Hà Nội",
+  "payment": {
+    "method": "COD",
+    "status": "success"
+  },
+  "placedAt": "2026-09-30T15:15:14.000Z",
+  "items": [
+    {
+      "itemId": "order-5418",
+      "productName": "Sản phẩm 83 của CÔNG",
+      "sku": "1218-118",
+      "quantity": 3,
+      "unitPriceVnd": 826000,
+      "lineSubtotalVnd": 2478000
+    }
+  ],
+  "discountBreakdown": [
+    {
+      "kind": "PRODUCT_DISCOUNT",
+      "labelKey": "PRODUCT_DISCOUNT",
+      "amountVnd": 99120,
+      "includedIn": "PRODUCT",
+      "fundedBy": "PLATFORM",
+      "sellerFundedVnd": null,
+      "platformFundedVnd": null
+    },
+    {
+      "kind": "SELLER_VOUCHER",
+      "labelKey": "SHOP_VOUCHER",
+      "amountVnd": 74340,
+      "includedIn": "SELLER",
+      "fundedBy": "SELLER",
+      "sellerFundedVnd": null,
+      "platformFundedVnd": null
+    },
+    {
+      "kind": "SHIPPING_SUPPORT",
+      "labelKey": "SHIP_SUPPORT",
+      "amountVnd": 20000,
+      "includedIn": "SHIPPING",
+      "fundedBy": "MIXED",
+      "sellerFundedVnd": null,
+      "platformFundedVnd": null
+    }
+  ],
+  "totals": {
+    "subtotalVnd": 2478000,
+    "shippingFeeVnd": 25000,
+    "totalDiscountVnd": 193460,
+    "orderTotalVnd": 2309540
+  },
+  "delivery": {
+    "carrierName": null,
+    "trackingCode": null,
+    "milestones": [
       {
-        "label": "Giảm giá SP",
-        "amount": 99120
+        "code": "PLACED",
+        "occurredAt": "2026-09-30T22:15:14+07:00",
+        "source": "ORDER"
       },
       {
-        "label": "Voucher shop",
-        "amount": 74340
+        "code": "CONFIRMED",
+        "occurredAt": "2026-09-30T10:00:00+07:00",
+        "source": "ORDER"
       },
       {
-        "label": "Hỗ trợ ship",
-        "amount": 20000
+        "code": "PACKED",
+        "occurredAt": null,
+        "source": null
+      },
+      {
+        "code": "SHIPPED",
+        "occurredAt": "2026-10-02T10:00:00+07:00",
+        "source": "ORDER"
+      },
+      {
+        "code": "DELIVERED",
+        "occurredAt": "2026-10-04T10:00:00+07:00",
+        "source": "ORDER"
       }
     ],
-    "total": {
-      "amount": 2309540,
-      "currency": "VND"
-    }
+    "timelineIntegrity": "OUT_OF_ORDER"
   },
-  "product": {
-    "name": "Sản phẩm 83 của CÔNG",
-    "sku": "1218-118",
-    "unitPrice": 826000,
-    "quantity": 3
-  },
-  "subTotal": 2478000,
-  "shippingFee": 25000,
-  "totalDiscount": 193460,
-  "total": {
-    "amount": 2309540,
-    "currency": "VND"
-  },
-  "timeline": [
-    {
-      "key": "placed",
-      "label": "Đặt hàng",
-      "at": "2026-09-30T22:15:14+07:00",
-      "tone": "done"
-    },
-    {
-      "key": "confirmed",
-      "label": "Xác nhận",
-      "at": "2026-09-30T10:00:00+07:00",
-      "tone": "done"
-    },
-    {
-      "key": "packed",
-      "label": "Đóng gói",
-      "at": "2026-10-01T10:00:00+07:00",
-      "tone": "done"
-    },
-    {
-      "key": "shipped",
-      "label": "Gửi hàng",
-      "at": "2026-10-02T10:00:00+07:00",
-      "tone": "done"
-    },
-    {
-      "key": "delivered",
-      "label": "Giao thành công",
-      "at": "2026-10-04T10:00:00+07:00",
-      "tone": "done"
-    }
+  "dataQualityFlags": [
+    "PACKED_TIMESTAMP_UNAVAILABLE",
+    "TIMELINE_OUT_OF_ORDER"
   ]
 }

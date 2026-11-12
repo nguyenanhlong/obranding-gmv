@@ -20,7 +20,13 @@ const NAV = [
   { group: 'Hỗ trợ người dùng', items: [{ label: 'Chat với khách hàng', href: '#' }] },
 ];
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
+export default function AdminLayout({
+  children,
+  drawer,
+}: {
+  children: React.ReactNode;
+  drawer: React.ReactNode;
+}) {
   return (
     <div className="flex min-h-screen bg-slate-50">
       <aside className="hidden w-64 shrink-0 flex-col border-r border-slate-200 bg-white lg:flex">
@@ -64,6 +70,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
         <main className="min-w-0 flex-1 px-6 py-5">{children}</main>
       </div>
+      {drawer}
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { allOrders, customers, type MockOrder } from '@/platform/mock/dataset';
 import { bucketRange, todayIn } from '@/platform/time';
+import { maskPhone } from '@/platform/format/phone';
 import { PAGE_SIZE_PERIOD_ENTITY, type ListPeriodBuyersParams } from './contracts';
 import type { RawPeriodBuyerList } from './schema';
 
@@ -11,16 +12,7 @@ const PERIOD_OF_GROUP: Record<string, 'day' | 'week' | 'month' | 'quarter' | 'ye
   YEAR: 'year',
 };
 
-/** Gợi ý mask của hợp đồng: 3 số đầu + **** + 3 số cuối. */
-export function maskPhone(phone: string | null | undefined): string | null {
-  if (!phone) return null;
-  const digits = phone.replace(/^\+?84/, '0').replace(/\D/g, '');
-  if (!digits) return null;
-  if (digits.length >= 7) {
-    return `${digits.slice(0, 3)}****${digits.slice(-3)}`;
-  }
-  return `****${digits.slice(-2)}`;
-}
+export { maskPhone };
 
 type Aggregate = {
   customerId: string;

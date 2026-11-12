@@ -1,7 +1,8 @@
 import 'server-only';
 import { pickSource } from '@/platform/reports/source';
 import type { OrderSource } from '../contracts';
+import { orderHttpSource } from './order.http';
 import { orderMockSource } from './order.mock';
 
-/** TODO (FE-B): thêm `order.http.ts` khi BE bàn giao, rồi đổi ở đây. */
-export const orderSource: OrderSource = pickSource(orderMockSource, orderMockSource);
+/** API 5 — mock hoặc http theo DATA_SOURCE. */
+export const orderSource: OrderSource = pickSource(orderMockSource, orderHttpSource);
