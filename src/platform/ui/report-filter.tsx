@@ -1,4 +1,5 @@
 import type { ReportFilters } from '@/platform/reports/filters';
+import { todayIn } from '@/platform/time';
 
 /**
  * Filter kỳ dùng chung cho M1/M2 (M4/M5 có khoảng ngày riêng, dùng lại component này).
@@ -39,6 +40,7 @@ export function ReportFilter({
           type="date"
           name="from"
           defaultValue={filters.from}
+          max={todayIn(filters.tz)}
           required
           className="rounded-md border border-slate-300 px-2 py-1.5 text-sm"
         />
@@ -50,6 +52,7 @@ export function ReportFilter({
           type="date"
           name="to"
           defaultValue={filters.to}
+          max={todayIn(filters.tz)}
           required
           className="rounded-md border border-slate-300 px-2 py-1.5 text-sm"
         />

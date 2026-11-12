@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import type { Period } from '@/contracts/base';
-import { addDays, diffDays, todayIn } from '@/platform/time';
+import { addDays, bucketOf, diffDays, todayIn } from '@/platform/time';
 
 export const PERIODS = ['day', 'week', 'month', 'quarter', 'year'] as const;
 
@@ -79,4 +79,81 @@ export function parsePositiveInt(
   const n = Number(raw);
   if (!Number.isFinite(n) || n < 1) return fallback;
   return Math.min(Math.floor(n), max);
+}
+
+// ---------------------------------------------------------------- hợp đồng BE
+
+export type GroupBy = 'DAY' | 'WEEK' | 'MONTH' | 'QUARTER' | 'YEAR';
+
+const GROUP_BY: Record<Period, GroupBy> = {
+  day: 'DAY',
+  week: 'WEEK',
+  month: 'MONTH',
+  quarter: 'QUARTER',
+  year: 'YEAR',
+};
+
+/** Số kỳ tối đa mỗi request, theo API 1 */
+export const PERIOD_LIMITS: Record<Period, number> = {
+  day: 93,
+  week: 104,
+  month: 36,
+  quarter: 20,
+  year: 10,
+};
+
+/**
+ * URL công khai của FE giữ ?from&to&period; chỉ đổi tên tham số ở ĐÚNG hàm này
+ * khi gọi BE. Không nơi nào khác được tự map tên tham số.
+ */
+export function toApiQuery(f: ReportFilters): {
+  fromDate: string;
+  toDate: string;
+  groupBy: GroupBy;
+} {
+  return { fromDate: f.from, toDate: f.to, groupBy: GROUP_BY[f.period] };
+}
+
+export function countPeriods(f: ReportFilters): number {
+  const buckets = new Set<string>();
+  let cursor = f.from;
+  while (cursor <= f.to) {
+    buckets.add(bucketOf(cursor, f.period));
+    cursor = addDays(cursor, 1);
+  }
+  return buckets.size;
+}
+
+/** API 1: giới hạn số kỳ theo groupBy, toDate không được sau hôm nay. */
+export function assertGrowthRange(f: ReportFilters): void {
+  const today = todayIn(f.tz);
+  if (f.to > today) throw new FilterError('toDate không được sau ngày hôm nay');
+
+  const periods = countPeriods(f);
+  const limit = PERIOD_LIMITS[f.period];
+  if (periods > limit) {
+    throw new FilterError(
+      `Khoảng thời gian quá dài cho groupBy=${GROUP_BY[f.period]}: tối đa ${limit} kỳ (đang có ${periods})`,
+    );
+  }
+}
+
+/** API 6: fromDate ≤ hôm nay, toDate được sau hôm nay, hai đầu phải cùng một kỳ. */
+export function assertPeriodRange(f: ReportFilters): void {
+  const today = todayIn(f.tz);
+  if (f.from > today) throw new FilterError('fromDate không được sau ngày hôm nay');
+  if (bucketOf(f.from, f.period) !== bucketOf(f.to, f.period)) {
+    throw new FilterError(
+      `fromDate và toDate phải thuộc cùng một kỳ ${GROUP_BY[f.period]}`,
+    );
+  }
+}
+
+/** API 7/8: toDate ≤ hôm nay, khoảng tối đa 1.096 ngày. */
+export function assertEntityRange(f: ReportFilters): void {
+  const today = todayIn(f.tz);
+  if (f.to > today) throw new FilterError('toDate không được sau ngày hôm nay');
+
+  const span = diffDays(f.from, f.to);
+  if (span > 1096) throw new FilterError('Khoảng thời gian tối đa 1096 ngày');
 }

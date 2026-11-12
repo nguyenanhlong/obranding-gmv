@@ -1,13 +1,24 @@
 import 'server-only';
+import type { ZodType } from 'zod';
 
+/** Lỗi có thông điệp tiếng Việt từ BE (thường là 400 INVALID_ARGUMENT). */
 export class ReportApiError extends Error {
   constructor(
     readonly path: string,
     readonly status: number,
-    readonly body: string,
+    readonly userMessage: string,
+    readonly rawBody: string,
   ) {
-    super(`Report API ${status} @ ${path}`);
+    super(`${status} @ ${path}: ${userMessage}`);
     this.name = 'ReportApiError';
+  }
+}
+
+/** 404: nhà bán / user không tồn tại trên hệ thống (API 7, API 8). */
+export class ReportNotFoundError extends Error {
+  constructor(readonly path: string) {
+    super(`Không tìm thấy dữ liệu: ${path}`);
+    this.name = 'ReportNotFoundError';
   }
 }
 
@@ -21,19 +32,39 @@ function baseUrl(): string {
   return url;
 }
 
+/** Lấy câu tiếng Việt trong body lỗi của gateway: { message: { message } } hoặc { message } */
+function extractMessage(body: unknown, fallback: string): string {
+  if (typeof body !== 'object' || body === null) return fallback;
+  const outer = body as Record<string, unknown>;
+  const inner = outer.message;
+  if (typeof inner === 'string' && inner.trim()) return inner;
+  if (typeof inner === 'object' && inner !== null) {
+    const nested = (inner as Record<string, unknown>).message;
+    if (typeof nested === 'string' && nested.trim()) return nested;
+  }
+  return fallback;
+}
+
 /**
- * Wrapper fetch dùng chung cho mọi *.http.ts.
- * Caching do unstable_cache ở queries.ts lo → ở đây luôn no-store để tránh 2 tầng.
+ * Điểm vào DUY NHẤT để gọi API báo cáo.
+ * - bóc envelope { statusCode, message, data } của gateway
+ * - 400 → ReportApiError với userMessage lấy từ message.message
+ * - 404 → ReportNotFoundError (page sẽ gọi notFound())
+ * - luôn no-store: caching do queries.ts lo, tránh hai tầng cache
  */
-export async function reportFetch<T>(path: string, query: Query = {}): Promise<T> {
+export async function gatewayFetch<T>(
+  path: string,
+  schema: ZodType<T>,
+  query: Query = {},
+): Promise<T> {
   const url = new URL(path, baseUrl());
 
-  for (const [k, v] of Object.entries(query)) {
-    if (v === undefined || v === null || v === '') continue;
-    if (Array.isArray(v)) {
-      for (const item of v) url.searchParams.append(k, item);
+  for (const [key, value] of Object.entries(query)) {
+    if (value === undefined || value === null || value === '') continue;
+    if (Array.isArray(value)) {
+      for (const item of value) url.searchParams.append(key, item);
     } else {
-      url.searchParams.set(k, String(v));
+      url.searchParams.set(key, String(value));
     }
   }
 
@@ -47,10 +78,44 @@ export async function reportFetch<T>(path: string, query: Query = {}): Promise<T
     signal: AbortSignal.timeout(TIMEOUT_MS),
   });
 
+  if (res.status === 404) throw new ReportNotFoundError(path);
+
   if (!res.ok) {
-    const body = await res.text().catch(() => '');
-    throw new ReportApiError(path, res.status, body);
+    const raw = await res.text().catch(() => '');
+    let parsed: unknown = null;
+    try {
+      parsed = raw ? JSON.parse(raw) : null;
+    } catch {
+      parsed = null;
+    }
+    throw new ReportApiError(path, res.status, extractMessage(parsed, raw.slice(0, 200)), raw);
   }
 
+  const body = (await res.json()) as { data?: unknown };
+  const payload = body && typeof body === 'object' && 'data' in body ? body.data : body;
+  return schema.parse(payload);
+}
+
+/** @deprecated dùng gatewayFetch. Giữ lại để slice cũ chưa chuyển kịp không vỡ build. */
+export async function reportFetch<T>(path: string, query: Query = {}): Promise<T> {
+  const url = new URL(path, baseUrl());
+  for (const [key, value] of Object.entries(query)) {
+    if (value === undefined || value === null || value === '') continue;
+    if (Array.isArray(value)) {
+      for (const item of value) url.searchParams.append(key, item);
+    } else {
+      url.searchParams.set(key, String(value));
+    }
+  }
+  const res = await fetch(url, {
+    cache: 'no-store',
+    headers: {
+      accept: 'application/json',
+      authorization: `Bearer ${process.env.REPORT_API_TOKEN ?? ''}`,
+      'x-request-id': crypto.randomUUID(),
+    },
+    signal: AbortSignal.timeout(TIMEOUT_MS),
+  });
+  if (!res.ok) throw new ReportApiError(path, res.status, res.statusText, '');
   return (await res.json()) as T;
 }

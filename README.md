@@ -136,6 +136,20 @@ REPORT_API_TOKEN=...
 
 Khi BE xong: viết `<slice>/server/<x>.http.ts` implement `<X>Source`, đổi `pickSource(mock, http)` trong `source.ts`, đổi env. Page/component không đổi.
 
+## Quy ước dữ liệu với BE
+
+| Quy ước | FE làm gì | Ở đâu |
+|---|---|---|
+| Envelope `{statusCode, message, data}` | Bóc `data`, đọc lỗi 400 từ `message.message`, 404 → `notFound()` | `platform/reports/http.ts` → `gatewayFetch` |
+| Số là **chuỗi** (`"1234"`, `"1.234"`, `"1234.00"`) | Parse sang number ở mapper, không `Number()` trần | `platform/reports/parse.ts` |
+| Phần trăm BE trả **đã ×100** (`10.9`) | `percentToRatio()` → view model 0..1, chỉ format khi hiển thị | `platform/reports/parse.ts` |
+| Query API: `fromDate`, `toDate`, `groupBy` (HOA) | URL vẫn `?from&to&period`; chỉ `toApiQuery()` đổi tên | `platform/reports/filters.ts` |
+| Giới hạn kỳ: DAY 93 · WEEK 104 · MONTH 36 · QUARTER 20 · YEAR 10 | `assertGrowthRange()` trước khi gọi API 1 | `platform/reports/filters.ts` |
+| API 6: hai đầu cùng một kỳ, `toDate` được ở tương lai | `assertPeriodRange()` | `platform/reports/filters.ts` |
+| API 7/8: `toDate ≤ hôm nay`, tối đa 1.096 ngày | `assertEntityRange()` | `platform/reports/filters.ts` |
+
+`growthPercent`/`previousValue` **do BE tính** — FE không tự suy ra.
+
 Endpoint dự kiến lấy từ đặc tả trong design (M3): `/admin/order-reports/growth`, `/growth/period`, `/growth/customers/:id`, `/growth/sellers/:id`, `/admin/orders/:publicId`.
 
 ## CI/CD
