@@ -1,4 +1,5 @@
-import type { OrderRow, Page } from '@/contracts/base';
+import type { Page } from '@/contracts/base';
+import type { GrowthOrderRow } from '@/platform/reports/orders/contracts';
 import type { ReportFilters } from '@/platform/reports/filters';
 import type { SeriesUnit } from '@/platform/reports/series';
 
@@ -44,9 +45,12 @@ export type SellerSummary = {
 export type SellerOrderQuery = {
   page: number;
   pageSize: number;
-  /** lọc theo một mốc trên biểu đồ */
-  from?: string;
-  to?: string;
+  /** key mốc trên biểu đồ (?bucket=), unit lấy từ series của API 7 */
+  bucket?: string;
+  bucketGroupBy?: string;
+  bucketPeriodKey?: string;
+  q?: string;
+  status?: string;
 };
 
 /** API 7 trả summary; danh sách đơn là API 2 (chưa có hợp đồng). */
@@ -56,7 +60,7 @@ export interface SellerSource {
     sellerId: string,
     f: ReportFilters,
     q: SellerOrderQuery,
-  ): Promise<Page<OrderRow>>;
+  ): Promise<Page<GrowthOrderRow>>;
 }
 
 export const SELLER_SERIES_TITLE: Record<SeriesUnit, string> = {

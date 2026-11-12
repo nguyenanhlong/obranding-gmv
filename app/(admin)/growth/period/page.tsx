@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { parseFilters, parsePositiveInt } from '@/platform/reports/filters';
+import { parseFilters, parsePageSize, parsePositiveInt } from '@/platform/reports/filters';
 import { filtersToQueryString, periodRangeError } from '@/platform/reports/filters';
 import { formatDate } from '@/platform/format/date';
 import { todayIn } from '@/platform/time';
@@ -10,6 +10,7 @@ import { ChartFrame } from '@/platform/ui/chart-frame';
 import { EmptyState } from '@/platform/ui/empty-state';
 import { KpiCard } from '@/platform/ui/kpi-card';
 import { OrderTable } from '@/platform/ui/order-table';
+import { ORDER_STATUS_OPTIONS, PAGE_SIZE_ORDER } from '@/platform/reports/orders/contracts';
 import { DistributionBars } from '@/features/period-detail/components/distribution-bars';
 import { PageSizeSelect } from '@/features/period-detail/components/page-size-select';
 import {
@@ -20,15 +21,6 @@ import {
 import { getPeriodSummary, listPeriodOrders } from '@/features/period-detail/server/queries';
 
 export const dynamic = 'force-dynamic';
-
-const STATUS_OPTIONS = [
-  { value: 'ALL', label: 'Tất cả trạng thái' },
-  { value: 'PENDING', label: 'Chờ xử lý' },
-  { value: 'PREPARING', label: 'Chuẩn bị hàng' },
-  { value: 'COMPLETED', label: 'Hoàn thành' },
-  { value: 'CANCELLED', label: 'Đã huỷ' },
-  { value: 'NEEDS_RESOLUTION', label: 'Cần giải quyết' },
-];
 
 const TABS = [
   { key: 'orders', label: 'Đơn hàng' },
@@ -67,7 +59,7 @@ export default async function PeriodPage({ searchParams }: PageProps) {
   }
 
   const page = parsePositiveInt(sp.page, 1, 9999);
-  const pageSize = parsePositiveInt(sp.pageSize, 10, 30);
+  const pageSize = parsePageSize(sp.pageSize, PAGE_SIZE_ORDER, 10);
   const q = typeof sp.q === 'string' ? sp.q : undefined;
   const status = typeof sp.status === 'string' ? sp.status : undefined;
   const tab = TABS.find((t) => t.key === sp.tab)?.key ?? 'orders';
@@ -87,6 +79,12 @@ export default async function PeriodPage({ searchParams }: PageProps) {
   const totalPages = Math.max(1, Math.ceil(orders.total / pageSize));
   const dayOnly = period.startDate === period.endDate;
   const approximate = period.status === 'PROVISIONAL';
+
+  const tableParams = new URLSearchParams(qs);
+  tableParams.set('tab', 'orders');
+  if (q) tableParams.set('q', q);
+  if (status && status !== 'ALL') tableParams.set('status', status);
+  const tableQs = tableParams.toString();
 
   const tabCount: Record<(typeof TABS)[number]['key'], number> = {
     orders: kpis.orders.value,
@@ -217,7 +215,7 @@ export default async function PeriodPage({ searchParams }: PageProps) {
                 defaultValue={status ?? 'ALL'}
                 className="rounded-md border border-slate-300 px-2 py-1.5 text-sm"
               >
-                {STATUS_OPTIONS.map((o) => (
+                {ORDER_STATUS_OPTIONS.map((o) => (
                   <option key={o.value} value={o.value}>
                     {o.label}
                   </option>
@@ -239,12 +237,17 @@ export default async function PeriodPage({ searchParams }: PageProps) {
             <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 pt-3">
               <div className="flex items-center gap-3">
                 <span className="text-sm text-slate-500">Kết quả {formatCount(orders.total)}</span>
-                <PageSizeSelect value={pageSize} basePath="/growth/period" query={`${qs}&tab=orders`} />
+                <PageSizeSelect
+                  value={pageSize}
+                  options={[...PAGE_SIZE_ORDER]}
+                  basePath="/growth/period"
+                  query={tableQs}
+                />
               </div>
 
               <div className="flex items-center gap-2">
                 <Link
-                  href={`/growth/period?${qs}&tab=orders&page=${Math.max(1, page - 1)}&pageSize=${pageSize}`}
+                  href={`/growth/period?${tableQs}&page=${Math.max(1, page - 1)}&pageSize=${pageSize}`}
                   className={`inline-flex h-8 items-center rounded-md border border-slate-300 px-3 text-sm ${
                     page <= 1 ? 'pointer-events-none opacity-40' : 'hover:bg-slate-50'
                   }`}
@@ -255,7 +258,7 @@ export default async function PeriodPage({ searchParams }: PageProps) {
                   Trang {page}/{totalPages}
                 </span>
                 <Link
-                  href={`/growth/period?${qs}&tab=orders&page=${Math.min(totalPages, page + 1)}&pageSize=${pageSize}`}
+                  href={`/growth/period?${tableQs}&page=${Math.min(totalPages, page + 1)}&pageSize=${pageSize}`}
                   className={`inline-flex h-8 items-center rounded-md border border-slate-300 px-3 text-sm ${
                     page >= totalPages ? 'pointer-events-none opacity-40' : 'hover:bg-slate-50'
                   }`}

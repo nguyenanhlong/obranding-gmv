@@ -119,4 +119,9 @@ export default tseslint.config(
       ],
     },
   },
+  // mock dùng chung của platform cũng là server layer
+  {
+    files: ['src/platform/reports/*/mock.ts'],
+    rules: { 'no-restricted-imports': 'off' },
+  },
 );

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { parseFilters, parsePositiveInt } from '@/platform/reports/filters';
+import { parseFilters, parsePageSize, parsePositiveInt } from '@/platform/reports/filters';
 import { filtersToQueryString, entityRangeError } from '@/platform/reports/filters';
 import { formatDate } from '@/platform/format/date';
 import { formatCompactMoney, formatCount } from '@/platform/format/money';
@@ -10,6 +10,8 @@ import { EmptyState } from '@/platform/ui/empty-state';
 import { KpiCard } from '@/platform/ui/kpi-card';
 import { OrderTable } from '@/platform/ui/order-table';
 import { ReportFilter } from '@/platform/ui/report-filter';
+import { ORDER_STATUS_OPTIONS, PAGE_SIZE_ORDER } from '@/platform/reports/orders/contracts';
+import { PageSizeSelect } from '@/features/period-detail/components/page-size-select';
 import { BuyerSeriesChart } from '@/features/buyer-detail/components/buyer-series-chart';
 import { BUYER_SERIES_TITLE, BUYER_TYPE_LABEL } from '@/features/buyer-detail/contracts';
 import { getBuyerSummary, listBuyerOrders } from '@/features/buyer-detail/server/queries';
@@ -38,12 +40,14 @@ export default async function BuyerPage({ params, searchParams }: PageProps) {
   }
 
   const page = parsePositiveInt(sp.page, 1, 9999);
-  const pageSize = parsePositiveInt(sp.pageSize, 10, 30);
+  const pageSize = parsePageSize(sp.pageSize, PAGE_SIZE_ORDER, 10);
+  const q = typeof sp.q === 'string' && sp.q ? sp.q : undefined;
+  const status = typeof sp.status === 'string' && sp.status ? sp.status : undefined;
 
   const summary = await getBuyerSummary(customerId, filters);
   if (!summary) notFound();
 
-  const orders = await listBuyerOrders(customerId, filters, { page, pageSize });
+  const orders = await listBuyerOrders(customerId, filters, { page, pageSize, q, status });
 
   const qs = filtersToQueryString(filters);
   const totalPages = Math.max(1, Math.ceil(orders.total / pageSize));
@@ -51,6 +55,11 @@ export default async function BuyerPage({ params, searchParams }: PageProps) {
   const defTo = typeof sp.defTo === 'string' ? sp.defTo : filters.to;
   const maxSellerValue = Math.max(1, ...summary.topSellers.map((s) => s.value));
   const lastOrder = summary.kpis.lastOrderAt ? formatDate(summary.kpis.lastOrderAt) : '—';
+
+  const tableParams = new URLSearchParams(qs);
+  if (q) tableParams.set('q', q);
+  if (status && status !== 'ALL') tableParams.set('status', status);
+  const tableQs = tableParams.toString();
 
   return (
     <div className="space-y-5">
@@ -172,15 +181,56 @@ export default async function BuyerPage({ params, searchParams }: PageProps) {
 
       <ChartFrame
         title={`Đơn hàng của ${summary.customer.name} (${formatCount(orders.total)})`}
-        description="Danh sách đơn lấy từ API 2 — hiện là mock, chờ hợp đồng"
+        description="Danh sách đơn lấy từ API 2 theo khoảng thời gian đang chọn"
       >
+        <form method="get" action="" className="mb-3 flex flex-wrap items-center gap-2">
+          <input type="hidden" name="from" value={filters.from} />
+          <input type="hidden" name="to" value={filters.to} />
+          <input type="hidden" name="period" value={filters.period} />
+          <input
+            type="search"
+            name="q"
+            defaultValue={q ?? ''}
+            placeholder="Tìm mã đơn / nhà bán"
+            className="w-56 rounded-md border border-slate-300 px-2 py-1.5 text-sm"
+          />
+          <select
+            name="status"
+            defaultValue={status ?? 'ALL'}
+            className="rounded-md border border-slate-300 px-2 py-1.5 text-sm"
+          >
+            {ORDER_STATUS_OPTIONS.map((o) => (
+              <option key={o.value} value={o.value}>
+                {o.label}
+              </option>
+            ))}
+          </select>
+          <button
+            type="submit"
+            className="rounded-md bg-slate-900 px-3 py-1.5 text-sm font-medium text-white"
+          >
+            Lọc
+          </button>
+          <span className="ml-auto text-xs text-slate-500">
+            Hiển thị {pageSize} · trang {page}/{totalPages}
+          </span>
+        </form>
+
         <OrderTable rows={orders.items} variant="buyer" startIndex={(page - 1) * pageSize} />
 
         <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 pt-3">
-          <span className="text-sm text-slate-500">Kết quả {formatCount(orders.total)}</span>
+          <div className="flex items-center gap-3">
+            <span className="text-sm text-slate-500">Kết quả {formatCount(orders.total)}</span>
+            <PageSizeSelect
+              value={pageSize}
+              options={[...PAGE_SIZE_ORDER]}
+              basePath={`/growth/customers/${customerId}`}
+              query={tableQs}
+            />
+          </div>
           <div className="flex items-center gap-2">
             <Link
-              href={`/growth/customers/${customerId}?${qs}&page=${Math.max(1, page - 1)}&pageSize=${pageSize}`}
+              href={`/growth/customers/${customerId}?${tableQs}&page=${Math.max(1, page - 1)}&pageSize=${pageSize}`}
               className={`inline-flex h-8 items-center rounded-md border border-slate-300 px-3 text-sm ${
                 page <= 1 ? 'pointer-events-none opacity-40' : 'hover:bg-slate-50'
               }`}
@@ -191,7 +241,7 @@ export default async function BuyerPage({ params, searchParams }: PageProps) {
               Trang {page}/{totalPages}
             </span>
             <Link
-              href={`/growth/customers/${customerId}?${qs}&page=${Math.min(totalPages, page + 1)}&pageSize=${pageSize}`}
+              href={`/growth/customers/${customerId}?${tableQs}&page=${Math.min(totalPages, page + 1)}&pageSize=${pageSize}`}
               className={`inline-flex h-8 items-center rounded-md border border-slate-300 px-3 text-sm ${
                 page >= totalPages ? 'pointer-events-none opacity-40' : 'hover:bg-slate-50'
               }`}

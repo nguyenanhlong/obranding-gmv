@@ -19,16 +19,19 @@ export async function GET(req: Request) {
   const detail = await listPeriodOrders(filters, { page: 1, pageSize: MAX_EXPORT_ROWS });
 
   const rows = detail.items.map((o) => ({
-    ma_don: o.publicId,
+    ma_don: o.orderPublicId,
+    so_don_hang: o.orderNumber,
     ngay_dat: o.placedAt,
-    ma_nha_ban: o.sellerCode,
-    ten_nha_ban: o.sellerName,
-    ma_kh: o.customerId.replace('customer-', ''),
-    khach_hang: o.customerName,
-    danh_muc: o.category,
-    khu_vuc: o.region,
-    gia_tri: o.total.amount,
-    thanh_toan: o.payment,
+    ma_nha_ban: o.sellerCode ?? '',
+    ten_nha_ban: o.sellerName ?? '',
+    ma_kh: o.customerId ?? '',
+    khach_hang: o.customerName ?? '',
+    danh_muc: o.primaryCategoryName ?? '',
+    khu_vuc: o.regionName ?? '',
+    so_san_pham: o.itemQuantity,
+    gia_tri: o.orderTotalVnd,
+    uu_dai: o.discountBadges.join('|'),
+    thanh_toan: `${o.paymentMethod ?? ''}/${o.paymentStatus ?? ''}`,
     trang_thai: o.status,
   }));
 

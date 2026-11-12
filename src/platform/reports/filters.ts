@@ -81,6 +81,17 @@ export function parsePositiveInt(
   return Math.min(Math.floor(n), max);
 }
 
+/** pageSize chỉ nhận đúng bộ giá trị hợp đồng cho phép; sai thì về mặc định. */
+export function parsePageSize(
+  value: string | string[] | undefined,
+  allowed: readonly number[],
+  fallback: number,
+): number {
+  const raw = Array.isArray(value) ? value[0] : value;
+  const n = Number(raw);
+  return allowed.includes(n) ? n : fallback;
+}
+
 // ---------------------------------------------------------------- hợp đồng BE
 
 export type GroupBy = 'DAY' | 'WEEK' | 'MONTH' | 'QUARTER' | 'YEAR';

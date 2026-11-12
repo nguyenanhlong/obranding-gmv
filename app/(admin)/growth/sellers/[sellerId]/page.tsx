@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { parseFilters, parsePositiveInt } from '@/platform/reports/filters';
+import { parseFilters, parsePageSize, parsePositiveInt } from '@/platform/reports/filters';
 import { filtersToQueryString, entityRangeError } from '@/platform/reports/filters';
 import { formatDate } from '@/platform/format/date';
 import { formatCompactMoney, formatCount } from '@/platform/format/money';
@@ -10,6 +10,11 @@ import { EmptyState } from '@/platform/ui/empty-state';
 import { KpiCard } from '@/platform/ui/kpi-card';
 import { OrderTable } from '@/platform/ui/order-table';
 import { ReportFilter } from '@/platform/ui/report-filter';
+import {
+  ORDER_STATUS_OPTIONS,
+  PAGE_SIZE_ORDER,
+} from '@/platform/reports/orders/contracts';
+import { PageSizeSelect } from '@/features/period-detail/components/page-size-select';
 import { SellerSeriesChart } from '@/features/seller-detail/components/seller-series-chart';
 import { SELLER_SERIES_TITLE } from '@/features/seller-detail/contracts';
 import { getSellerSummary, listSellerOrders } from '@/features/seller-detail/server/queries';
@@ -38,25 +43,27 @@ export default async function SellerPage({ params, searchParams }: PageProps) {
   }
 
   const page = parsePositiveInt(sp.page, 1, 9999);
-  const pageSize = parsePositiveInt(sp.pageSize, 10, 30);
-  const bucketFrom = typeof sp.bucketFrom === 'string' ? sp.bucketFrom : undefined;
-  const bucketTo = typeof sp.bucketTo === 'string' ? sp.bucketTo : undefined;
+  const pageSize = parsePageSize(sp.pageSize, PAGE_SIZE_ORDER, 10);
+  const bucket = typeof sp.bucket === 'string' && sp.bucket ? sp.bucket : undefined;
+  const q = typeof sp.q === 'string' && sp.q ? sp.q : undefined;
+  const status = typeof sp.status === 'string' && sp.status ? sp.status : undefined;
 
   const summary = await getSellerSummary(sellerId, filters);
   if (!summary) notFound();
 
-  const orders = await listSellerOrders(sellerId, filters, {
-    page,
-    pageSize,
-    from: bucketFrom,
-    to: bucketTo,
-  });
+  const orders = await listSellerOrders(sellerId, filters, { page, pageSize, bucket, q, status });
 
   const qs = filtersToQueryString(filters);
   const totalPages = Math.max(1, Math.ceil(orders.total / pageSize));
   const defFrom = typeof sp.defFrom === 'string' ? sp.defFrom : filters.from;
   const defTo = typeof sp.defTo === 'string' ? sp.defTo : filters.to;
-  const bucketLabel = summary.series.buckets.find((b) => b.startDate === bucketFrom)?.label;
+  const bucketLabel = summary.series.buckets.find((b) => b.key === bucket)?.label;
+
+  const tableParams = new URLSearchParams(qs);
+  if (bucket) tableParams.set('bucket', bucket);
+  if (q) tableParams.set('q', q);
+  if (status && status !== 'ALL') tableParams.set('status', status);
+  const tableQs = tableParams.toString();
 
   return (
     <div className="space-y-5">
@@ -117,7 +124,7 @@ export default async function SellerPage({ params, searchParams }: PageProps) {
           bucketLabel ? `Đang lọc: ${bucketLabel}` : 'Bấm một mốc để lọc danh sách đơn bên dưới'
         }
         actions={
-          bucketFrom ? (
+          bucket ? (
             <Link
               href={`/growth/sellers/${sellerId}?${qs}`}
               className="rounded-md border border-slate-300 px-2 py-1 text-xs text-slate-600 hover:bg-slate-50"
@@ -136,15 +143,57 @@ export default async function SellerPage({ params, searchParams }: PageProps) {
 
       <ChartFrame
         title={`Đơn hàng của nhà bán (${formatCount(orders.total)})`}
-        description="Danh sách đơn lấy từ API 2 — hiện là mock, chờ hợp đồng"
+        description="Danh sách đơn lấy từ API 2, lọc theo đúng mốc đang chọn trên biểu đồ"
       >
+        <form method="get" action="" className="mb-3 flex flex-wrap items-center gap-2">
+          <input type="hidden" name="from" value={filters.from} />
+          <input type="hidden" name="to" value={filters.to} />
+          <input type="hidden" name="period" value={filters.period} />
+          {bucket ? <input type="hidden" name="bucket" value={bucket} /> : null}
+          <input
+            type="search"
+            name="q"
+            defaultValue={q ?? ''}
+            placeholder="Tìm mã đơn / khách hàng"
+            className="w-56 rounded-md border border-slate-300 px-2 py-1.5 text-sm"
+          />
+          <select
+            name="status"
+            defaultValue={status ?? 'ALL'}
+            className="rounded-md border border-slate-300 px-2 py-1.5 text-sm"
+          >
+            {ORDER_STATUS_OPTIONS.map((o) => (
+              <option key={o.value} value={o.value}>
+                {o.label}
+              </option>
+            ))}
+          </select>
+          <button
+            type="submit"
+            className="rounded-md bg-slate-900 px-3 py-1.5 text-sm font-medium text-white"
+          >
+            Lọc
+          </button>
+          <span className="ml-auto text-xs text-slate-500">
+            Hiển thị {pageSize} · trang {page}/{totalPages}
+          </span>
+        </form>
+
         <OrderTable rows={orders.items} variant="seller" startIndex={(page - 1) * pageSize} />
 
         <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 pt-3">
-          <span className="text-sm text-slate-500">Kết quả {formatCount(orders.total)}</span>
+          <div className="flex items-center gap-3">
+            <span className="text-sm text-slate-500">Kết quả {formatCount(orders.total)}</span>
+            <PageSizeSelect
+              value={pageSize}
+              options={[...PAGE_SIZE_ORDER]}
+              basePath={`/growth/sellers/${sellerId}`}
+              query={tableQs}
+            />
+          </div>
           <div className="flex items-center gap-2">
             <Link
-              href={`/growth/sellers/${sellerId}?${qs}${bucketFrom ? `&bucketFrom=${bucketFrom}&bucketTo=${bucketTo}` : ''}&page=${Math.max(1, page - 1)}&pageSize=${pageSize}`}
+              href={`/growth/sellers/${sellerId}?${tableQs}&page=${Math.max(1, page - 1)}&pageSize=${pageSize}`}
               className={`inline-flex h-8 items-center rounded-md border border-slate-300 px-3 text-sm ${
                 page <= 1 ? 'pointer-events-none opacity-40' : 'hover:bg-slate-50'
               }`}
@@ -155,7 +204,7 @@ export default async function SellerPage({ params, searchParams }: PageProps) {
               Trang {page}/{totalPages}
             </span>
             <Link
-              href={`/growth/sellers/${sellerId}?${qs}${bucketFrom ? `&bucketFrom=${bucketFrom}&bucketTo=${bucketTo}` : ''}&page=${Math.min(totalPages, page + 1)}&pageSize=${pageSize}`}
+              href={`/growth/sellers/${sellerId}?${tableQs}&page=${Math.min(totalPages, page + 1)}&pageSize=${pageSize}`}
               className={`inline-flex h-8 items-center rounded-md border border-slate-300 px-3 text-sm ${
                 page >= totalPages ? 'pointer-events-none opacity-40' : 'hover:bg-slate-50'
               }`}

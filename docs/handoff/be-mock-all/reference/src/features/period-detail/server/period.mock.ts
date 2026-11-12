@@ -1,42 +1,33 @@
-import type { OrderRow } from '@/contracts/base';
+import 'server-only';
 import type { ReportFilters } from '@/platform/reports/filters';
-import { filterRange } from '@/platform/mock/aggregate';
-import { allOrders } from '@/platform/mock/dataset';
+import { bucketOf } from '@/platform/time';
+import { mockListGrowthOrders } from '@/platform/reports/orders/mock';
+import {
+  toOrderPage,
+  type GrowthOrderStatusFilter,
+} from '@/platform/reports/orders/contracts';
 import type { PeriodOrderQuery, PeriodSource } from '../contracts';
 import { mapPeriodSummary } from './period.mapper';
 import { buildRawPeriodSummary } from './period.raw';
-
-function matches(row: OrderRow, q: string | undefined, status: string | undefined): boolean {
-  if (status && status !== 'ALL' && row.status !== status) return false;
-  if (!q) return true;
-  const needle = q.toLowerCase();
-  return (
-    row.publicId.toLowerCase().includes(needle) ||
-    row.sellerName.toLowerCase().includes(needle) ||
-    row.customerName.toLowerCase().includes(needle)
-  );
-}
+import { periodSummarySchema } from './period.schema';
 
 export const periodMockSource: PeriodSource = {
   async getSummary(f: ReportFilters) {
-    return mapPeriodSummary(buildRawPeriodSummary(f));
+    return mapPeriodSummary(periodSummarySchema.parse(buildRawPeriodSummary(f)));
   },
 
-  /**
-   * TODO (chờ API 2): đây là phần duy nhất còn mock trong M2.
-   * Khi BE có hợp đồng danh sách đơn, thay đúng hàm này bằng gatewayFetch.
-   */
+  /** Danh sách đơn — dùng chung module API 2, scope PERIOD. */
   async listOrders(f: ReportFilters, query: PeriodOrderQuery) {
-    const orders = filterRange(allOrders(), f.from, f.to)
-      .filter((o) => matches(o, query.q, query.status))
-      .sort((a, b) => (a.placedAt < b.placedAt ? 1 : -1));
-
-    const start = (query.page - 1) * query.pageSize;
-    return {
-      items: orders.slice(start, start + query.pageSize),
-      total: orders.length,
-      page: query.page,
-      pageSize: query.pageSize,
-    };
+    return toOrderPage(
+      mockListGrowthOrders({
+        scope: 'PERIOD',
+        groupBy: f.period.toUpperCase(),
+        periodKey: bucketOf(f.from, f.period),
+        page: query.page,
+        pageSize: query.pageSize,
+        q: query.q,
+        status: query.status as GrowthOrderStatusFilter | undefined,
+      }),
+    );
   },
 };

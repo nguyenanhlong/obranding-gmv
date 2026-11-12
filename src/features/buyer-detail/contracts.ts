@@ -1,4 +1,5 @@
-import type { OrderRow, Page } from '@/contracts/base';
+import type { Page } from '@/contracts/base';
+import type { GrowthOrderRow } from '@/platform/reports/orders/contracts';
 import type { ReportFilters } from '@/platform/reports/filters';
 import type { SeriesUnit } from '@/platform/reports/series';
 
@@ -63,6 +64,8 @@ export type BuyerOrderQuery = {
   pageSize: number;
   from?: string;
   to?: string;
+  q?: string;
+  status?: string;
 };
 
 /** API 8 trả summary; danh sách đơn là API 2 (chưa có hợp đồng). */
@@ -72,7 +75,7 @@ export interface BuyerSource {
     customerId: string,
     f: ReportFilters,
     q: BuyerOrderQuery,
-  ): Promise<Page<OrderRow>>;
+  ): Promise<Page<GrowthOrderRow>>;
 }
 
 export const BUYER_SERIES_TITLE: Record<SeriesUnit, string> = {

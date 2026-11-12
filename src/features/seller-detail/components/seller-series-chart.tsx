@@ -13,7 +13,7 @@ import {
 type SellerSeriesChartProps = {
   buckets: SellerSeriesBucket[];
   basePath: string;
-  /** query hiện tại, chưa gồm bucketFrom/bucketTo */
+  /** query hiện tại, chưa gồm bucket */
   query: string;
   height?: number;
 };
@@ -33,8 +33,7 @@ export function SellerSeriesChart({
 
   const openBucket = (bucket: SellerSeriesBucket) => {
     const qs = new URLSearchParams(query);
-    qs.set('bucketFrom', bucket.startDate);
-    qs.set('bucketTo', bucket.endDate);
+    qs.set('bucket', bucket.key);
     qs.set('page', '1');
     router.push(`${basePath}?${qs.toString()}`);
   };
@@ -92,14 +91,17 @@ export function SellerSeriesChart({
               fill="#4f46e5"
               radius={[4, 4, 0, 0]}
               cursor="pointer"
-              onClick={(entry) => openBucket(entry as unknown as SellerSeriesBucket)}
+              onClick={(entry) => {
+                const bucket = entry as unknown as SellerSeriesBucket;
+                if (bucket.orders > 0) openBucket(bucket);
+              }}
             />
           </BarChart>
         </ResponsiveContainer>
       </div>
 
       <p className="text-xs text-slate-500">
-        Rê chuột để xem nhanh · bấm một mốc để lọc danh sách đơn bên dưới
+        Rê chuột để xem nhanh · bấm một mốc để lọc danh sách đơn bên dưới (mốc 0 đơn không lọc).
       </p>
     </div>
   );

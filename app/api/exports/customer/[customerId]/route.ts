@@ -20,13 +20,14 @@ export async function GET(req: Request, ctx: RouteContext) {
   if (detail.items.length === 0) return new Response('not found', { status: 404 });
 
   const rows = detail.items.map((o) => ({
-    ma_don: o.publicId,
+    ma_don: o.orderPublicId,
     ngay_dat: o.placedAt,
-    nha_ban: o.sellerName,
-    danh_muc: o.category,
-    so_san_pham: o.itemCount,
-    gia_tri: o.total.amount,
-    thanh_toan: o.payment,
+    nha_ban: o.sellerName ?? '',
+    danh_muc: o.primaryCategoryName ?? '',
+    so_san_pham: o.itemQuantity,
+    gia_tri: o.orderTotalVnd,
+    uu_dai: o.discountBadges.join('|'),
+    thanh_toan: `${o.paymentMethod ?? ''}/${o.paymentStatus ?? ''}`,
     trang_thai: o.status,
   }));
 

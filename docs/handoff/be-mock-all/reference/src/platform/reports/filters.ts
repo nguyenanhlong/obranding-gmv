@@ -81,6 +81,17 @@ export function parsePositiveInt(
   return Math.min(Math.floor(n), max);
 }
 
+/** pageSize chỉ nhận đúng bộ giá trị hợp đồng cho phép; sai thì về mặc định. */
+export function parsePageSize(
+  value: string | string[] | undefined,
+  allowed: readonly number[],
+  fallback: number,
+): number {
+  const raw = Array.isArray(value) ? value[0] : value;
+  const n = Number(raw);
+  return allowed.includes(n) ? n : fallback;
+}
+
 // ---------------------------------------------------------------- hợp đồng BE
 
 export type GroupBy = 'DAY' | 'WEEK' | 'MONTH' | 'QUARTER' | 'YEAR';
@@ -156,6 +167,15 @@ export function assertEntityRange(f: ReportFilters): void {
 
   const span = diffDays(f.from, f.to);
   if (span > 1096) throw new FilterError('Khoảng thời gian tối đa 1096 ngày');
+}
+
+/** Kẹp toDate về hôm nay — dùng cho mọi link sang API 7/8 (toDate ≤ hôm nay). */
+export function clampToToday(
+  range: { from: string; to: string },
+  tz: string = DEFAULT_TZ,
+): { from: string; to: string } {
+  const today = todayIn(tz);
+  return { from: range.from, to: range.to > today ? today : range.to };
 }
 
 /** Dùng ở page: trả message thay vì ném lỗi, để hiển thị EmptyState thay vì error boundary. */

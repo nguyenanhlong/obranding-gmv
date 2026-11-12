@@ -1,4 +1,5 @@
-import type { OrderRow, Page } from '@/contracts/base';
+import type { Page } from '@/contracts/base';
+import type { GrowthOrderRow } from '@/platform/reports/orders/contracts';
 import type { ReportFilters } from '@/platform/reports/filters';
 
 export type PeriodStatus = 'FINAL' | 'PROVISIONAL';
@@ -65,7 +66,7 @@ export type PeriodOrderQuery = {
  */
 export interface PeriodSource {
   getSummary(f: ReportFilters): Promise<PeriodSummary>;
-  listOrders(f: ReportFilters, q: PeriodOrderQuery): Promise<Page<OrderRow>>;
+  listOrders(f: ReportFilters, q: PeriodOrderQuery): Promise<Page<GrowthOrderRow>>;
 }
 
 export { GROUP_BY_LABEL } from '@/platform/reports/labels';

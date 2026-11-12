@@ -11,5 +11,7 @@ export const buyerSource: BuyerSource = {
       ? buyerMockSource.getSummary(customerId, f)
       : buyerHttpSource.getSummary(customerId, f),
   listOrders: (customerId: string, f: ReportFilters, q: BuyerOrderQuery) =>
-    buyerMockSource.listOrders(customerId, f, q),
+    isMockMode()
+      ? buyerMockSource.listOrders(customerId, f, q)
+      : buyerHttpSource.listOrders(customerId, f, q),
 };

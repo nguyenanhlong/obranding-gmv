@@ -14,11 +14,10 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import type { ReportFilters } from '@/platform/reports/filters';
-import type { PeriodSource } from '@/features/period-detail/contracts';
-import type { BuyerSource } from '@/features/buyer-detail/contracts';
-import type { SellerSource } from '@/features/seller-detail/contracts';
 import type { OrderSource } from '@/features/order-detail/contracts';
 import { DATASET_FROM, DATASET_TO, allOrders } from '@/platform/mock/dataset';
+import { mockListGrowthOrders } from '@/platform/reports/orders/mock';
+import { bucketOf } from '@/platform/time';
 import { buildRawGrowthReport } from '@/features/growth-overview/server/growth.raw';
 import { buildRawPeriodSummary } from '@/features/period-detail/server/period.raw';
 import { buildRawSellerSummary } from '@/features/seller-detail/server/seller.raw';
@@ -50,6 +49,12 @@ const COPY_FILES = [
   'src/platform/mock/dataset.ts',
   'src/platform/mock/aggregate.ts',
   'src/platform/reports/series.ts',
+  // API 2 — module đơn dùng chung cho M2/M4/M5
+  'src/platform/reports/parse.ts',
+  'src/platform/reports/orders/contracts.ts',
+  'src/platform/reports/orders/schema.ts',
+  'src/platform/reports/orders/mapper.ts',
+  'src/platform/reports/orders/mock.ts',
   // M1
   'src/features/growth-overview/contracts.ts',
   'src/features/growth-overview/server/growth.mock.ts',
@@ -136,18 +141,6 @@ async function main(): Promise<void> {
     console.log('  copy   ', rel);
   }
 
-  const period = await loadMockCopy<PeriodSource>(
-    'src/features/period-detail/server/period.mock.ts',
-    'periodMockSource',
-  );
-  const buyer = await loadMockCopy<BuyerSource>(
-    'src/features/buyer-detail/server/buyer.mock.ts',
-    'buyerMockSource',
-  );
-  const seller = await loadMockCopy<SellerSource>(
-    'src/features/seller-detail/server/seller.mock.ts',
-    'sellerMockSource',
-  );
   const order = await loadMockCopy<OrderSource>(
     'src/features/order-detail/server/order.mock.ts',
     'orderMockSource',
@@ -161,11 +154,15 @@ async function main(): Promise<void> {
   const periodSummary = buildRawPeriodSummary(FILTERS_PERIOD);
   writeJson('samples/m2-period-summary.json', periodSummary);
 
-  const periodOrders = await period.listOrders(FILTERS_PERIOD, { page: 1, pageSize: 10 });
-  writeJson('samples/m2-orders-page.json', {
-    ...periodOrders,
-    items: periodOrders.items.map(toOrderRow),
+  // API 2 — sample đúng contract: meta + pagination + items
+  const periodOrders = mockListGrowthOrders({
+    scope: 'PERIOD',
+    groupBy: 'MONTH',
+    periodKey: bucketOf(FILTERS_PERIOD.from, 'month'),
+    page: 1,
+    pageSize: 10,
   });
+  writeJson('samples/m2-orders-page.json', periodOrders);
 
   // chọn user và seller có nhiều đơn nhất trong kỳ để sample có dữ liệu phong phú
   const inRange = allOrders().filter((o) => {
@@ -194,28 +191,30 @@ async function main(): Promise<void> {
   if (sellerSummary) writeJson('samples/m5-seller-summary.json', sellerSummary);
 
   // danh sách đơn của M4/M5 — mock (chờ API 2)
-  const buyerOrders = await buyer.listOrders(sampleCustomerId, FILTERS_PERIOD, {
+  const buyerOrders = mockListGrowthOrders({
+    scope: 'CUSTOMER',
+    customerId: sampleCustomerId,
+    fromDate: FILTERS_PERIOD.from,
+    toDate: FILTERS_PERIOD.to,
     page: 1,
     pageSize: 10,
   });
-  writeJson('samples/m4-orders-page.json', {
-    ...buyerOrders,
-    items: buyerOrders.items.map(toOrderRow),
-  });
+  writeJson('samples/m4-orders-page.json', buyerOrders);
 
-  const sellerOrders = await seller.listOrders(sampleSellerId, FILTERS_PERIOD, {
+  const sellerOrders = mockListGrowthOrders({
+    scope: 'SELLER',
+    sellerId: sampleSellerId,
+    fromDate: FILTERS_PERIOD.from,
+    toDate: FILTERS_PERIOD.to,
     page: 1,
     pageSize: 10,
   });
-  writeJson('samples/m5-orders-page.json', {
-    ...sellerOrders,
-    items: sellerOrders.items.map(toOrderRow),
-  });
+  writeJson('samples/m5-orders-page.json', sellerOrders);
 
   // ── M6: chi tiết đơn
   const firstOrder = periodOrders.items[0];
   if (firstOrder) {
-    const orderDetail = await order.get(firstOrder.publicId);
+    const orderDetail = await order.get(firstOrder.orderPublicId);
     if (orderDetail) {
       writeJson('samples/m6-order-detail.json', {
         ...orderDetail,

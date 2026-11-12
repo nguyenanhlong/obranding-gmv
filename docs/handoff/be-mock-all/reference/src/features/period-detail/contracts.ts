@@ -1,4 +1,5 @@
-import type { OrderRow, Page } from '@/contracts/base';
+import type { Page } from '@/contracts/base';
+import type { GrowthOrderRow } from '@/platform/reports/orders/contracts';
 import type { ReportFilters } from '@/platform/reports/filters';
 
 export type PeriodStatus = 'FINAL' | 'PROVISIONAL';
@@ -65,17 +66,10 @@ export type PeriodOrderQuery = {
  */
 export interface PeriodSource {
   getSummary(f: ReportFilters): Promise<PeriodSummary>;
-  listOrders(f: ReportFilters, q: PeriodOrderQuery): Promise<Page<OrderRow>>;
+  listOrders(f: ReportFilters, q: PeriodOrderQuery): Promise<Page<GrowthOrderRow>>;
 }
 
-/** Nhãn đơn vị kỳ của BE → tiếng Việt, dùng cho dòng "Chu kỳ …" */
-export const GROUP_BY_LABEL: Record<string, string> = {
-  DAY: 'ngày',
-  WEEK: 'tuần',
-  MONTH: 'tháng',
-  QUARTER: 'quý',
-  YEAR: 'năm',
-};
+export { GROUP_BY_LABEL } from '@/platform/reports/labels';
 
 /** Tiêu đề biểu đồ theo unit của API 6 */
 export const UNIT_TITLE: Record<DistributionUnit, string> = {

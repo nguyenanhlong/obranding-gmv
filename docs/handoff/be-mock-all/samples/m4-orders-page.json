@@ -1,168 +1,145 @@
 {
+  "meta": {
+    "scope": "CUSTOMER",
+    "groupBy": null,
+    "periodKey": null,
+    "customerId": "customer-358",
+    "sellerId": null,
+    "startDate": "2026-09-01",
+    "endDate": "2026-09-30",
+    "listStartDate": "2026-09-01",
+    "listEndDate": "2026-09-30",
+    "bucketGroupBy": null,
+    "bucketPeriodKey": null,
+    "periodStatus": "FINAL",
+    "timezone": "Asia/Ho_Chi_Minh",
+    "dataAsOf": "2026-11-12T07:58:18.786Z"
+  },
+  "pagination": {
+    "page": 1,
+    "pageSize": 10,
+    "totalItems": 5,
+    "totalPages": 1
+  },
   "items": [
     {
-      "id": "order-5401",
-      "publicId": "2626092900005401AB",
-      "placedAt": "2026-09-29T12:44:19+07:00",
-      "status": "COMPLETED",
+      "orderPublicId": "2626092900005401AB",
+      "orderNumber": "OD-2626092900",
+      "placedAt": "2026-09-29T05:44:19.000Z",
       "sellerId": "seller-59",
       "sellerCode": "SL0001406",
       "sellerName": "CÔNG TY TNHH ĐỒ CHƠI GỖ BÉ NA 6",
-      "customerId": "customer-358",
+      "customerId": "358",
       "customerName": "Ngô Quốc Nguyên",
-      "category": "Sở thích & sưu tầm",
-      "region": "Tỉnh An Giang",
-      "itemCount": 2,
-      "payment": "PREPAID",
-      "discounts": [
-        {
-          "label": "Giảm giá SP",
-          "amount": 18960
-        },
-        {
-          "label": "Voucher shop",
-          "amount": 14220
-        }
+      "primaryCategoryName": "Sở thích & sưu tầm",
+      "itemQuantity": 2,
+      "regionName": "Tỉnh An Giang",
+      "orderTotalVnd": 465820,
+      "discountBadges": [
+        "PRODUCT_DISCOUNT",
+        "SELLER_VOUCHER"
       ],
-      "total": {
-        "amount": 465820,
-        "currency": "VND"
-      }
+      "paymentMethod": "NO_CASH",
+      "paymentStatus": "success",
+      "status": "COMPLETED",
+      "sourceStatus": "COMPLETED",
+      "state": "COMPLETED"
     },
     {
-      "id": "order-5355",
-      "publicId": "2626092600005355AB",
-      "placedAt": "2026-09-26T15:35:51+07:00",
-      "status": "COMPLETED",
+      "orderPublicId": "2626092600005355AB",
+      "orderNumber": "OD-2626092600",
+      "placedAt": "2026-09-26T08:35:51.000Z",
       "sellerId": "seller-23",
       "sellerCode": "SL0001154",
       "sellerName": "CÔNG TY CỔ PHẦN CÀ PHÊ ĐẤT ĐỎ 3",
-      "customerId": "customer-358",
+      "customerId": "358",
       "customerName": "Ngô Quốc Nguyên",
-      "category": "Sở thích & sưu tầm",
-      "region": "Tỉnh An Giang",
-      "itemCount": 4,
-      "payment": "COD",
-      "discounts": [
-        {
-          "label": "Giảm giá SP",
-          "amount": 152480
-        },
-        {
-          "label": "Voucher shop",
-          "amount": 114360
-        },
-        {
-          "label": "Hỗ trợ ship",
-          "amount": 20000
-        }
+      "primaryCategoryName": "Sở thích & sưu tầm",
+      "itemQuantity": 4,
+      "regionName": "Tỉnh An Giang",
+      "orderTotalVnd": 3525160,
+      "discountBadges": [
+        "PRODUCT_DISCOUNT",
+        "SELLER_VOUCHER",
+        "SHIPPING_SUPPORT"
       ],
-      "total": {
-        "amount": 3525160,
-        "currency": "VND"
-      }
+      "paymentMethod": "COD",
+      "paymentStatus": "success",
+      "status": "COMPLETED",
+      "sourceStatus": "COMPLETED",
+      "state": "COMPLETED"
     },
     {
-      "id": "order-5303",
-      "publicId": "2626092400005303AB",
-      "placedAt": "2026-09-24T21:01:47+07:00",
-      "status": "COMPLETED",
+      "orderPublicId": "2626092400005303AB",
+      "orderNumber": "OD-2626092400",
+      "placedAt": "2026-09-24T14:01:47.000Z",
       "sellerId": "seller-27",
       "sellerCode": "SL0001182",
       "sellerName": "MÂY TRE PHÚ VINH 3",
-      "customerId": "customer-358",
+      "customerId": "358",
       "customerName": "Ngô Quốc Nguyên",
-      "category": "Sắc đẹp",
-      "region": "Tỉnh An Giang",
-      "itemCount": 2,
-      "payment": "COD",
-      "discounts": [
-        {
-          "label": "Giảm giá SP",
-          "amount": 47200
-        },
-        {
-          "label": "Voucher shop",
-          "amount": 35400
-        }
+      "primaryCategoryName": "Sắc đẹp",
+      "itemQuantity": 2,
+      "regionName": "Tỉnh An Giang",
+      "orderTotalVnd": 1122400,
+      "discountBadges": [
+        "PRODUCT_DISCOUNT",
+        "SELLER_VOUCHER"
       ],
-      "total": {
-        "amount": 1122400,
-        "currency": "VND"
-      }
+      "paymentMethod": "COD",
+      "paymentStatus": "success",
+      "status": "COMPLETED",
+      "sourceStatus": "COMPLETED",
+      "state": "COMPLETED"
     },
     {
-      "id": "order-4991",
-      "publicId": "2626090800004991AB",
-      "placedAt": "2026-09-08T17:46:57+07:00",
-      "status": "COMPLETED",
+      "orderPublicId": "2626090800004991AB",
+      "orderNumber": "OD-2626090800",
+      "placedAt": "2026-09-08T10:46:57.000Z",
       "sellerId": "seller-50",
       "sellerCode": "SL0001343",
       "sellerName": "TRẦM HƯƠNG KHÁNH HOÀ 5",
-      "customerId": "customer-358",
+      "customerId": "358",
       "customerName": "Ngô Quốc Nguyên",
-      "category": "Nhà cửa và Đời sống",
-      "region": "Tỉnh An Giang",
-      "itemCount": 4,
-      "payment": "COD",
-      "discounts": [
-        {
-          "label": "Giảm giá SP",
-          "amount": 76480
-        },
-        {
-          "label": "Voucher shop",
-          "amount": 57360
-        },
-        {
-          "label": "Hỗ trợ ship",
-          "amount": 20000
-        }
+      "primaryCategoryName": "Nhà cửa và Đời sống",
+      "itemQuantity": 4,
+      "regionName": "Tỉnh An Giang",
+      "orderTotalVnd": 1783160,
+      "discountBadges": [
+        "PRODUCT_DISCOUNT",
+        "SELLER_VOUCHER",
+        "SHIPPING_SUPPORT"
       ],
-      "total": {
-        "amount": 1783160,
-        "currency": "VND"
-      }
+      "paymentMethod": "COD",
+      "paymentStatus": "success",
+      "status": "COMPLETED",
+      "sourceStatus": "COMPLETED",
+      "state": "COMPLETED"
     },
     {
-      "id": "order-4848",
-      "publicId": "2626090100004848AB",
-      "placedAt": "2026-09-01T16:31:57+07:00",
-      "status": "COMPLETED",
+      "orderPublicId": "2626090100004848AB",
+      "orderNumber": "OD-2626090100",
+      "placedAt": "2026-09-01T09:31:57.000Z",
       "sellerId": "seller-32",
       "sellerCode": "SL0001217",
       "sellerName": "HỘ KINH DOANH YẾN SÀO KHÁNH PHONG 4",
-      "customerId": "customer-358",
+      "customerId": "358",
       "customerName": "Ngô Quốc Nguyên",
-      "category": "Nhà cửa và Đời sống",
-      "region": "Tỉnh An Giang",
-      "itemCount": 3,
-      "payment": "COD",
-      "discounts": [
-        {
-          "label": "Giảm giá SP",
-          "amount": 139200
-        },
-        {
-          "label": "Voucher shop",
-          "amount": 104400
-        },
-        {
-          "label": "Voucher sàn",
-          "amount": 69600
-        },
-        {
-          "label": "Hỗ trợ ship",
-          "amount": 20000
-        }
+      "primaryCategoryName": "Nhà cửa và Đời sống",
+      "itemQuantity": 3,
+      "regionName": "Tỉnh An Giang",
+      "orderTotalVnd": 3146800,
+      "discountBadges": [
+        "PRODUCT_DISCOUNT",
+        "SELLER_VOUCHER",
+        "PLATFORM_VOUCHER",
+        "SHIPPING_SUPPORT"
       ],
-      "total": {
-        "amount": 3146800,
-        "currency": "VND"
-      }
+      "paymentMethod": "COD",
+      "paymentStatus": "success",
+      "status": "COMPLETED",
+      "sourceStatus": "COMPLETED",
+      "state": "COMPLETED"
     }
-  ],
-  "total": 5,
-  "page": 1,
-  "pageSize": 10
+  ]
 }

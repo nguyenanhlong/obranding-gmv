@@ -1,24 +1,23 @@
 import Link from 'next/link';
-import { ORDER_STATUS_LABEL, type OrderRow } from '@/contracts/base';
 import { formatDateTime } from '@/platform/format/date';
 import { formatMoney } from '@/platform/format/money';
 import { DataTable, type Column } from '@/platform/ui/data-table';
+import {
+  BADGE_LABEL,
+  ORDER_STATUS_LABEL,
+  paymentLabel,
+  type GrowthOrderRow,
+} from '@/platform/reports/orders/contracts';
 
 export type OrderTableVariant = 'period' | 'buyer' | 'seller';
 
 type OrderTableProps = {
-  rows: OrderRow[];
+  rows: GrowthOrderRow[];
   variant: OrderTableVariant;
-  /** số thứ tự bắt đầu, để phân trang đúng */
   startIndex?: number;
 };
 
-function discountText(row: OrderRow): string {
-  if (row.discounts.length === 0) return '—';
-  return row.discounts.map((d) => d.label).join(' · ');
-}
-
-function statusPill(row: OrderRow) {
+function statusPill(row: GrowthOrderRow) {
   const tone =
     row.status === 'COMPLETED'
       ? 'bg-emerald-50 text-emerald-700'
@@ -34,116 +33,128 @@ function statusPill(row: OrderRow) {
   );
 }
 
-/** Bảng đơn dùng chung cho M2 / M4 / M5 — mỗi màn chọn variant, cột do đây định nghĩa. */
+/** Bảng đơn dùng chung — dữ liệu là GrowthOrderRow của API 2. */
 export function OrderTable({ rows, variant, startIndex = 0 }: OrderTableProps) {
-  const indexById = new Map(rows.map((row, i) => [row.id, i]));
+  const indexById = new Map(rows.map((row, i) => [row.orderPublicId, i]));
 
-  const base: Column<OrderRow>[] = [
+  const base: Column<GrowthOrderRow>[] = [
     {
       key: 'index',
       header: 'STT',
       align: 'right',
-      render: (row) => String((indexById.get(row.id) ?? 0) + 1 + startIndex),
+      render: (row) => String((indexById.get(row.orderPublicId) ?? 0) + 1 + startIndex),
     },
     {
-      key: 'publicId',
+      key: 'orderPublicId',
       header: 'Mã đơn hàng',
       render: (row) => (
         <Link
-          href={`/orders/${row.publicId}`}
+          href={`/orders/${row.orderPublicId}`}
           className="font-mono text-xs text-indigo-700 hover:underline"
+          title={row.orderNumber}
         >
-          {row.publicId}
+          {row.orderPublicId}
         </Link>
       ),
     },
     {
       key: 'placedAt',
       header: 'Ngày đặt hàng',
-      render: (row) => <span className="text-xs text-slate-600">{formatDateTime(row.placedAt)}</span>,
+      render: (row) => (
+        <span className="whitespace-nowrap text-xs text-slate-600">{formatDateTime(row.placedAt)}</span>
+      ),
     },
   ];
 
-  const sellerCols: Column<OrderRow>[] = [
+  const sellerCols: Column<GrowthOrderRow>[] = [
     {
       key: 'sellerCode',
       header: 'Mã nhà bán',
-      render: (row) => <span className="font-mono text-xs">{row.sellerCode}</span>,
+      render: (row) => <span className="font-mono text-xs">{row.sellerCode ?? '—'}</span>,
     },
-    { key: 'sellerName', header: 'Tên nhà bán', render: (row) => row.sellerName },
+    { key: 'sellerName', header: 'Tên nhà bán', render: (row) => row.sellerName ?? '—' },
   ];
 
-  const customerCols: Column<OrderRow>[] = [
+  const customerCols: Column<GrowthOrderRow>[] = [
     {
       key: 'customerId',
       header: 'Mã KH',
-      render: (row) => <span className="font-mono text-xs">{row.customerId.replace('customer-', '')}</span>,
+      render: (row) => <span className="font-mono text-xs">{row.customerId ?? '—'}</span>,
     },
-    { key: 'customerName', header: 'Khách hàng', render: (row) => row.customerName },
+    { key: 'customerName', header: 'Khách hàng', render: (row) => row.customerName ?? '—' },
   ];
 
-  const tail: Column<OrderRow>[] = [
+  const tail: Column<GrowthOrderRow>[] = [
     {
-      key: 'total',
+      key: 'orderTotalVnd',
       header: 'Giá trị đơn',
       align: 'right',
       className: 'tabular-nums',
-      render: (row) => formatMoney(row.total.amount),
+      render: (row) => formatMoney(row.orderTotalVnd),
     },
     {
-      key: 'discounts',
+      key: 'discountBadges',
       header: 'Ưu đãi',
-      render: (row) => <span className="text-xs text-slate-600">{discountText(row)}</span>,
+      render: (row) =>
+        row.discountBadges.length === 0 ? (
+          <span className="text-xs text-slate-400">—</span>
+        ) : (
+          <span className="flex flex-wrap gap-1">
+            {row.discountBadges.map((badge) => (
+              <span
+                key={badge}
+                className="rounded bg-slate-100 px-1.5 py-0.5 text-[11px] text-slate-600"
+              >
+                {BADGE_LABEL[badge]}
+              </span>
+            ))}
+          </span>
+        ),
     },
     {
       key: 'payment',
       header: 'Thanh toán',
-      render: (row) => (row.payment === 'COD' ? 'COD' : 'Thanh toán trước'),
+      render: (row) => (
+        <span className="whitespace-nowrap text-xs text-slate-600">
+          {paymentLabel(row.paymentMethod, row.paymentStatus)}
+        </span>
+      ),
     },
     { key: 'status', header: 'Trạng thái', render: statusPill },
   ];
 
-  const columns: Column<OrderRow>[] =
+  const quantity: Column<GrowthOrderRow> = {
+    key: 'itemQuantity',
+    header: 'SL sản phẩm',
+    align: 'right',
+    render: (row) => String(row.itemQuantity),
+  };
+
+  const columns: Column<GrowthOrderRow>[] =
     variant === 'period'
       ? [
           ...base,
           ...sellerCols,
           ...customerCols,
-          { key: 'category', header: 'Danh mục', render: (row) => row.category },
-          { key: 'region', header: 'Khu vực', render: (row) => row.region },
+          { key: 'category', header: 'Danh mục', render: (row) => row.primaryCategoryName ?? '—' },
+          { key: 'region', header: 'Khu vực', render: (row) => row.regionName ?? '—' },
           ...tail,
         ]
       : variant === 'buyer'
         ? [
             ...base,
             ...sellerCols,
-            { key: 'category', header: 'Danh mục', render: (row) => row.category },
-            {
-              key: 'itemCount',
-              header: 'SL sản phẩm',
-              align: 'right',
-              render: (row) => String(row.itemCount),
-            },
+            { key: 'category', header: 'Danh mục', render: (row) => row.primaryCategoryName ?? '—' },
+            quantity,
             ...tail,
           ]
-        : [
-            ...base,
-            ...customerCols,
-            { key: 'region', header: 'Khu vực', render: (row) => row.region },
-            {
-              key: 'itemCount',
-              header: 'SL SP',
-              align: 'right',
-              render: (row) => String(row.itemCount),
-            },
-            ...tail,
-          ];
+        : [...base, ...customerCols, { key: 'region', header: 'Khu vực', render: (row) => row.regionName ?? '—' }, quantity, ...tail];
 
   return (
-    <DataTable<OrderRow>
+    <DataTable<GrowthOrderRow>
       columns={columns}
       rows={rows}
-      rowKey={(row) => row.id}
+      rowKey={(row) => row.orderPublicId}
       empty={
         <div className="px-4 py-10 text-center text-sm text-slate-500">
           Không có đơn nào khớp điều kiện lọc.

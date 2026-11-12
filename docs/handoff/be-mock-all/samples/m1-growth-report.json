@@ -2805,21 +2805,21 @@
       "periodLabel": "Tháng 10/2026",
       "startDate": "2026-10-01",
       "endDate": "2026-10-31",
-      "status": "FINAL",
+      "status": "PROVISIONAL",
       "orders": {
         "value": "501",
-        "previousValue": "557",
-        "growthPercent": -10.1
+        "previousValue": "501",
+        "growthPercent": 0
       },
       "buyers": {
         "value": "285",
-        "previousValue": "291",
-        "growthPercent": -2.1
+        "previousValue": "279",
+        "growthPercent": 2.2
       },
       "gmv": {
         "value": "958581430",
-        "previousValue": "1144986060",
-        "growthPercent": -16.3
+        "previousValue": "1027885020",
+        "growthPercent": -6.7
       },
       "activeSellers": {
         "value": "60",
@@ -2970,7 +2970,7 @@
           "orders": "15",
           "gmv": "24377510",
           "orderShare": 3,
-          "growthPercent": 114.3
+          "growthPercent": 275
         },
         {
           "sellerId": "seller-1",
@@ -2980,7 +2980,7 @@
           "orders": "14",
           "gmv": "20977340",
           "orderShare": 2.8,
-          "growthPercent": 100
+          "growthPercent": 133.3
         },
         {
           "sellerId": "seller-57",
@@ -3000,7 +3000,7 @@
           "orders": "13",
           "gmv": "22681010",
           "orderShare": 2.6,
-          "growthPercent": 8.3
+          "growthPercent": 18.2
         },
         {
           "sellerId": "seller-29",
@@ -3010,7 +3010,7 @@
           "orders": "12",
           "gmv": "30164920",
           "orderShare": 2.4,
-          "growthPercent": 9.1
+          "growthPercent": 20
         },
         {
           "sellerId": "seller-15",
@@ -3020,7 +3020,7 @@
           "orders": "12",
           "gmv": "26494320",
           "orderShare": 2.4,
-          "growthPercent": -14.3
+          "growthPercent": -7.7
         },
         {
           "sellerId": "seller-47",
@@ -3030,7 +3030,7 @@
           "orders": "12",
           "gmv": "22330840",
           "orderShare": 2.4,
-          "growthPercent": 33.3
+          "growthPercent": 71.4
         },
         {
           "sellerId": "seller-50",
@@ -3040,7 +3040,7 @@
           "orders": "12",
           "gmv": "21258560",
           "orderShare": 2.4,
-          "growthPercent": 0
+          "growthPercent": 33.3
         },
         {
           "sellerId": "seller-45",
@@ -3050,7 +3050,7 @@
           "orders": "12",
           "gmv": "20263440",
           "orderShare": 2.4,
-          "growthPercent": 20
+          "growthPercent": 33.3
         }
       ]
     }
