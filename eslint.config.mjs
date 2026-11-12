@@ -124,4 +124,10 @@ export default tseslint.config(
     files: ['src/platform/reports/*/mock.ts'],
     rules: { 'no-restricted-imports': 'off' },
   },
+
+  // test được dùng dataset để làm fixture
+  {
+    files: ['src/**/__tests__/**', 'src/**/*.test.ts'],
+    rules: { 'no-restricted-imports': 'off' },
+  },
 );

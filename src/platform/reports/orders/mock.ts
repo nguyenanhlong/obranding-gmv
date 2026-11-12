@@ -1,14 +1,15 @@
-import { allOrders, type MockOrder } from '@/platform/mock/dataset';
-import { bucketRange, bucketOf, todayIn, parseDate } from '@/platform/time';
+import { allOrders, customers, type MockOrder } from '@/platform/mock/dataset';
+import { bucketRange, todayIn } from '@/platform/time';
 import type {
   DiscountBadgeKind,
   GrowthOrderPage,
-  GrowthOrderRow,
   GrowthOrderStatus,
   ListGrowthOrdersParams,
   PaymentMethod,
 } from './contracts';
 import { PAGE_SIZE_ORDER } from './contracts';
+import { mapOrderList } from './mapper';
+import { orderListSchema, type RawOrderItem, type RawOrderList } from './schema';
 
 const BADGE_BY_LABEL: Record<string, DiscountBadgeKind> = {
   'Thẻ Sành': 'SANH',
@@ -61,10 +62,19 @@ function paymentOf(order: MockOrder): {
   status: 'waiting' | 'success' | 'failed';
 } {
   const method: PaymentMethod = order.payment === 'COD' ? 'COD' : 'NO_CASH';
-  return { method, status: order.status === 'COMPLETED' ? 'success' : 'waiting' };
+  return {
+    method,
+    status:
+      order.status === 'CANCELLED'
+        ? 'failed'
+        : order.status === 'COMPLETED'
+          ? 'success'
+          : 'waiting',
+  };
 }
 
-function toRow(order: MockOrder): GrowthOrderRow {
+/** Response THÔ — tiền là chuỗi VND, giống hệt BE trả về. */
+function toRawRow(order: MockOrder): RawOrderItem {
   const pay = paymentOf(order);
   return {
     orderPublicId: order.publicId,
@@ -78,7 +88,7 @@ function toRow(order: MockOrder): GrowthOrderRow {
     primaryCategoryName: order.category,
     itemQuantity: order.itemCount,
     regionName: order.region,
-    orderTotalVnd: order.total.amount,
+    orderTotalVnd: String(order.total.amount),
     discountBadges: badgesOf(order),
     paymentMethod: pay.method,
     paymentStatus: pay.status,
@@ -111,7 +121,14 @@ function resolveRange(p: ListGrowthOrdersParams): { from: string; to: string } |
   return { from, to };
 }
 
-function matchesQuery(row: GrowthOrderRow, p: ListGrowthOrdersParams, q: string): boolean {
+const CUSTOMER_PHONE = new Map(
+  customers().map((c) => [
+    c.id,
+    c.phone.replace(/^\+?84/, '0').replace(/\D/g, ''),
+  ]),
+);
+
+function matchesQuery(row: RawOrderItem, p: ListGrowthOrdersParams, q: string): boolean {
   const haystack =
     p.scope === 'PERIOD'
       ? [
@@ -124,12 +141,28 @@ function matchesQuery(row: GrowthOrderRow, p: ListGrowthOrdersParams, q: string)
         ]
       : p.scope === 'CUSTOMER'
         ? [row.orderPublicId, row.orderNumber, row.sellerName ?? '', row.sellerCode ?? '']
-        : [row.orderPublicId, row.orderNumber, row.customerName ?? ''];
+        : [
+            row.orderPublicId,
+            row.orderNumber,
+            row.customerName ?? '',
+            row.customerId ?? '',
+          ];
 
-  return haystack.some((v) => v.toLowerCase().includes(q));
+  if (haystack.some((v) => v.toLowerCase().includes(q))) return true;
+
+  // SELLER: q toàn số, đủ 4 số trở lên thì tìm thêm theo SĐT đã chuẩn hoá.
+  if (p.scope === 'SELLER') {
+    const digits = q.replace(/\D/g, '');
+    if (digits.length >= 4 && digits === q) {
+      const phone = row.customerId ? CUSTOMER_PHONE.get(row.customerId) : undefined;
+      return Boolean(phone?.includes(digits));
+    }
+  }
+  return false;
 }
 
-export function mockListGrowthOrders(p: ListGrowthOrdersParams): GrowthOrderPage {
+/** Dựng response THÔ của API 2 — dùng chung cho mock và sample bàn giao. */
+export function buildRawOrderList(p: ListGrowthOrdersParams): RawOrderList {
   const range = resolveRange(p);
   const today = todayIn();
   const startDate = range?.from ?? p.fromDate ?? today;
@@ -143,7 +176,7 @@ export function mockListGrowthOrders(p: ListGrowthOrdersParams): GrowthOrderPage
       if (p.scope === 'SELLER' && o.sellerId !== p.sellerId) return false;
       return true;
     })
-    .map(toRow);
+    .map(toRawRow);
 
   if (p.status && p.status !== 'ALL') {
     rows = rows.filter((r) => r.status === p.status);
@@ -185,9 +218,7 @@ export function mockListGrowthOrders(p: ListGrowthOrdersParams): GrowthOrderPage
   };
 }
 
-/** Dùng cho test: nhanh chóng lấy kỳ của một ngày */
-export function periodKeyOf(date: string, groupBy: string): string {
-  return bucketOf(date, PERIOD_OF_GROUP[groupBy.toUpperCase()] ?? 'month');
+/** Mock đi qua zod rồi mới map — cùng đường với http (N13). */
+export function mockListGrowthOrders(p: ListGrowthOrdersParams): GrowthOrderPage {
+  return mapOrderList(orderListSchema.parse(buildRawOrderList(p)));
 }
-
-export { parseDate };

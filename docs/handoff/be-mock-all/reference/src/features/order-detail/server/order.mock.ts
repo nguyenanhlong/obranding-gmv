@@ -56,7 +56,8 @@ const DISCOUNT_META: Record<
 
 const MILESTONE_ORDER: MilestoneCode[] = ['PLACED', 'CONFIRMED', 'PACKED', 'SHIPPED', 'DELIVERED'];
 
-function buildRawDrawer(order: MockOrder): RawOrderDrawer {
+/** Response THÔ của API 5 — dùng cho mock và sample bàn giao. */
+export function buildRawOrderDrawer(order: MockOrder): RawOrderDrawer {
   const phone = customers().find((c) => c.id === order.customerId)?.phone ?? null;
 
   const discounts = order.discounts
@@ -171,6 +172,6 @@ export const orderMockSource: OrderSource = {
   async get(publicId) {
     const order = allOrders().find((o) => o.publicId === publicId);
     if (!order) return null;
-    return mapOrderDrawer(orderDrawerSchema.parse(buildRawDrawer(order)));
+    return mapOrderDrawer(orderDrawerSchema.parse(buildRawOrderDrawer(order)));
   },
 };

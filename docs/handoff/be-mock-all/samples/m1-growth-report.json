@@ -14,22 +14,22 @@
       "status": "FINAL",
       "orders": {
         "value": "361",
-        "previousValue": null,
+        "previousValue": "0",
         "growthPercent": null
       },
       "buyers": {
         "value": "65",
-        "previousValue": null,
+        "previousValue": "0",
         "growthPercent": null
       },
       "gmv": {
         "value": "724748170",
-        "previousValue": null,
+        "previousValue": "0",
         "growthPercent": null
       },
       "activeSellers": {
         "value": "60",
-        "previousValue": null,
+        "previousValue": "0",
         "growthPercent": null
       },
       "aov": "2007613",

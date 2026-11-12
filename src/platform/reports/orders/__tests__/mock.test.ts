@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { customers } from '@/platform/mock/dataset';
 import { mockListGrowthOrders } from '../mock';
 
 describe('mockListGrowthOrders', () => {
@@ -63,5 +64,35 @@ describe('mockListGrowthOrders', () => {
     for (const order of page.items) {
       expect(order.placedAt.slice(0, 7)).toBe('2026-10');
     }
+  });
+
+  it('SELLER tìm được theo 4 số cuối điện thoại (q toàn số)', () => {
+    const base = mockListGrowthOrders({
+      scope: 'SELLER',
+      sellerId: 'seller-1',
+      fromDate: '2025-11-01',
+      toDate: '2026-10-27',
+      page: 1,
+      pageSize: 10,
+    });
+    const first = base.items[0];
+    expect(first).toBeDefined();
+
+    const phone = customers().find((c) => c.id === first?.customerId)?.phone ?? '';
+    const digits = phone.replace(/^\+?84/, '0').replace(/\D/g, '').slice(-4);
+    expect(digits.length).toBe(4);
+
+    const found = mockListGrowthOrders({
+      scope: 'SELLER',
+      sellerId: 'seller-1',
+      fromDate: '2025-11-01',
+      toDate: '2026-10-27',
+      q: digits,
+      page: 1,
+      pageSize: 10,
+    });
+
+    expect(found.pagination.totalItems).toBeGreaterThan(0);
+    expect(found.items.some((row) => row.customerId === first?.customerId)).toBe(true);
   });
 });

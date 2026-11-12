@@ -69,8 +69,16 @@ function previousWindow(
   periods: { key: string; start: string; end: string }[],
   status: 'FINAL' | 'PROVISIONAL',
   today: string,
+  period: ReportFilters['period'],
 ): Window | null {
-  const prev = periods[index - 1];
+  // Kỳ đầu tiên trong khoảng vẫn có kỳ liền trước — lùi 1 bucket là xong.
+  const prev = periods[index - 1] ?? (() => {
+    const current = periods[index];
+    if (!current) return null;
+    const bucket = bucketOf(addDays(current.start, -1), period);
+    const range = bucketRange(bucket, period);
+    return { key: bucket, start: range.from, end: range.to };
+  })();
   if (!prev) return null;
   if (status === 'FINAL') return { start: prev.start, end: prev.end };
 
@@ -94,7 +102,7 @@ export function buildRawGrowthReport(f: ReportFilters): RawGrowthResponse {
     const current = ordersIn(window);
     const now = totalsOf(current);
 
-    const prevWindow = previousWindow(index, periods, status, today);
+    const prevWindow = previousWindow(index, periods, status, today, f.period);
     const prev = prevWindow ? totalsOf(ordersIn(prevWindow)) : null;
 
     const metric = (value: number, previous: number | null) => ({

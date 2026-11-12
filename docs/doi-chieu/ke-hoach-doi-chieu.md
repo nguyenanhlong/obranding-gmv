@@ -1,4 +1,8 @@
-# Kế hoạch đồng bộ FE với hợp đồng BE (P0)
+# Kế hoạch đồng bộ FE với hợp đồng BE
+
+> **Trạng thái 12/11/2026:** kế hoạch P1–P5 đã hoàn tất; bộ hợp đồng mới API 2/3/4/5 được
+> thi công ở **P7–P12** (xem `ket-qua-doi-chieu.md` để biết trạng thái 56 dòng).
+> Tài liệu này giữ lại lịch sử map 62 dòng của đợt P1–P5.
 
 Nguồn: `doi_chieu/doi-chieu-tat-ca-FE-API-contract-2026-11-12.xlsx` (sheet **Xung đột**, 62 dòng).
 Bảng dưới đây map từng dòng sang phase thi công, trạng thái và file đích.
@@ -15,12 +19,12 @@ Bảng dưới đây map từng dòng sang phase thi công, trạng thái và fi
 | — | Chờ API 2/3/4/5 (đóng băng) | 3 |
 | — | Không áp dụng | 1 |
 
-Ghi chú phạm vi:
+Ghi chú phạm vi (đã hết hiệu lực sau P8–P10):
 
-- API 2 (danh sách đơn), API 3 (user mua), API 4 (nhà bán), API 5 (chi tiết đơn) **chưa có hợp đồng**.
-  Các dòng liên quan bị đóng băng: không sửa shape, không dựng bảng giả, giữ mock + TODO.
-- Màn M6 `/orders/[orderId]` không bị chạm trong đợt này.
-- Ngoại lệ được làm: tách `getSummary()` / `listOrders()` để cô lập mock của API 2.
+- ~~API 2/3/4/5 chưa có hợp đồng~~ → đã có và đã thi công: API 2 dùng chung 3 scope, API 3/4 là 2 tab
+  của Chi tiết kỳ, API 5 là drawer `view=growthDrawer`.
+- M6 `/orders/[orderId]` giữ trang riêng cho F5, thêm drawer bằng intercepting route.
+- `getSummary()` / `listOrders()` vẫn tách riêng; cả hai đi qua `platform/reports/*`.
 
 ## Chi tiết 62 dòng
 

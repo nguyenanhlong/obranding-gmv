@@ -13,7 +13,7 @@
     "bucketPeriodKey": null,
     "periodStatus": "FINAL",
     "timezone": "Asia/Ho_Chi_Minh",
-    "dataAsOf": "2026-11-12T08:09:10.411Z"
+    "dataAsOf": "2026-11-12T08:18:29.505Z"
   },
   "pagination": {
     "page": 1,
@@ -34,7 +34,7 @@
       "primaryCategoryName": "Sở thích & sưu tầm",
       "itemQuantity": 2,
       "regionName": "Tỉnh An Giang",
-      "orderTotalVnd": 465820,
+      "orderTotalVnd": "465820",
       "discountBadges": [
         "PRODUCT_DISCOUNT",
         "SELLER_VOUCHER"
@@ -57,7 +57,7 @@
       "primaryCategoryName": "Sở thích & sưu tầm",
       "itemQuantity": 4,
       "regionName": "Tỉnh An Giang",
-      "orderTotalVnd": 3525160,
+      "orderTotalVnd": "3525160",
       "discountBadges": [
         "PRODUCT_DISCOUNT",
         "SELLER_VOUCHER",
@@ -81,7 +81,7 @@
       "primaryCategoryName": "Sắc đẹp",
       "itemQuantity": 2,
       "regionName": "Tỉnh An Giang",
-      "orderTotalVnd": 1122400,
+      "orderTotalVnd": "1122400",
       "discountBadges": [
         "PRODUCT_DISCOUNT",
         "SELLER_VOUCHER"
@@ -104,7 +104,7 @@
       "primaryCategoryName": "Nhà cửa và Đời sống",
       "itemQuantity": 4,
       "regionName": "Tỉnh An Giang",
-      "orderTotalVnd": 1783160,
+      "orderTotalVnd": "1783160",
       "discountBadges": [
         "PRODUCT_DISCOUNT",
         "SELLER_VOUCHER",
@@ -128,7 +128,7 @@
       "primaryCategoryName": "Nhà cửa và Đời sống",
       "itemQuantity": 3,
       "regionName": "Tỉnh An Giang",
-      "orderTotalVnd": 3146800,
+      "orderTotalVnd": "3146800",
       "discountBadges": [
         "PRODUCT_DISCOUNT",
         "SELLER_VOUCHER",

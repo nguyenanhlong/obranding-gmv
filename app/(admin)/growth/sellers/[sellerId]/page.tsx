@@ -46,7 +46,7 @@ export default async function SellerPage({ params, searchParams }: PageProps) {
   const page = parsePositiveInt(sp.page, 1, 9999);
   const pageSize = parsePageSize(sp.pageSize, PAGE_SIZE_ORDER, 10);
   const bucket = typeof sp.bucket === 'string' && sp.bucket ? sp.bucket : undefined;
-  const q = typeof sp.q === 'string' && sp.q ? sp.q : undefined;
+  const q = typeof sp.q === 'string' && sp.q ? sp.q.slice(0, 100) : undefined;
   const status = typeof sp.status === 'string' && sp.status ? sp.status : undefined;
 
   let summary: Awaited<ReturnType<typeof getSellerSummary>> = null;

@@ -13,7 +13,7 @@
     "bucketPeriodKey": null,
     "periodStatus": "FINAL",
     "timezone": "Asia/Ho_Chi_Minh",
-    "dataAsOf": "2026-11-12T08:09:10.413Z"
+    "dataAsOf": "2026-11-12T08:18:29.510Z"
   },
   "pagination": {
     "page": 1,
@@ -34,7 +34,7 @@
       "primaryCategoryName": "Mẹ & Bé",
       "itemQuantity": 4,
       "regionName": "Tỉnh An Giang",
-      "orderTotalVnd": 5742280,
+      "orderTotalVnd": "5742280",
       "discountBadges": [
         "PRODUCT_DISCOUNT",
         "SELLER_VOUCHER",
@@ -58,7 +58,7 @@
       "primaryCategoryName": "Mẹ & Bé",
       "itemQuantity": 3,
       "regionName": "Tỉnh An Giang",
-      "orderTotalVnd": 2951710,
+      "orderTotalVnd": "2951710",
       "discountBadges": [
         "PRODUCT_DISCOUNT",
         "SELLER_VOUCHER"
@@ -81,7 +81,7 @@
       "primaryCategoryName": "Mẹ & Bé",
       "itemQuantity": 3,
       "regionName": "Thành phố Hồ Chí Minh",
-      "orderTotalVnd": 3806050,
+      "orderTotalVnd": "3806050",
       "discountBadges": [
         "PRODUCT_DISCOUNT",
         "SELLER_VOUCHER",
@@ -105,7 +105,7 @@
       "primaryCategoryName": "Mẹ & Bé",
       "itemQuantity": 2,
       "regionName": "Tỉnh An Giang",
-      "orderTotalVnd": 2529340,
+      "orderTotalVnd": "2529340",
       "discountBadges": [
         "PRODUCT_DISCOUNT",
         "SELLER_VOUCHER",
@@ -130,7 +130,7 @@
       "primaryCategoryName": "Mẹ & Bé",
       "itemQuantity": 1,
       "regionName": "Thành phố Hồ Chí Minh",
-      "orderTotalVnd": 656930,
+      "orderTotalVnd": "656930",
       "discountBadges": [
         "PRODUCT_DISCOUNT",
         "SELLER_VOUCHER",
@@ -154,7 +154,7 @@
       "primaryCategoryName": "Mẹ & Bé",
       "itemQuantity": 2,
       "regionName": "Thành phố Đà Nẵng",
-      "orderTotalVnd": 3142360,
+      "orderTotalVnd": "3142360",
       "discountBadges": [
         "PRODUCT_DISCOUNT",
         "SELLER_VOUCHER"
@@ -177,7 +177,7 @@
       "primaryCategoryName": "Mẹ & Bé",
       "itemQuantity": 2,
       "regionName": "Thành phố Hồ Chí Minh",
-      "orderTotalVnd": 1842680,
+      "orderTotalVnd": "1842680",
       "discountBadges": [
         "PRODUCT_DISCOUNT",
         "SELLER_VOUCHER",
@@ -201,14 +201,14 @@
       "primaryCategoryName": "Mẹ & Bé",
       "itemQuantity": 1,
       "regionName": "Thành phố Cần Thơ",
-      "orderTotalVnd": 552240,
+      "orderTotalVnd": "552240",
       "discountBadges": [
         "SANH",
         "SELLER_VOUCHER",
         "SHIPPING_SUPPORT"
       ],
       "paymentMethod": "COD",
-      "paymentStatus": "waiting",
+      "paymentStatus": "failed",
       "status": "CANCELLED",
       "sourceStatus": "CANCELLED",
       "state": "CANCELLED"
@@ -225,7 +225,7 @@
       "primaryCategoryName": "Mẹ & Bé",
       "itemQuantity": 4,
       "regionName": "Tỉnh An Giang",
-      "orderTotalVnd": 3815320,
+      "orderTotalVnd": "3815320",
       "discountBadges": [
         "PRODUCT_DISCOUNT",
         "SELLER_VOUCHER",
@@ -249,7 +249,7 @@
       "primaryCategoryName": "Mẹ & Bé",
       "itemQuantity": 1,
       "regionName": "Thành phố Hồ Chí Minh",
-      "orderTotalVnd": 347240,
+      "orderTotalVnd": "347240",
       "discountBadges": [
         "SANH",
         "SELLER_VOUCHER",

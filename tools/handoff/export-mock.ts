@@ -14,9 +14,9 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import type { ReportFilters } from '@/platform/reports/filters';
-import type { OrderSource } from '@/features/order-detail/contracts';
+import type { RawOrderDrawer } from '@/features/order-detail/server/order.schema';
 import { DATASET_FROM, DATASET_TO, allOrders } from '@/platform/mock/dataset';
-import { mockListGrowthOrders } from '@/platform/reports/orders/mock';
+import { buildRawOrderList } from '@/platform/reports/orders/mock';
 import { mockListPeriodBuyers } from '@/platform/reports/period-buyers/mock';
 import { mockListPeriodSellers } from '@/platform/reports/period-sellers/mock';
 import { bucketOf } from '@/platform/time';
@@ -51,6 +51,7 @@ const COPY_FILES = [
   'src/platform/mock/dataset.ts',
   'src/platform/mock/aggregate.ts',
   'src/platform/reports/series.ts',
+  'src/platform/format/phone.ts',
   // API 2 — module đơn dùng chung cho M2/M4/M5
   'src/platform/reports/parse.ts',
   'src/platform/reports/orders/contracts.ts',
@@ -128,11 +129,6 @@ async function main(): Promise<void> {
     console.log('  copy   ', rel);
   }
 
-  const order = await loadMockCopy<OrderSource>(
-    'src/features/order-detail/server/order.mock.ts',
-    'orderMockSource',
-  );
-
   // ── M1: hub báo cáo tăng trưởng — xuất RESPONSE THÔ đúng hợp đồng BE
   // (số dạng chuỗi, % đã ×100). View model của FE đi qua mapper riêng.
   writeJson('samples/m1-growth-report.json', buildRawGrowthReport(FILTERS_GROWTH));
@@ -142,7 +138,7 @@ async function main(): Promise<void> {
   writeJson('samples/m2-period-summary.json', periodSummary);
 
   // API 2 — sample đúng contract: meta + pagination + items
-  const periodOrders = mockListGrowthOrders({
+  const periodOrders = buildRawOrderList({
     scope: 'PERIOD',
     groupBy: 'MONTH',
     periodKey: bucketOf(FILTERS_PERIOD.from, 'month'),
@@ -199,7 +195,7 @@ async function main(): Promise<void> {
   if (sellerSummary) writeJson('samples/m5-seller-summary.json', sellerSummary);
 
   // danh sách đơn của M4/M5 — mock (chờ API 2)
-  const buyerOrders = mockListGrowthOrders({
+  const buyerOrders = buildRawOrderList({
     scope: 'CUSTOMER',
     customerId: sampleCustomerId,
     fromDate: FILTERS_PERIOD.from,
@@ -209,7 +205,7 @@ async function main(): Promise<void> {
   });
   writeJson('samples/m4-orders-page.json', buyerOrders);
 
-  const sellerOrders = mockListGrowthOrders({
+  const sellerOrders = buildRawOrderList({
     scope: 'SELLER',
     sellerId: sampleSellerId,
     fromDate: FILTERS_PERIOD.from,
@@ -222,10 +218,14 @@ async function main(): Promise<void> {
   // ── M6: chi tiết đơn
   const firstOrder = periodOrders.items[0];
   if (firstOrder) {
-    const orderDetail = await order.get(firstOrder.orderPublicId);
-    if (orderDetail) {
-      // API 5 — projection growthDrawer, đúng shape hợp đồng
-      writeJson('samples/m6-order-detail.json', orderDetail);
+    const fullOrder = allOrders().find((o) => o.publicId === firstOrder.orderPublicId);
+    if (fullOrder) {
+      // API 5 — response THÔ (tiền dạng chuỗi) đúng hợp đồng growthDrawer
+      const buildRawOrderDrawer = await loadMockCopy<(order: typeof fullOrder) => RawOrderDrawer>(
+        'src/features/order-detail/server/order.mock.ts',
+        'buildRawOrderDrawer',
+      );
+      writeJson('samples/m6-order-detail.json', buildRawOrderDrawer(fullOrder));
     }
   }
 

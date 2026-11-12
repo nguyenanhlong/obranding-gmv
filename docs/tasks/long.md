@@ -1,9 +1,8 @@
 # Long — FE-B · M2 Chi tiết kỳ + M6 Chi tiết đơn
 
-> **Cập nhật 12/11/2026:** M2 đã dùng API 6 (6 KPI + distribution theo unit, 3 tab có số đếm);
-> danh sách đơn vẫn mock (chờ API 2) và đã tách `listOrders()` để thay một chỗ.
-> M6 giữ nguyên mock (chờ API 5). Chi tiết: `docs/doi-chieu/ket-qua-doi-chieu.md`.
-
+> **Cập nhật 12/11/2026 (cuối):** M2 dùng API 6 + API 2 (scope PERIOD) + API 3 + API 4.
+> M6 mở dạng **drawer** bằng intercepting route, gọi API 5 `view=growthDrawer`, vẫn giữ trang
+> `/orders/[id]` cho F5. Chi tiết trạng thái: `docs/doi-chieu/ket-qua-doi-chieu.md`.
 
 Nhánh: `feat/fe-b-long` · Route: `/growth/period`, `/orders/[orderId]`
 
@@ -11,29 +10,30 @@ Nhánh: `feat/fe-b-long` · Route: `/growth/period`, `/orders/[orderId]`
 
 | Vùng | Ghi chú |
 |---|---|
-| `app/(admin)/growth/period/page.tsx` | M2: 6 KPI, phân bổ theo ngày, bảng 13 cột + search/filter/paging |
-| `app/(admin)/orders/[orderId]/page.tsx` | M6: sản phẩm, breakdown ưu đãi, timeline |
-| `src/features/period-detail/**` | contracts, mock, source, queries |
-| `src/features/order-detail/**` | contracts, mock, source, queries |
-| `app/api/exports/period/route.ts` | CSV |
+| `app/(admin)/growth/period/page.tsx` | M2: 6 KPI, phân bổ, 3 tab đầy đủ |
+| `app/(admin)/@drawer/(.)orders/[orderId]/page.tsx` | M6: drawer |
+| `app/(admin)/orders/[orderId]/page.tsx` | M6: trang đầy đủ (F5) |
+| `src/features/period-detail/**` | contracts, mock, http, source, queries, 2 bảng API 3/4 |
+| `src/features/order-detail/**` | contracts, schema, mapper, mock, http, drawer |
+| `src/platform/reports/{orders,period-buyers,period-sellers}/**` | tầng dữ liệu dùng chung |
+| `app/api/exports/period/route.ts` | CSV (field mới của API 2) |
 
 ## Đã có
 
-- [x] M2 render được: 6 KPI (đơn, GMV, user, nhà bán, AOV, tỉ lệ khách mới)
-- [x] Phân bổ đơn theo ngày + "Cao nhất ngày X"
-- [x] Bảng đơn 13 cột, search theo mã đơn/nhà bán/khách, filter trạng thái, phân trang
-- [x] M6: breakdown ưu đãi, timeline 5 mốc + mốc huỷ, link từ mã đơn ở mọi bảng
-- [x] Export CSV cho M2
+- [x] M2: 6 KPI, phân bổ theo unit, badge 3 tab
+- [x] API 2 scope PERIOD: `groupBy` + `periodKey`, q (mã đơn/mã-tên khách/nhà bán), status, pageSize 10/20/50/100
+- [x] API 3: bảng User mua hàng, sort ORDER_COUNT/TOTAL_VALUE trên URL, link kèm from/to
+- [x] API 4: bảng Nhà bán, thanh tỷ trọng GMV, link kèm from/to
+- [x] M6: drawer + trang riêng, items[] nhiều dòng, discountBreakdown, milestones null, dataQualityFlags
+- [x] 404 → notFound; 422 → EmptyState với message BE
 
-## Việc tiếp
+## Việc tiếp (chờ BE chốt hợp đồng)
 
-- [ ] M2: chart bar hiện là CSS — đổi sang Recharts nếu cần tooltip khi hover
-- [ ] M2: toggle 3 series (Đơn hàng / User mua hàng / Nhà bán) như design
-- [ ] M2: page size 10/20/30 (hiện cố định qua query)
-- [ ] M6: đoạn nối timeline tô cam khi hai mốc liền kề đều có giá trị
-- [ ] M6: hiển thị đúng nhãn ưu đãi theo M3 mục 4 (Thẻ Sành nằm trong giảm giá SP)
-- [ ] Viết `period.http.ts` + `order.http.ts` khi BE bàn giao
+- [ ] Chốt nguồn số tab Đơn hàng (API 6 vs API 2) — hiện theo API 6
+- [ ] Chốt có loại đơn huỷ khi lọc mốc nhà bán — hiện giữ `status=ALL`
+- [ ] `PACKED` cần nguồn thời gian độc lập để bỏ `PACKED_TIMESTAMP_UNAVAILABLE`
+- [ ] XLSX/PDF cho M2 (đang 501)
 
 ## Không chạm
 
-`layout.tsx`, `src/platform/**`, `src/contracts/**`, `growth/page.tsx`, `customers/**`, `sellers/**`
+`layout.tsx` (trừ slot drawer), `src/contracts/**`, `growth/page.tsx`, `customers/**`, `sellers/**`

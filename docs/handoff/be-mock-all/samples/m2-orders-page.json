@@ -13,7 +13,7 @@
     "bucketPeriodKey": null,
     "periodStatus": "FINAL",
     "timezone": "Asia/Ho_Chi_Minh",
-    "dataAsOf": "2026-11-12T08:09:10.398Z"
+    "dataAsOf": "2026-11-12T08:18:29.483Z"
   },
   "pagination": {
     "page": 1,
@@ -34,7 +34,7 @@
       "primaryCategoryName": "Sở thích & sưu tầm",
       "itemQuantity": 3,
       "regionName": "Thành phố Hà Nội",
-      "orderTotalVnd": 2309540,
+      "orderTotalVnd": "2309540",
       "discountBadges": [
         "PRODUCT_DISCOUNT",
         "SELLER_VOUCHER",
@@ -58,7 +58,7 @@
       "primaryCategoryName": "Sắc đẹp",
       "itemQuantity": 3,
       "regionName": "Thành phố Hồ Chí Minh",
-      "orderTotalVnd": 2287520,
+      "orderTotalVnd": "2287520",
       "discountBadges": [
         "SANH",
         "SELLER_VOUCHER",
@@ -82,7 +82,7 @@
       "primaryCategoryName": "Sở thích & sưu tầm",
       "itemQuantity": 4,
       "regionName": "Tỉnh Đắk Lắk",
-      "orderTotalVnd": 1135200,
+      "orderTotalVnd": "1135200",
       "discountBadges": [
         "PRODUCT_DISCOUNT",
         "SELLER_VOUCHER",
@@ -106,7 +106,7 @@
       "primaryCategoryName": "Sở thích & sưu tầm",
       "itemQuantity": 1,
       "regionName": "Thành phố Cần Thơ",
-      "orderTotalVnd": 1410930,
+      "orderTotalVnd": "1410930",
       "discountBadges": [
         "PRODUCT_DISCOUNT",
         "SELLER_VOUCHER",
@@ -130,7 +130,7 @@
       "primaryCategoryName": "Thời trang",
       "itemQuantity": 4,
       "regionName": "Tỉnh Bắc Ninh",
-      "orderTotalVnd": 3779680,
+      "orderTotalVnd": "3779680",
       "discountBadges": [
         "PRODUCT_DISCOUNT",
         "SELLER_VOUCHER",
@@ -155,7 +155,7 @@
       "primaryCategoryName": "Mẹ & Bé",
       "itemQuantity": 1,
       "regionName": "Tỉnh Bắc Ninh",
-      "orderTotalVnd": 669950,
+      "orderTotalVnd": "669950",
       "discountBadges": [
         "PRODUCT_DISCOUNT",
         "SELLER_VOUCHER",
@@ -179,7 +179,7 @@
       "primaryCategoryName": "Thời trang",
       "itemQuantity": 1,
       "regionName": "Thành phố Cần Thơ",
-      "orderTotalVnd": 416990,
+      "orderTotalVnd": "416990",
       "discountBadges": [
         "PRODUCT_DISCOUNT",
         "SELLER_VOUCHER",
@@ -203,7 +203,7 @@
       "primaryCategoryName": "Mẹ & Bé",
       "itemQuantity": 3,
       "regionName": "Tỉnh Đồng Tháp",
-      "orderTotalVnd": 4023070,
+      "orderTotalVnd": "4023070",
       "discountBadges": [
         "PRODUCT_DISCOUNT",
         "SELLER_VOUCHER"
@@ -226,7 +226,7 @@
       "primaryCategoryName": "Thời trang",
       "itemQuantity": 1,
       "regionName": "Tỉnh Bắc Ninh",
-      "orderTotalVnd": 338060,
+      "orderTotalVnd": "338060",
       "discountBadges": [
         "PRODUCT_DISCOUNT",
         "SELLER_VOUCHER",
@@ -251,7 +251,7 @@
       "primaryCategoryName": "Thời trang",
       "itemQuantity": 2,
       "regionName": "Tỉnh Đắk Lắk",
-      "orderTotalVnd": 1615760,
+      "orderTotalVnd": "1615760",
       "discountBadges": [
         "PRODUCT_DISCOUNT",
         "SELLER_VOUCHER",

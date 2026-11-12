@@ -25,15 +25,15 @@
       "productName": "Sản phẩm 83 của CÔNG",
       "sku": "1218-118",
       "quantity": 3,
-      "unitPriceVnd": 826000,
-      "lineSubtotalVnd": 2478000
+      "unitPriceVnd": "826000",
+      "lineSubtotalVnd": "2478000"
     }
   ],
   "discountBreakdown": [
     {
       "kind": "PRODUCT_DISCOUNT",
       "labelKey": "PRODUCT_DISCOUNT",
-      "amountVnd": 99120,
+      "amountVnd": "99120",
       "includedIn": "PRODUCT",
       "fundedBy": "PLATFORM",
       "sellerFundedVnd": null,
@@ -42,7 +42,7 @@
     {
       "kind": "SELLER_VOUCHER",
       "labelKey": "SHOP_VOUCHER",
-      "amountVnd": 74340,
+      "amountVnd": "74340",
       "includedIn": "SELLER",
       "fundedBy": "SELLER",
       "sellerFundedVnd": null,
@@ -51,7 +51,7 @@
     {
       "kind": "SHIPPING_SUPPORT",
       "labelKey": "SHIP_SUPPORT",
-      "amountVnd": 20000,
+      "amountVnd": "20000",
       "includedIn": "SHIPPING",
       "fundedBy": "MIXED",
       "sellerFundedVnd": null,
@@ -59,10 +59,10 @@
     }
   ],
   "totals": {
-    "subtotalVnd": 2478000,
-    "shippingFeeVnd": 25000,
-    "totalDiscountVnd": 193460,
-    "orderTotalVnd": 2309540
+    "subtotalVnd": "2478000",
+    "shippingFeeVnd": "25000",
+    "totalDiscountVnd": "193460",
+    "orderTotalVnd": "2309540"
   },
   "delivery": {
     "carrierName": null,
