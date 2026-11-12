@@ -5,6 +5,7 @@ import { allOrders } from '@/platform/mock/dataset';
 import type { SellerOrderQuery, SellerSource } from '../contracts';
 import { mapSellerSummary } from './seller.mapper';
 import { buildRawSellerSummary } from './seller.raw';
+import { sellerSummarySchema } from './seller.schema';
 
 function inRange(row: OrderRow, from: string, to: string): boolean {
   const day = row.placedAt.slice(0, 10);
@@ -14,7 +15,7 @@ function inRange(row: OrderRow, from: string, to: string): boolean {
 export const sellerMockSource: SellerSource = {
   async getSummary(sellerId: string, f: ReportFilters) {
     const raw = buildRawSellerSummary(sellerId, f.from, f.to);
-    return raw ? mapSellerSummary(raw) : null;
+    return raw ? mapSellerSummary(sellerSummarySchema.parse(raw)) : null;
   },
 
   /** TODO (chờ API 2): danh sách đơn của nhà bán vẫn là mock. */

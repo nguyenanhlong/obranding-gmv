@@ -1,5 +1,14 @@
 import type { ReportFilters } from '@/platform/reports/filters';
-import { addDays, bucketOf, bucketRange, diffDays, parseDate, todayIn, toIsoDate } from '@/platform/time';
+import {
+  addDays,
+  bucketOf,
+  bucketRange,
+  currentHourIn,
+  diffDays,
+  parseDate,
+  todayIn,
+  toIsoDate,
+} from '@/platform/time';
 import { allOrders } from '@/platform/mock/dataset';
 import type { RawBucket, RawPeriodSummary } from './period.schema';
 
@@ -49,7 +58,7 @@ function previousWindow(period: { start: string; end: string }, windowEnd: strin
 function bucketStartOf(bucket: { key: string; index: number }, unit: string, window: Window): string {
   if (unit === 'HOUR') return window.start;
   if (unit === 'MONTH') return `${bucket.key}-01`;
-  if (unit === 'WEEK') return bucket.key;
+  if (unit === 'WEEK') return bucketRange(bucket.key, 'week').from;
   return bucket.key; // WEEKDAY / DAY: key là ngày
 }
 
@@ -58,6 +67,7 @@ function buildDistribution(
   rows: Row[],
   window: Window,
   today: string,
+  tz: string,
 ): RawPeriodSummary['distribution'] {
   const descriptor: { key: string; label: string; shortLabel: string; index: number }[] = [];
 
@@ -132,7 +142,7 @@ function buildDistribution(
     counts.set(key, (counts.get(key) ?? 0) + 1);
   }
 
-  const nowHour = new Date().getUTCHours();
+  const nowHour = currentHourIn(tz);
 
   const buckets: RawBucket[] = descriptor.map((d) => {
     const startDate = bucketStartOf(d, unit, window);
@@ -249,6 +259,6 @@ export function buildRawPeriodSummary(f: ReportFilters): RawPeriodSummary {
       newBuyers: String(newBuyers),
       newBuyerRate: buyers === 0 ? 0 : round1((newBuyers / buyers) * 100),
     },
-    distribution: buildDistribution(unit, rows, window, today),
+    distribution: buildDistribution(unit, rows, window, today, f.tz),
   };
 }

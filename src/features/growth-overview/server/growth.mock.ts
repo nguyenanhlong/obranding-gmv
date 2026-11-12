@@ -3,6 +3,7 @@ import type { ReportFilters } from '@/platform/reports/filters';
 import type { GrowthReport } from '../contracts';
 import { mapGrowthReport } from './growth.mapper';
 import { buildRawGrowthReport } from './growth.raw';
+import { growthResponseSchema } from './growth.schema';
 
 /**
  * Mock dựng response THÔ (chuỗi số, % ×100) rồi đi qua mapper —
@@ -10,6 +11,6 @@ import { buildRawGrowthReport } from './growth.raw';
  */
 export const growthMockSource = {
   async getReport(f: ReportFilters): Promise<GrowthReport> {
-    return mapGrowthReport(buildRawGrowthReport(f));
+    return mapGrowthReport(growthResponseSchema.parse(buildRawGrowthReport(f)));
   },
 };

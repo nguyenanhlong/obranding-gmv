@@ -1,6 +1,6 @@
 import { csvResponse, toCsv } from '@/platform/reports/csv';
 import { rejectUnsupportedFormat } from '@/platform/reports/export';
-import { parseFilters, searchParamsToRecord } from '@/platform/reports/filters';
+import { growthRangeError, parseFilters, searchParamsToRecord } from '@/platform/reports/filters';
 import { getGrowthReport } from '@/features/growth-overview/server/queries';
 
 export const dynamic = 'force-dynamic';
@@ -11,6 +11,9 @@ export async function GET(req: Request) {
   if (blocked) return blocked;
 
   const filters = parseFilters(searchParamsToRecord(url.searchParams));
+  const rangeError = growthRangeError(filters);
+  if (rangeError) return Response.json({ error: rangeError }, { status: 400 });
+
   const report = await getGrowthReport(filters);
 
   const rows = report.periods.map((p) => ({

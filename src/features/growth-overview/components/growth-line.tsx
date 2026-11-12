@@ -16,9 +16,13 @@ import { formatSignedPercent } from '@/platform/format/percent';
 import type { GrowthMetricKey, GrowthPeriod } from '../contracts';
 import { METRIC_LABEL, toGrowthLineData, type GrowthLineDatum } from './growth-line.data';
 
+type Back = { from: string; to: string; period: string };
+
 type GrowthLineProps = {
   periods: GrowthPeriod[];
   groupBy: string;
+  /** bộ lọc gốc để nút quay lại giữ đúng filter */
+  back?: Back;
   height?: number;
 };
 
@@ -28,7 +32,7 @@ const METRICS: GrowthMetricKey[] = ['orders', 'buyers', 'gmv'];
  * Biểu đồ đường theo ô "Chỉ số tăng trưởng". Đổi chỉ số bằng state client,
  * không gọi lại API (hợp đồng API 1 mục 3.5).
  */
-export function GrowthLine({ periods, groupBy, height = 320 }: GrowthLineProps) {
+export function GrowthLine({ periods, groupBy, back, height = 320 }: GrowthLineProps) {
   const [metric, setMetric] = useState<GrowthMetricKey>('orders');
   const router = useRouter();
   const data = toGrowthLineData(periods, metric, groupBy);
@@ -40,6 +44,11 @@ export function GrowthLine({ periods, groupBy, height = 320 }: GrowthLineProps) 
       to: point.endDate,
       period: groupBy.toLowerCase(),
     });
+    if (back) {
+      qs.set('backFrom', back.from);
+      qs.set('backTo', back.to);
+      qs.set('backPeriod', back.period);
+    }
     router.push(`/growth/period?${qs.toString()}`);
   };
 

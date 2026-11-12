@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { formatDate } from '@/platform/format/date';
 import { formatCompactMoney, formatCount } from '@/platform/format/money';
 import { formatSignedPercent } from '@/platform/format/percent';
 import type { GrowthPeriod } from '../contracts';
@@ -6,13 +7,14 @@ import type { GrowthPeriod } from '../contracts';
 type PeriodTableProps = {
   periods: GrowthPeriod[];
   groupBy: string;
+  back?: { from: string; to: string; period: string };
 };
 
 /**
  * Bảng "Số liệu theo ngày/tuần/tháng/quý/năm": mỗi dòng 1 kỳ, kỳ mới nhất lên đầu.
  * Tăng trưởng lấy từ orders.growthPercent của chính kỳ đó.
  */
-export function PeriodTable({ periods, groupBy }: PeriodTableProps) {
+export function PeriodTable({ periods, groupBy, back }: PeriodTableProps) {
   const rows = [...periods].reverse();
 
   return (
@@ -36,7 +38,13 @@ export function PeriodTable({ periods, groupBy }: PeriodTableProps) {
               from: p.startDate,
               to: p.endDate,
               period: groupBy.toLowerCase(),
-            }).toString();
+            });
+            if (back) {
+              qs.set('backFrom', back.from);
+              qs.set('backTo', back.to);
+              qs.set('backPeriod', back.period);
+            }
+            const qsString = qs.toString();
             const growth = p.orders.growthPercent;
 
             return (
@@ -50,7 +58,7 @@ export function PeriodTable({ periods, groupBy }: PeriodTableProps) {
                   ) : null}
                 </td>
                 <td className="px-3 py-2 text-xs text-slate-500">
-                  {p.startDate} – {p.endDate}
+                  {formatDate(p.startDate)} – {formatDate(p.endDate)}
                 </td>
                 <td className="px-3 py-2 text-right tabular-nums">{formatCount(p.orders.value)}</td>
                 <td className="px-3 py-2 text-right tabular-nums">{formatCompactMoney(p.gmv.value)}</td>
@@ -63,7 +71,7 @@ export function PeriodTable({ periods, groupBy }: PeriodTableProps) {
                 </td>
                 <td className="px-3 py-2 text-right">
                   <Link
-                    href={`/growth/period?${qs}`}
+                    href={`/growth/period?${qsString}`}
                     className="text-xs font-medium text-indigo-700 hover:underline"
                   >
                     Chi tiết

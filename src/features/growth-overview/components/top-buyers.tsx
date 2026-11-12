@@ -6,6 +6,8 @@ import type { GrowthPeriod, TopBuyer } from '../contracts';
 type TopBuyersPanelProps = {
   period: GrowthPeriod | null;
   groupBy: string;
+  /** bộ lọc tổng quan đã kẹp toDate = min(to, hôm nay) */
+  range: { from: string; to: string };
 };
 
 function BuyerList({
@@ -50,15 +52,15 @@ function BuyerList({
 }
 
 /** API 1 đã trả sẵn topBuyersByOrders / topBuyersByValue (API 3 chưa có hợp đồng). */
-export function TopBuyersPanel({ period, groupBy }: TopBuyersPanelProps) {
+export function TopBuyersPanel({ period, groupBy, range }: TopBuyersPanelProps) {
   if (!period) return <EmptyState title="Chưa có kỳ nào để hiển thị top user" />;
 
   const rangeQs = new URLSearchParams({
-    from: period.startDate,
-    to: period.endDate,
+    from: range.from,
+    to: range.to,
     period: groupBy.toLowerCase(),
-    defFrom: period.startDate,
-    defTo: period.endDate,
+    defFrom: range.from,
+    defTo: range.to,
   }).toString();
 
   return (

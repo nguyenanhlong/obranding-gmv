@@ -50,7 +50,7 @@ export default async function BuyerPage({ params, searchParams }: PageProps) {
   const defFrom = typeof sp.defFrom === 'string' ? sp.defFrom : filters.from;
   const defTo = typeof sp.defTo === 'string' ? sp.defTo : filters.to;
   const maxSellerValue = Math.max(1, ...summary.topSellers.map((s) => s.value));
-  const lastOrder = summary.kpis.lastOrderAt ? summary.kpis.lastOrderAt.slice(0, 10) : '—';
+  const lastOrder = summary.kpis.lastOrderAt ? formatDate(summary.kpis.lastOrderAt) : '—';
 
   return (
     <div className="space-y-5">
@@ -127,7 +127,7 @@ export default async function BuyerPage({ params, searchParams }: PageProps) {
           value={lastOrder}
           hint={
             summary.kpis.firstOrderAt
-              ? `đơn đầu tiên ${summary.kpis.firstOrderAt.slice(0, 10)}`
+              ? `đơn đầu tiên ${formatDate(summary.kpis.firstOrderAt)}`
               : 'chưa có đơn'
           }
         />

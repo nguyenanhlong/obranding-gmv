@@ -1,6 +1,6 @@
 import { csvResponse, toCsv } from '@/platform/reports/csv';
 import { rejectUnsupportedFormat } from '@/platform/reports/export';
-import { parseFilters, searchParamsToRecord } from '@/platform/reports/filters';
+import { parseFilters, periodRangeError, searchParamsToRecord } from '@/platform/reports/filters';
 import { listPeriodOrders } from '@/features/period-detail/server/queries';
 
 export const dynamic = 'force-dynamic';
@@ -13,6 +13,8 @@ export async function GET(req: Request) {
   if (blocked) return blocked;
 
   const filters = parseFilters(searchParamsToRecord(url.searchParams));
+  const rangeError = periodRangeError(filters);
+  if (rangeError) return Response.json({ error: rangeError }, { status: 400 });
   // TODO API 2: danh sách đơn vẫn lấy từ mock; đổi sang API 2 khi có hợp đồng.
   const detail = await listPeriodOrders(filters, { page: 1, pageSize: MAX_EXPORT_ROWS });
 

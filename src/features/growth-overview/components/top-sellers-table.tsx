@@ -9,21 +9,23 @@ type TopSellersTableProps = {
   period: GrowthPeriod | null;
   topN: number;
   groupBy: string;
+  /** bộ lọc tổng quan đã kẹp toDate = min(to, hôm nay) */
+  range: { from: string; to: string };
 };
 
 /** Khối "Top nhà bán theo số đơn" của kỳ đang xem (mặc định kỳ FINAL cuối). */
-export function TopSellersTable({ period, topN, groupBy }: TopSellersTableProps) {
+export function TopSellersTable({ period, topN, groupBy, range }: TopSellersTableProps) {
   if (!period) {
     return <EmptyState title="Chưa có kỳ nào để hiển thị top nhà bán" />;
   }
 
   const rows = period.topSellersByOrders.slice(0, topN);
   const rangeQs = new URLSearchParams({
-    from: period.startDate,
-    to: period.endDate,
+    from: range.from,
+    to: range.to,
     period: groupBy.toLowerCase(),
-    defFrom: period.startDate,
-    defTo: period.endDate,
+    defFrom: range.from,
+    defTo: range.to,
   }).toString();
 
   const columns: Column<TopSeller>[] = [

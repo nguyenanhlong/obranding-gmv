@@ -158,6 +158,15 @@ export function assertEntityRange(f: ReportFilters): void {
   if (span > 1096) throw new FilterError('Khoảng thời gian tối đa 1096 ngày');
 }
 
+/** Kẹp toDate về hôm nay — dùng cho mọi link sang API 7/8 (toDate ≤ hôm nay). */
+export function clampToToday(
+  range: { from: string; to: string },
+  tz: string = DEFAULT_TZ,
+): { from: string; to: string } {
+  const today = todayIn(tz);
+  return { from: range.from, to: range.to > today ? today : range.to };
+}
+
 /** Dùng ở page: trả message thay vì ném lỗi, để hiển thị EmptyState thay vì error boundary. */
 export function growthRangeError(f: ReportFilters): string | null {
   try {

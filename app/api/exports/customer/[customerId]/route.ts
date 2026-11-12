@@ -1,6 +1,6 @@
 import { csvResponse, toCsv } from '@/platform/reports/csv';
 import { rejectUnsupportedFormat } from '@/platform/reports/export';
-import { parseFilters, searchParamsToRecord } from '@/platform/reports/filters';
+import { entityRangeError, parseFilters, searchParamsToRecord } from '@/platform/reports/filters';
 import { listBuyerOrders } from '@/features/buyer-detail/server/queries';
 
 export const dynamic = 'force-dynamic';
@@ -14,6 +14,8 @@ export async function GET(req: Request, ctx: RouteContext) {
 
   const { customerId } = await ctx.params;
   const filters = parseFilters(searchParamsToRecord(url.searchParams));
+  const rangeError = entityRangeError(filters);
+  if (rangeError) return Response.json({ error: rangeError }, { status: 400 });
   const detail = await listBuyerOrders(customerId, filters, { page: 1, pageSize: 5000 });
   if (detail.items.length === 0) return new Response('not found', { status: 404 });
 

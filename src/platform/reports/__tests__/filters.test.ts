@@ -71,7 +71,7 @@ describe('bucketOf', () => {
     expect(bucketOf('2026-10-05', 'month')).toBe('2026-10');
     expect(bucketOf('2026-10-05', 'quarter')).toBe('2026-Q4');
     expect(bucketOf('2026-10-05', 'year')).toBe('2026');
-    expect(bucketOf('2026-10-05', 'week')).toBe('2026-10-05'); // thứ 2
+    expect(bucketOf('2026-10-05', 'week')).toBe('2026-W41'); // ISO week key
   });
 });
 
@@ -83,6 +83,10 @@ describe('bucketRange', () => {
 
   it('quý 4 kết thúc 31/12', () => {
     expect(bucketRange('2026-Q4', 'quarter')).toEqual({ from: '2026-10-01', to: '2026-12-31' });
+  });
+
+  it('tuần ISO parse được từ key 2026-W41', () => {
+    expect(bucketRange('2026-W41', 'week')).toEqual({ from: '2026-10-05', to: '2026-10-11' });
   });
 });
 

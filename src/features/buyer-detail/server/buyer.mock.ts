@@ -5,6 +5,7 @@ import { allOrders } from '@/platform/mock/dataset';
 import type { BuyerOrderQuery, BuyerSource } from '../contracts';
 import { mapBuyerSummary } from './buyer.mapper';
 import { buildRawBuyerSummary } from './buyer.raw';
+import { buyerSummarySchema } from './buyer.schema';
 
 function inRange(row: OrderRow, from: string, to: string): boolean {
   const day = row.placedAt.slice(0, 10);
@@ -14,7 +15,7 @@ function inRange(row: OrderRow, from: string, to: string): boolean {
 export const buyerMockSource: BuyerSource = {
   async getSummary(customerId: string, f: ReportFilters) {
     const raw = buildRawBuyerSummary(customerId, f.from, f.to);
-    return raw ? mapBuyerSummary(raw) : null;
+    return raw ? mapBuyerSummary(buyerSummarySchema.parse(raw)) : null;
   },
 
   /** TODO (chờ API 2): danh sách đơn của khách vẫn là mock. */

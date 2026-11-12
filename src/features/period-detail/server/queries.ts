@@ -4,10 +4,11 @@ import type { ReportFilters } from '@/platform/reports/filters';
 import { REPORT_TAGS } from '@/platform/reports/tags';
 import type { PeriodOrderQuery } from '../contracts';
 import { periodSource } from './source';
+import { dataMode } from '@/platform/reports/source';
 
 export const getPeriodSummary = unstable_cache(
   async (filters: ReportFilters) => periodSource.getSummary(filters),
-  ['period:summary'],
+  ['period:summary', dataMode()],
   { revalidate: 60, tags: [REPORT_TAGS.period] },
 );
 
@@ -15,6 +16,6 @@ export const getPeriodSummary = unstable_cache(
 export const listPeriodOrders = unstable_cache(
   async (filters: ReportFilters, query: PeriodOrderQuery) =>
     periodSource.listOrders(filters, query),
-  ['period:orders'],
+  ['period:orders', dataMode()],
   { revalidate: 60, tags: [REPORT_TAGS.period] },
 );

@@ -6,6 +6,7 @@ import { allOrders } from '@/platform/mock/dataset';
 import type { PeriodOrderQuery, PeriodSource } from '../contracts';
 import { mapPeriodSummary } from './period.mapper';
 import { buildRawPeriodSummary } from './period.raw';
+import { periodSummarySchema } from './period.schema';
 
 function matches(row: OrderRow, q: string | undefined, status: string | undefined): boolean {
   if (status && status !== 'ALL' && row.status !== status) return false;
@@ -20,7 +21,7 @@ function matches(row: OrderRow, q: string | undefined, status: string | undefine
 
 export const periodMockSource: PeriodSource = {
   async getSummary(f: ReportFilters) {
-    return mapPeriodSummary(buildRawPeriodSummary(f));
+    return mapPeriodSummary(periodSummarySchema.parse(buildRawPeriodSummary(f)));
   },
 
   /**

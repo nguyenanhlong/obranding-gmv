@@ -1,5 +1,6 @@
 import { parseFilters, parsePositiveInt } from '@/platform/reports/filters';
-import { filtersToQueryString, growthRangeError } from '@/platform/reports/filters';
+import { clampToToday, filtersToQueryString, growthRangeError } from '@/platform/reports/filters';
+import { GROUP_BY_LABEL } from '@/platform/reports/labels';
 import { ChartFrame } from '@/platform/ui/chart-frame';
 import { EmptyState } from '@/platform/ui/empty-state';
 import { ReportFilter } from '@/platform/ui/report-filter';
@@ -27,6 +28,8 @@ export default async function GrowthPage({ searchParams }: PageProps) {
   const selection = report ? kpisOf(report) : null;
   const groupBy = report?.meta.groupBy ?? filters.period.toUpperCase();
   const qs = filtersToQueryString(filters);
+  const linkRange = clampToToday({ from: filters.from, to: filters.to }, filters.tz);
+  const back = { from: filters.from, to: filters.to, period: filters.period };
 
   return (
     <div className="space-y-5">
@@ -35,7 +38,7 @@ export default async function GrowthPage({ searchParams }: PageProps) {
           <h1 className="text-xl font-semibold text-slate-900">Báo cáo tăng trưởng</h1>
           <p className="mt-0.5 text-sm text-slate-500">
             Đơn con theo nhà bán · tính theo ngày đặt hàng
-            {report ? ` · ${groupBy.toLowerCase()} · ${report.meta.totalPeriods} kỳ` : ''}
+            {report ? ` · ${GROUP_BY_LABEL[groupBy] ?? groupBy.toLowerCase()} · ${report.meta.totalPeriods} kỳ` : ''}
           </p>
         </div>
 
@@ -72,7 +75,7 @@ export default async function GrowthPage({ searchParams }: PageProps) {
                 : 'Số liệu theo kỳ đã chốt gần nhất'
             }
           >
-            <GrowthLine periods={report.periods} groupBy={groupBy} />
+            <GrowthLine periods={report.periods} groupBy={groupBy} back={back} />
           </ChartFrame>
 
           <ChartFrame
@@ -94,18 +97,18 @@ export default async function GrowthPage({ searchParams }: PageProps) {
               </div>
             }
           >
-            <TopSellersTable period={selection?.period ?? null} topN={topN} groupBy={groupBy} />
+            <TopSellersTable period={selection?.period ?? null} topN={topN} groupBy={groupBy} range={linkRange} />
           </ChartFrame>
 
           <ChartFrame
             title="Top user mua hàng"
             description="API 1 trả sẵn 10 dòng mỗi danh sách · API 3 (danh sách đầy đủ) chưa có hợp đồng"
           >
-            <TopBuyersPanel period={selection?.period ?? null} groupBy={groupBy} />
+            <TopBuyersPanel period={selection?.period ?? null} groupBy={groupBy} range={linkRange} />
           </ChartFrame>
 
           <ChartFrame title="Số liệu theo kỳ" description="Kỳ mới nhất ở trên cùng">
-            <PeriodTable periods={report.periods} groupBy={groupBy} />
+            <PeriodTable periods={report.periods} groupBy={groupBy} back={back} />
           </ChartFrame>
         </>
       )}

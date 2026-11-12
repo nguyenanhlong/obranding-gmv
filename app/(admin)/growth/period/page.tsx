@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { parseFilters, parsePositiveInt } from '@/platform/reports/filters';
 import { filtersToQueryString, periodRangeError } from '@/platform/reports/filters';
 import { formatDate } from '@/platform/format/date';
+import { todayIn } from '@/platform/time';
 import { formatCompactMoney, formatCount } from '@/platform/format/money';
 import { formatPercent } from '@/platform/format/percent';
 import type { Delta } from '@/contracts/base';
@@ -9,7 +10,6 @@ import { ChartFrame } from '@/platform/ui/chart-frame';
 import { EmptyState } from '@/platform/ui/empty-state';
 import { KpiCard } from '@/platform/ui/kpi-card';
 import { OrderTable } from '@/platform/ui/order-table';
-import { ReportFilter } from '@/platform/ui/report-filter';
 import { DistributionBars } from '@/features/period-detail/components/distribution-bars';
 import { PageSizeSelect } from '@/features/period-detail/components/page-size-select';
 import {
@@ -61,7 +61,6 @@ export default async function PeriodPage({ searchParams }: PageProps) {
     return (
       <div className="space-y-5">
         <h1 className="text-xl font-semibold text-slate-900">Chi tiết kỳ</h1>
-        <ReportFilter filters={filters} />
         <EmptyState title="Khoảng ngày không hợp lệ cho kỳ này" description={rangeError} />
       </div>
     );
@@ -80,6 +79,11 @@ export default async function PeriodPage({ searchParams }: PageProps) {
 
   const { period, kpis, distribution } = summary;
   const qs = filtersToQueryString(filters);
+  const today = todayIn(filters.tz);
+  const backFrom = (typeof sp.backFrom === 'string' && sp.backFrom) || period.startDate;
+  const backToRaw = (typeof sp.backTo === 'string' && sp.backTo) || period.endDate;
+  const backTo = backToRaw > today ? today : backToRaw;
+  const backPeriod = (typeof sp.backPeriod === 'string' && sp.backPeriod) || period.groupBy.toLowerCase();
   const totalPages = Math.max(1, Math.ceil(orders.total / pageSize));
   const dayOnly = period.startDate === period.endDate;
   const approximate = period.status === 'PROVISIONAL';
@@ -94,7 +98,10 @@ export default async function PeriodPage({ searchParams }: PageProps) {
     <div className="space-y-5">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <Link href={`/growth?${qs}`} className="text-xs text-indigo-700 hover:underline">
+          <Link
+            href={`/growth?from=${backFrom}&to=${backTo}&period=${backPeriod}`}
+            className="text-xs text-indigo-700 hover:underline"
+          >
             ← Quay lại biểu đồ
           </Link>
           <div className="mt-1 flex flex-wrap items-center gap-2">
@@ -125,8 +132,6 @@ export default async function PeriodPage({ searchParams }: PageProps) {
           ))}
         </div>
       </div>
-
-      <ReportFilter filters={filters} />
 
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-3 xl:grid-cols-6">
         <KpiCard
