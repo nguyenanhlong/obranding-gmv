@@ -1,5 +1,10 @@
 # Chinh — FE-A · Shell + M1 Báo cáo tăng trưởng
 
+> **Cập nhật 12/11/2026:** M1 đã đồng bộ API 1 (meta + periods, 3 danh sách top, KPI lấy kỳ FINAL cuối);
+> hạ tầng chung (gatewayFetch, parse số, toApiQuery, validator) đã xong. Còn lại: tooltip gộp 3 top,
+> XLSX/PDF. Chi tiết: `docs/doi-chieu/ket-qua-doi-chieu.md`.
+
+
 Nhánh: `feat/fe-a-chinh` · Route: `/growth` · Feature: `src/features/growth-overview`
 
 ## Phạm vi

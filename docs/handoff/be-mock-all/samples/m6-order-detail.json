@@ -1,0 +1,80 @@
+{
+  "order": {
+    "id": "order-5418",
+    "publicId": "2626093000005418AB",
+    "placedAt": "2026-09-30T22:15:14+07:00",
+    "status": "COMPLETED",
+    "sellerId": "seller-53",
+    "sellerCode": "SL0001364",
+    "sellerName": "CÔNG TY CỔ PHẦN CÀ PHÊ ĐẤT ĐỎ 6",
+    "customerId": "customer-105",
+    "customerName": "Đỗ Thảo Mai",
+    "category": "Sở thích & sưu tầm",
+    "region": "Thành phố Hà Nội",
+    "itemCount": 3,
+    "payment": "COD",
+    "discounts": [
+      {
+        "label": "Giảm giá SP",
+        "amount": 99120
+      },
+      {
+        "label": "Voucher shop",
+        "amount": 74340
+      },
+      {
+        "label": "Hỗ trợ ship",
+        "amount": 20000
+      }
+    ],
+    "total": {
+      "amount": 2309540,
+      "currency": "VND"
+    }
+  },
+  "product": {
+    "name": "Sản phẩm 83 của CÔNG",
+    "sku": "1218-118",
+    "unitPrice": 826000,
+    "quantity": 3
+  },
+  "subTotal": 2478000,
+  "shippingFee": 25000,
+  "totalDiscount": 193460,
+  "total": {
+    "amount": 2309540,
+    "currency": "VND"
+  },
+  "timeline": [
+    {
+      "key": "placed",
+      "label": "Đặt hàng",
+      "at": "2026-09-30T22:15:14+07:00",
+      "tone": "done"
+    },
+    {
+      "key": "confirmed",
+      "label": "Xác nhận",
+      "at": "2026-09-30T10:00:00+07:00",
+      "tone": "done"
+    },
+    {
+      "key": "packed",
+      "label": "Đóng gói",
+      "at": "2026-10-01T10:00:00+07:00",
+      "tone": "done"
+    },
+    {
+      "key": "shipped",
+      "label": "Gửi hàng",
+      "at": "2026-10-02T10:00:00+07:00",
+      "tone": "done"
+    },
+    {
+      "key": "delivered",
+      "label": "Giao thành công",
+      "at": "2026-10-04T10:00:00+07:00",
+      "tone": "done"
+    }
+  ]
+}

@@ -1,0 +1,3058 @@
+{
+  "meta": {
+    "startDate": "2025-11-01",
+    "endDate": "2026-10-31",
+    "groupBy": "MONTH",
+    "totalPeriods": 12
+  },
+  "periods": [
+    {
+      "periodKey": "2025-11",
+      "periodLabel": "Tháng 11/2025",
+      "startDate": "2025-11-01",
+      "endDate": "2025-11-30",
+      "status": "FINAL",
+      "orders": {
+        "value": "361",
+        "previousValue": null,
+        "growthPercent": null
+      },
+      "buyers": {
+        "value": "65",
+        "previousValue": null,
+        "growthPercent": null
+      },
+      "gmv": {
+        "value": "724748170",
+        "previousValue": null,
+        "growthPercent": null
+      },
+      "activeSellers": {
+        "value": "60",
+        "previousValue": null,
+        "growthPercent": null
+      },
+      "aov": "2007613",
+      "topBuyersByOrders": [
+        {
+          "customerId": "customer-35",
+          "customerName": "Đỗ Thảo Mai",
+          "orders": "14",
+          "value": "24273090"
+        },
+        {
+          "customerId": "customer-21",
+          "customerName": "Nguyễn Minh Anh",
+          "orders": "13",
+          "value": "20347070"
+        },
+        {
+          "customerId": "customer-26",
+          "customerName": "Vũ Gia Vinh",
+          "orders": "12",
+          "value": "28234110"
+        },
+        {
+          "customerId": "customer-11",
+          "customerName": "Nguyễn Minh Anh",
+          "orders": "10",
+          "value": "19955910"
+        },
+        {
+          "customerId": "customer-34",
+          "customerName": "Trần Tuấn Huy",
+          "orders": "10",
+          "value": "16875440"
+        },
+        {
+          "customerId": "customer-25",
+          "customerName": "Đỗ Thảo Mai",
+          "orders": "10",
+          "value": "16761400"
+        },
+        {
+          "customerId": "customer-12",
+          "customerName": "Bùi Ngọc Bảo",
+          "orders": "10",
+          "value": "14179280"
+        },
+        {
+          "customerId": "customer-1",
+          "customerName": "Nguyễn Minh Anh",
+          "orders": "10",
+          "value": "13583750"
+        },
+        {
+          "customerId": "customer-8",
+          "customerName": "Ngô Quốc Nguyên",
+          "orders": "9",
+          "value": "22326540"
+        },
+        {
+          "customerId": "customer-9",
+          "customerName": "Đặng Đức Hải",
+          "orders": "8",
+          "value": "25551720"
+        }
+      ],
+      "topBuyersByValue": [
+        {
+          "customerId": "customer-26",
+          "customerName": "Vũ Gia Vinh",
+          "orders": "12",
+          "value": "28234110"
+        },
+        {
+          "customerId": "customer-9",
+          "customerName": "Đặng Đức Hải",
+          "orders": "8",
+          "value": "25551720"
+        },
+        {
+          "customerId": "customer-48",
+          "customerName": "Ngô Quốc Nguyên",
+          "orders": "8",
+          "value": "25074650"
+        },
+        {
+          "customerId": "customer-35",
+          "customerName": "Đỗ Thảo Mai",
+          "orders": "14",
+          "value": "24273090"
+        },
+        {
+          "customerId": "customer-8",
+          "customerName": "Ngô Quốc Nguyên",
+          "orders": "9",
+          "value": "22326540"
+        },
+        {
+          "customerId": "customer-10",
+          "customerName": "Phạm Bảo Thư",
+          "orders": "6",
+          "value": "21609220"
+        },
+        {
+          "customerId": "customer-21",
+          "customerName": "Nguyễn Minh Anh",
+          "orders": "13",
+          "value": "20347070"
+        },
+        {
+          "customerId": "customer-11",
+          "customerName": "Nguyễn Minh Anh",
+          "orders": "10",
+          "value": "19955910"
+        },
+        {
+          "customerId": "customer-17",
+          "customerName": "Lê Anh Kiệt",
+          "orders": "8",
+          "value": "18759800"
+        },
+        {
+          "customerId": "customer-38",
+          "customerName": "Ngô Quốc Nguyên",
+          "orders": "6",
+          "value": "17642650"
+        }
+      ],
+      "topSellersByOrders": [
+        {
+          "sellerId": "seller-50",
+          "sellerCode": "SL0001343",
+          "sellerName": "TRẦM HƯƠNG KHÁNH HOÀ 5",
+          "category": "Nhà cửa và Đời sống",
+          "orders": "12",
+          "gmv": "28065470",
+          "orderShare": 3.3,
+          "growthPercent": null
+        },
+        {
+          "sellerId": "seller-21",
+          "sellerCode": "SL0001140",
+          "sellerName": "CÔNG TY TNHH GỐM LAM BÁT TRÀNG 3",
+          "category": "Sắc đẹp",
+          "orders": "11",
+          "gmv": "28805020",
+          "orderShare": 3,
+          "growthPercent": null
+        },
+        {
+          "sellerId": "seller-17",
+          "sellerCode": "SL0001112",
+          "sellerName": "MÂY TRE PHÚ VINH 2",
+          "category": "Sở thích & sưu tầm",
+          "orders": "11",
+          "gmv": "22956060",
+          "orderShare": 3,
+          "growthPercent": null
+        },
+        {
+          "sellerId": "seller-24",
+          "sellerCode": "SL0001161",
+          "sellerName": "CÔNG TY TNHH TRÀ TÂN CƯƠNG XANH 3",
+          "category": "Thời trang",
+          "orders": "11",
+          "gmv": "15163410",
+          "orderShare": 3,
+          "growthPercent": null
+        },
+        {
+          "sellerId": "seller-19",
+          "sellerCode": "SL0001126",
+          "sellerName": "CÔNG TY TNHH ĐỒ CHƠI GỖ BÉ NA 2",
+          "category": "Thực phẩm & Đồ uống",
+          "orders": "10",
+          "gmv": "24072110",
+          "orderShare": 2.8,
+          "growthPercent": null
+        },
+        {
+          "sellerId": "seller-9",
+          "sellerCode": "SL0001056",
+          "sellerName": "CÔNG TY TNHH ĐỒ CHƠI GỖ BÉ NA",
+          "category": "Sắc đẹp",
+          "orders": "10",
+          "gmv": "12801450",
+          "orderShare": 2.8,
+          "growthPercent": null
+        },
+        {
+          "sellerId": "seller-31",
+          "sellerCode": "SL0001210",
+          "sellerName": "CÔNG TY TNHH GỐM LAM BÁT TRÀNG 4",
+          "category": "Thực phẩm & Đồ uống",
+          "orders": "9",
+          "gmv": "17683100",
+          "orderShare": 2.5,
+          "growthPercent": null
+        },
+        {
+          "sellerId": "seller-27",
+          "sellerCode": "SL0001182",
+          "sellerName": "MÂY TRE PHÚ VINH 3",
+          "category": "Sắc đẹp",
+          "orders": "9",
+          "gmv": "17445870",
+          "orderShare": 2.5,
+          "growthPercent": null
+        },
+        {
+          "sellerId": "seller-4",
+          "sellerCode": "SL0001021",
+          "sellerName": "CÔNG TY TNHH TRÀ TÂN CƯƠNG XANH",
+          "category": "Mẹ & Bé",
+          "orders": "9",
+          "gmv": "15400140",
+          "orderShare": 2.5,
+          "growthPercent": null
+        },
+        {
+          "sellerId": "seller-51",
+          "sellerCode": "SL0001350",
+          "sellerName": "CÔNG TY TNHH GỐM LAM BÁT TRÀNG 6",
+          "category": "Sắc đẹp",
+          "orders": "8",
+          "gmv": "25705490",
+          "orderShare": 2.2,
+          "growthPercent": null
+        }
+      ]
+    },
+    {
+      "periodKey": "2025-12",
+      "periodLabel": "Tháng 12/2025",
+      "startDate": "2025-12-01",
+      "endDate": "2025-12-31",
+      "status": "FINAL",
+      "orders": {
+        "value": "393",
+        "previousValue": "361",
+        "growthPercent": 8.9
+      },
+      "buyers": {
+        "value": "93",
+        "previousValue": "65",
+        "growthPercent": 43.1
+      },
+      "gmv": {
+        "value": "744676580",
+        "previousValue": "724748170",
+        "growthPercent": 2.7
+      },
+      "activeSellers": {
+        "value": "60",
+        "previousValue": "60",
+        "growthPercent": 0
+      },
+      "aov": "1894851",
+      "topBuyersByOrders": [
+        {
+          "customerId": "customer-19",
+          "customerName": "Đặng Đức Hải",
+          "orders": "12",
+          "value": "16454650"
+        },
+        {
+          "customerId": "customer-59",
+          "customerName": "Đặng Đức Hải",
+          "orders": "10",
+          "value": "21794050"
+        },
+        {
+          "customerId": "customer-27",
+          "customerName": "Lê Anh Kiệt",
+          "orders": "10",
+          "value": "20564600"
+        },
+        {
+          "customerId": "customer-1",
+          "customerName": "Nguyễn Minh Anh",
+          "orders": "10",
+          "value": "16507090"
+        },
+        {
+          "customerId": "customer-29",
+          "customerName": "Đặng Đức Hải",
+          "orders": "9",
+          "value": "19468130"
+        },
+        {
+          "customerId": "customer-66",
+          "customerName": "Vũ Gia Vinh",
+          "orders": "9",
+          "value": "18799250"
+        },
+        {
+          "customerId": "customer-16",
+          "customerName": "Vũ Gia Vinh",
+          "orders": "9",
+          "value": "15208220"
+        },
+        {
+          "customerId": "customer-25",
+          "customerName": "Đỗ Thảo Mai",
+          "orders": "9",
+          "value": "11879600"
+        },
+        {
+          "customerId": "customer-40",
+          "customerName": "Phạm Bảo Thư",
+          "orders": "8",
+          "value": "25756200"
+        },
+        {
+          "customerId": "customer-13",
+          "customerName": "Hoàng Hải Linh",
+          "orders": "8",
+          "value": "21086100"
+        }
+      ],
+      "topBuyersByValue": [
+        {
+          "customerId": "customer-40",
+          "customerName": "Phạm Bảo Thư",
+          "orders": "8",
+          "value": "25756200"
+        },
+        {
+          "customerId": "customer-59",
+          "customerName": "Đặng Đức Hải",
+          "orders": "10",
+          "value": "21794050"
+        },
+        {
+          "customerId": "customer-13",
+          "customerName": "Hoàng Hải Linh",
+          "orders": "8",
+          "value": "21086100"
+        },
+        {
+          "customerId": "customer-27",
+          "customerName": "Lê Anh Kiệt",
+          "orders": "10",
+          "value": "20564600"
+        },
+        {
+          "customerId": "customer-29",
+          "customerName": "Đặng Đức Hải",
+          "orders": "9",
+          "value": "19468130"
+        },
+        {
+          "customerId": "customer-66",
+          "customerName": "Vũ Gia Vinh",
+          "orders": "9",
+          "value": "18799250"
+        },
+        {
+          "customerId": "customer-18",
+          "customerName": "Ngô Quốc Nguyên",
+          "orders": "7",
+          "value": "17332330"
+        },
+        {
+          "customerId": "customer-1",
+          "customerName": "Nguyễn Minh Anh",
+          "orders": "10",
+          "value": "16507090"
+        },
+        {
+          "customerId": "customer-19",
+          "customerName": "Đặng Đức Hải",
+          "orders": "12",
+          "value": "16454650"
+        },
+        {
+          "customerId": "customer-46",
+          "customerName": "Vũ Gia Vinh",
+          "orders": "4",
+          "value": "15781510"
+        }
+      ],
+      "topSellersByOrders": [
+        {
+          "sellerId": "seller-35",
+          "sellerCode": "SL0001238",
+          "sellerName": "MỘC HƯƠNG COSMETICS 4",
+          "category": "Sở thích & sưu tầm",
+          "orders": "12",
+          "gmv": "25312970",
+          "orderShare": 3.1,
+          "growthPercent": 300
+        },
+        {
+          "sellerId": "seller-38",
+          "sellerCode": "SL0001259",
+          "sellerName": "BÁNH PÍA SÓC TRĂNG XƯA 4",
+          "category": "Nhà cửa và Đời sống",
+          "orders": "11",
+          "gmv": "19831850",
+          "orderShare": 2.8,
+          "growthPercent": 83.3
+        },
+        {
+          "sellerId": "seller-59",
+          "sellerCode": "SL0001406",
+          "sellerName": "CÔNG TY TNHH ĐỒ CHƠI GỖ BÉ NA 6",
+          "category": "Sở thích & sưu tầm",
+          "orders": "11",
+          "gmv": "17358930",
+          "orderShare": 2.8,
+          "growthPercent": 120
+        },
+        {
+          "sellerId": "seller-55",
+          "sellerCode": "SL0001378",
+          "sellerName": "MỘC HƯƠNG COSMETICS 6",
+          "category": "Thực phẩm & Đồ uống",
+          "orders": "10",
+          "gmv": "20467210",
+          "orderShare": 2.5,
+          "growthPercent": 25
+        },
+        {
+          "sellerId": "seller-34",
+          "sellerCode": "SL0001231",
+          "sellerName": "CÔNG TY TNHH TRÀ TÂN CƯƠNG XANH 4",
+          "category": "Mẹ & Bé",
+          "orders": "10",
+          "gmv": "19684250",
+          "orderShare": 2.5,
+          "growthPercent": 66.7
+        },
+        {
+          "sellerId": "seller-46",
+          "sellerCode": "SL0001315",
+          "sellerName": "CÔNG TY TNHH NƯỚC MẮM CỬA BIỂN 5",
+          "category": "Mẹ & Bé",
+          "orders": "9",
+          "gmv": "21541020",
+          "orderShare": 2.3,
+          "growthPercent": 28.6
+        },
+        {
+          "sellerId": "seller-53",
+          "sellerCode": "SL0001364",
+          "sellerName": "CÔNG TY CỔ PHẦN CÀ PHÊ ĐẤT ĐỎ 6",
+          "category": "Sở thích & sưu tầm",
+          "orders": "9",
+          "gmv": "21146280",
+          "orderShare": 2.3,
+          "growthPercent": 80
+        },
+        {
+          "sellerId": "seller-28",
+          "sellerCode": "SL0001189",
+          "sellerName": "BÁNH PÍA SÓC TRĂNG XƯA 3",
+          "category": "Mẹ & Bé",
+          "orders": "9",
+          "gmv": "21084800",
+          "orderShare": 2.3,
+          "growthPercent": 28.6
+        },
+        {
+          "sellerId": "seller-13",
+          "sellerCode": "SL0001084",
+          "sellerName": "CÔNG TY CỔ PHẦN CÀ PHÊ ĐẤT ĐỎ 2",
+          "category": "Thực phẩm & Đồ uống",
+          "orders": "9",
+          "gmv": "13201430",
+          "orderShare": 2.3,
+          "growthPercent": 12.5
+        },
+        {
+          "sellerId": "seller-30",
+          "sellerCode": "SL0001203",
+          "sellerName": "TRẦM HƯƠNG KHÁNH HOÀ 3",
+          "category": "Thời trang",
+          "orders": "8",
+          "gmv": "20453070",
+          "orderShare": 2,
+          "growthPercent": 14.3
+        }
+      ]
+    },
+    {
+      "periodKey": "2026-01",
+      "periodLabel": "Tháng 1/2026",
+      "startDate": "2026-01-01",
+      "endDate": "2026-01-31",
+      "status": "FINAL",
+      "orders": {
+        "value": "437",
+        "previousValue": "393",
+        "growthPercent": 11.2
+      },
+      "buyers": {
+        "value": "120",
+        "previousValue": "93",
+        "growthPercent": 29
+      },
+      "gmv": {
+        "value": "868561390",
+        "previousValue": "744676580",
+        "growthPercent": 16.6
+      },
+      "activeSellers": {
+        "value": "60",
+        "previousValue": "60",
+        "growthPercent": 0
+      },
+      "aov": "1987555",
+      "topBuyersByOrders": [
+        {
+          "customerId": "customer-62",
+          "customerName": "Bùi Ngọc Bảo",
+          "orders": "10",
+          "value": "13772790"
+        },
+        {
+          "customerId": "customer-22",
+          "customerName": "Bùi Ngọc Bảo",
+          "orders": "9",
+          "value": "20984820"
+        },
+        {
+          "customerId": "customer-95",
+          "customerName": "Đỗ Thảo Mai",
+          "orders": "8",
+          "value": "17814860"
+        },
+        {
+          "customerId": "customer-38",
+          "customerName": "Ngô Quốc Nguyên",
+          "orders": "8",
+          "value": "14336000"
+        },
+        {
+          "customerId": "customer-80",
+          "customerName": "Phạm Bảo Thư",
+          "orders": "8",
+          "value": "11026320"
+        },
+        {
+          "customerId": "customer-40",
+          "customerName": "Phạm Bảo Thư",
+          "orders": "7",
+          "value": "18217160"
+        },
+        {
+          "customerId": "customer-90",
+          "customerName": "Phạm Bảo Thư",
+          "orders": "7",
+          "value": "18102420"
+        },
+        {
+          "customerId": "customer-18",
+          "customerName": "Ngô Quốc Nguyên",
+          "orders": "7",
+          "value": "14546890"
+        },
+        {
+          "customerId": "customer-47",
+          "customerName": "Lê Anh Kiệt",
+          "orders": "7",
+          "value": "9174750"
+        },
+        {
+          "customerId": "customer-36",
+          "customerName": "Vũ Gia Vinh",
+          "orders": "6",
+          "value": "15432670"
+        }
+      ],
+      "topBuyersByValue": [
+        {
+          "customerId": "customer-22",
+          "customerName": "Bùi Ngọc Bảo",
+          "orders": "9",
+          "value": "20984820"
+        },
+        {
+          "customerId": "customer-40",
+          "customerName": "Phạm Bảo Thư",
+          "orders": "7",
+          "value": "18217160"
+        },
+        {
+          "customerId": "customer-90",
+          "customerName": "Phạm Bảo Thư",
+          "orders": "7",
+          "value": "18102420"
+        },
+        {
+          "customerId": "customer-95",
+          "customerName": "Đỗ Thảo Mai",
+          "orders": "8",
+          "value": "17814860"
+        },
+        {
+          "customerId": "customer-96",
+          "customerName": "Vũ Gia Vinh",
+          "orders": "5",
+          "value": "17461810"
+        },
+        {
+          "customerId": "customer-36",
+          "customerName": "Vũ Gia Vinh",
+          "orders": "6",
+          "value": "15432670"
+        },
+        {
+          "customerId": "customer-57",
+          "customerName": "Lê Anh Kiệt",
+          "orders": "5",
+          "value": "15196270"
+        },
+        {
+          "customerId": "customer-37",
+          "customerName": "Lê Anh Kiệt",
+          "orders": "5",
+          "value": "14928840"
+        },
+        {
+          "customerId": "customer-18",
+          "customerName": "Ngô Quốc Nguyên",
+          "orders": "7",
+          "value": "14546890"
+        },
+        {
+          "customerId": "customer-38",
+          "customerName": "Ngô Quốc Nguyên",
+          "orders": "8",
+          "value": "14336000"
+        }
+      ],
+      "topSellersByOrders": [
+        {
+          "sellerId": "seller-20",
+          "sellerCode": "SL0001133",
+          "sellerName": "TRẦM HƯƠNG KHÁNH HOÀ 2",
+          "category": "Nhà cửa và Đời sống",
+          "orders": "13",
+          "gmv": "31917110",
+          "orderShare": 3,
+          "growthPercent": 333.3
+        },
+        {
+          "sellerId": "seller-30",
+          "sellerCode": "SL0001203",
+          "sellerName": "TRẦM HƯƠNG KHÁNH HOÀ 3",
+          "category": "Thời trang",
+          "orders": "13",
+          "gmv": "29379400",
+          "orderShare": 3,
+          "growthPercent": 62.5
+        },
+        {
+          "sellerId": "seller-13",
+          "sellerCode": "SL0001084",
+          "sellerName": "CÔNG TY CỔ PHẦN CÀ PHÊ ĐẤT ĐỎ 2",
+          "category": "Thực phẩm & Đồ uống",
+          "orders": "13",
+          "gmv": "25296760",
+          "orderShare": 3,
+          "growthPercent": 44.4
+        },
+        {
+          "sellerId": "seller-7",
+          "sellerCode": "SL0001042",
+          "sellerName": "MÂY TRE PHÚ VINH",
+          "category": "Thực phẩm & Đồ uống",
+          "orders": "12",
+          "gmv": "27978560",
+          "orderShare": 2.7,
+          "growthPercent": 140
+        },
+        {
+          "sellerId": "seller-25",
+          "sellerCode": "SL0001168",
+          "sellerName": "MỘC HƯƠNG COSMETICS 3",
+          "category": "Thực phẩm & Đồ uống",
+          "orders": "12",
+          "gmv": "23964470",
+          "orderShare": 2.7,
+          "growthPercent": 71.4
+        },
+        {
+          "sellerId": "seller-38",
+          "sellerCode": "SL0001259",
+          "sellerName": "BÁNH PÍA SÓC TRĂNG XƯA 4",
+          "category": "Nhà cửa và Đời sống",
+          "orders": "12",
+          "gmv": "17232620",
+          "orderShare": 2.7,
+          "growthPercent": 9.1
+        },
+        {
+          "sellerId": "seller-5",
+          "sellerCode": "SL0001028",
+          "sellerName": "MỘC HƯƠNG COSMETICS",
+          "category": "Sở thích & sưu tầm",
+          "orders": "12",
+          "gmv": "15733410",
+          "orderShare": 2.7,
+          "growthPercent": 200
+        },
+        {
+          "sellerId": "seller-37",
+          "sellerCode": "SL0001252",
+          "sellerName": "MÂY TRE PHÚ VINH 4",
+          "category": "Thực phẩm & Đồ uống",
+          "orders": "11",
+          "gmv": "19193590",
+          "orderShare": 2.5,
+          "growthPercent": 57.1
+        },
+        {
+          "sellerId": "seller-16",
+          "sellerCode": "SL0001105",
+          "sellerName": "CÔNG TY TNHH NƯỚC MẮM CỬA BIỂN 2",
+          "category": "Mẹ & Bé",
+          "orders": "10",
+          "gmv": "25544340",
+          "orderShare": 2.3,
+          "growthPercent": 100
+        },
+        {
+          "sellerId": "seller-47",
+          "sellerCode": "SL0001322",
+          "sellerName": "MÂY TRE PHÚ VINH 5",
+          "category": "Sở thích & sưu tầm",
+          "orders": "10",
+          "gmv": "24972130",
+          "orderShare": 2.3,
+          "growthPercent": 150
+        }
+      ]
+    },
+    {
+      "periodKey": "2026-02",
+      "periodLabel": "Tháng 2/2026",
+      "startDate": "2026-02-01",
+      "endDate": "2026-02-28",
+      "status": "FINAL",
+      "orders": {
+        "value": "403",
+        "previousValue": "437",
+        "growthPercent": -7.8
+      },
+      "buyers": {
+        "value": "144",
+        "previousValue": "120",
+        "growthPercent": 20
+      },
+      "gmv": {
+        "value": "855305730",
+        "previousValue": "868561390",
+        "growthPercent": -1.5
+      },
+      "activeSellers": {
+        "value": "60",
+        "previousValue": "60",
+        "growthPercent": 0
+      },
+      "aov": "2122347",
+      "topBuyersByOrders": [
+        {
+          "customerId": "customer-119",
+          "customerName": "Đặng Đức Hải",
+          "orders": "10",
+          "value": "28827330"
+        },
+        {
+          "customerId": "customer-4",
+          "customerName": "Trần Tuấn Huy",
+          "orders": "6",
+          "value": "17111850"
+        },
+        {
+          "customerId": "customer-131",
+          "customerName": "Nguyễn Minh Anh",
+          "orders": "6",
+          "value": "11826100"
+        },
+        {
+          "customerId": "customer-59",
+          "customerName": "Đặng Đức Hải",
+          "orders": "6",
+          "value": "10536000"
+        },
+        {
+          "customerId": "customer-12",
+          "customerName": "Bùi Ngọc Bảo",
+          "orders": "6",
+          "value": "9785990"
+        },
+        {
+          "customerId": "customer-52",
+          "customerName": "Bùi Ngọc Bảo",
+          "orders": "6",
+          "value": "8224890"
+        },
+        {
+          "customerId": "customer-45",
+          "customerName": "Đỗ Thảo Mai",
+          "orders": "6",
+          "value": "7046050"
+        },
+        {
+          "customerId": "customer-51",
+          "customerName": "Nguyễn Minh Anh",
+          "orders": "5",
+          "value": "16942040"
+        },
+        {
+          "customerId": "customer-6",
+          "customerName": "Vũ Gia Vinh",
+          "orders": "5",
+          "value": "15882090"
+        },
+        {
+          "customerId": "customer-54",
+          "customerName": "Trần Tuấn Huy",
+          "orders": "5",
+          "value": "13297840"
+        }
+      ],
+      "topBuyersByValue": [
+        {
+          "customerId": "customer-119",
+          "customerName": "Đặng Đức Hải",
+          "orders": "10",
+          "value": "28827330"
+        },
+        {
+          "customerId": "customer-4",
+          "customerName": "Trần Tuấn Huy",
+          "orders": "6",
+          "value": "17111850"
+        },
+        {
+          "customerId": "customer-51",
+          "customerName": "Nguyễn Minh Anh",
+          "orders": "5",
+          "value": "16942040"
+        },
+        {
+          "customerId": "customer-6",
+          "customerName": "Vũ Gia Vinh",
+          "orders": "5",
+          "value": "15882090"
+        },
+        {
+          "customerId": "customer-32",
+          "customerName": "Bùi Ngọc Bảo",
+          "orders": "4",
+          "value": "14662510"
+        },
+        {
+          "customerId": "customer-54",
+          "customerName": "Trần Tuấn Huy",
+          "orders": "5",
+          "value": "13297840"
+        },
+        {
+          "customerId": "customer-84",
+          "customerName": "Trần Tuấn Huy",
+          "orders": "5",
+          "value": "12674640"
+        },
+        {
+          "customerId": "customer-131",
+          "customerName": "Nguyễn Minh Anh",
+          "orders": "6",
+          "value": "11826100"
+        },
+        {
+          "customerId": "customer-134",
+          "customerName": "Trần Tuấn Huy",
+          "orders": "4",
+          "value": "11558310"
+        },
+        {
+          "customerId": "customer-89",
+          "customerName": "Đặng Đức Hải",
+          "orders": "5",
+          "value": "11515070"
+        }
+      ],
+      "topSellersByOrders": [
+        {
+          "sellerId": "seller-55",
+          "sellerCode": "SL0001378",
+          "sellerName": "MỘC HƯƠNG COSMETICS 6",
+          "category": "Thực phẩm & Đồ uống",
+          "orders": "11",
+          "gmv": "34141670",
+          "orderShare": 2.7,
+          "growthPercent": 83.3
+        },
+        {
+          "sellerId": "seller-48",
+          "sellerCode": "SL0001329",
+          "sellerName": "BÁNH PÍA SÓC TRĂNG XƯA 5",
+          "category": "Thời trang",
+          "orders": "11",
+          "gmv": "20122580",
+          "orderShare": 2.7,
+          "growthPercent": 57.1
+        },
+        {
+          "sellerId": "seller-45",
+          "sellerCode": "SL0001308",
+          "sellerName": "MỘC HƯƠNG COSMETICS 5",
+          "category": "Sắc đẹp",
+          "orders": "10",
+          "gmv": "28432380",
+          "orderShare": 2.5,
+          "growthPercent": 400
+        },
+        {
+          "sellerId": "seller-2",
+          "sellerCode": "SL0001007",
+          "sellerName": "HỘ KINH DOANH YẾN SÀO KHÁNH PHONG",
+          "category": "Nhà cửa và Đời sống",
+          "orders": "10",
+          "gmv": "24306290",
+          "orderShare": 2.5,
+          "growthPercent": 42.9
+        },
+        {
+          "sellerId": "seller-49",
+          "sellerCode": "SL0001336",
+          "sellerName": "CÔNG TY TNHH ĐỒ CHƠI GỖ BÉ NA 5",
+          "category": "Thực phẩm & Đồ uống",
+          "orders": "10",
+          "gmv": "22937810",
+          "orderShare": 2.5,
+          "growthPercent": 66.7
+        },
+        {
+          "sellerId": "seller-33",
+          "sellerCode": "SL0001224",
+          "sellerName": "CÔNG TY CỔ PHẦN CÀ PHÊ ĐẤT ĐỎ 4",
+          "category": "Sắc đẹp",
+          "orders": "10",
+          "gmv": "21830500",
+          "orderShare": 2.5,
+          "growthPercent": 66.7
+        },
+        {
+          "sellerId": "seller-41",
+          "sellerCode": "SL0001280",
+          "sellerName": "CÔNG TY TNHH GỐM LAM BÁT TRÀNG 5",
+          "category": "Sở thích & sưu tầm",
+          "orders": "10",
+          "gmv": "18404280",
+          "orderShare": 2.5,
+          "growthPercent": 0
+        },
+        {
+          "sellerId": "seller-24",
+          "sellerCode": "SL0001161",
+          "sellerName": "CÔNG TY TNHH TRÀ TÂN CƯƠNG XANH 3",
+          "category": "Thời trang",
+          "orders": "10",
+          "gmv": "16918550",
+          "orderShare": 2.5,
+          "growthPercent": 0
+        },
+        {
+          "sellerId": "seller-19",
+          "sellerCode": "SL0001126",
+          "sellerName": "CÔNG TY TNHH ĐỒ CHƠI GỖ BÉ NA 2",
+          "category": "Thực phẩm & Đồ uống",
+          "orders": "9",
+          "gmv": "22409230",
+          "orderShare": 2.2,
+          "growthPercent": 50
+        },
+        {
+          "sellerId": "seller-18",
+          "sellerCode": "SL0001119",
+          "sellerName": "BÁNH PÍA SÓC TRĂNG XƯA 2",
+          "category": "Thời trang",
+          "orders": "9",
+          "gmv": "22407460",
+          "orderShare": 2.2,
+          "growthPercent": 0
+        }
+      ]
+    },
+    {
+      "periodKey": "2026-03",
+      "periodLabel": "Tháng 3/2026",
+      "startDate": "2026-03-01",
+      "endDate": "2026-03-31",
+      "status": "FINAL",
+      "orders": {
+        "value": "455",
+        "previousValue": "403",
+        "growthPercent": 12.9
+      },
+      "buyers": {
+        "value": "164",
+        "previousValue": "144",
+        "growthPercent": 13.9
+      },
+      "gmv": {
+        "value": "917127070",
+        "previousValue": "855305730",
+        "growthPercent": 7.2
+      },
+      "activeSellers": {
+        "value": "60",
+        "previousValue": "60",
+        "growthPercent": 0
+      },
+      "aov": "2015664",
+      "topBuyersByOrders": [
+        {
+          "customerId": "customer-21",
+          "customerName": "Nguyễn Minh Anh",
+          "orders": "7",
+          "value": "12511430"
+        },
+        {
+          "customerId": "customer-67",
+          "customerName": "Lê Anh Kiệt",
+          "orders": "7",
+          "value": "9627150"
+        },
+        {
+          "customerId": "customer-77",
+          "customerName": "Lê Anh Kiệt",
+          "orders": "7",
+          "value": "9276640"
+        },
+        {
+          "customerId": "customer-54",
+          "customerName": "Trần Tuấn Huy",
+          "orders": "6",
+          "value": "16306990"
+        },
+        {
+          "customerId": "customer-134",
+          "customerName": "Trần Tuấn Huy",
+          "orders": "6",
+          "value": "14214950"
+        },
+        {
+          "customerId": "customer-167",
+          "customerName": "Lê Anh Kiệt",
+          "orders": "6",
+          "value": "13341370"
+        },
+        {
+          "customerId": "customer-33",
+          "customerName": "Hoàng Hải Linh",
+          "orders": "6",
+          "value": "11538520"
+        },
+        {
+          "customerId": "customer-170",
+          "customerName": "Phạm Bảo Thư",
+          "orders": "6",
+          "value": "10239720"
+        },
+        {
+          "customerId": "customer-16",
+          "customerName": "Vũ Gia Vinh",
+          "orders": "6",
+          "value": "7558430"
+        },
+        {
+          "customerId": "customer-66",
+          "customerName": "Vũ Gia Vinh",
+          "orders": "6",
+          "value": "5524970"
+        }
+      ],
+      "topBuyersByValue": [
+        {
+          "customerId": "customer-54",
+          "customerName": "Trần Tuấn Huy",
+          "orders": "6",
+          "value": "16306990"
+        },
+        {
+          "customerId": "customer-68",
+          "customerName": "Ngô Quốc Nguyên",
+          "orders": "3",
+          "value": "14832070"
+        },
+        {
+          "customerId": "customer-134",
+          "customerName": "Trần Tuấn Huy",
+          "orders": "6",
+          "value": "14214950"
+        },
+        {
+          "customerId": "customer-8",
+          "customerName": "Ngô Quốc Nguyên",
+          "orders": "3",
+          "value": "13341550"
+        },
+        {
+          "customerId": "customer-167",
+          "customerName": "Lê Anh Kiệt",
+          "orders": "6",
+          "value": "13341370"
+        },
+        {
+          "customerId": "customer-166",
+          "customerName": "Vũ Gia Vinh",
+          "orders": "5",
+          "value": "13329430"
+        },
+        {
+          "customerId": "customer-162",
+          "customerName": "Bùi Ngọc Bảo",
+          "orders": "4",
+          "value": "13012340"
+        },
+        {
+          "customerId": "customer-150",
+          "customerName": "Phạm Bảo Thư",
+          "orders": "5",
+          "value": "12692520"
+        },
+        {
+          "customerId": "customer-21",
+          "customerName": "Nguyễn Minh Anh",
+          "orders": "7",
+          "value": "12511430"
+        },
+        {
+          "customerId": "customer-159",
+          "customerName": "Đặng Đức Hải",
+          "orders": "4",
+          "value": "12421370"
+        }
+      ],
+      "topSellersByOrders": [
+        {
+          "sellerId": "seller-22",
+          "sellerCode": "SL0001147",
+          "sellerName": "HỘ KINH DOANH YẾN SÀO KHÁNH PHONG 3",
+          "category": "Mẹ & Bé",
+          "orders": "15",
+          "gmv": "32952610",
+          "orderShare": 3.3,
+          "growthPercent": 66.7
+        },
+        {
+          "sellerId": "seller-20",
+          "sellerCode": "SL0001133",
+          "sellerName": "TRẦM HƯƠNG KHÁNH HOÀ 2",
+          "category": "Nhà cửa và Đời sống",
+          "orders": "13",
+          "gmv": "32384610",
+          "orderShare": 2.9,
+          "growthPercent": 44.4
+        },
+        {
+          "sellerId": "seller-41",
+          "sellerCode": "SL0001280",
+          "sellerName": "CÔNG TY TNHH GỐM LAM BÁT TRÀNG 5",
+          "category": "Sở thích & sưu tầm",
+          "orders": "13",
+          "gmv": "21581570",
+          "orderShare": 2.9,
+          "growthPercent": 30
+        },
+        {
+          "sellerId": "seller-24",
+          "sellerCode": "SL0001161",
+          "sellerName": "CÔNG TY TNHH TRÀ TÂN CƯƠNG XANH 3",
+          "category": "Thời trang",
+          "orders": "13",
+          "gmv": "18984180",
+          "orderShare": 2.9,
+          "growthPercent": 30
+        },
+        {
+          "sellerId": "seller-11",
+          "sellerCode": "SL0001070",
+          "sellerName": "CÔNG TY TNHH GỐM LAM BÁT TRÀNG 2",
+          "category": "Sở thích & sưu tầm",
+          "orders": "12",
+          "gmv": "28079620",
+          "orderShare": 2.6,
+          "growthPercent": 71.4
+        },
+        {
+          "sellerId": "seller-53",
+          "sellerCode": "SL0001364",
+          "sellerName": "CÔNG TY CỔ PHẦN CÀ PHÊ ĐẤT ĐỎ 6",
+          "category": "Sở thích & sưu tầm",
+          "orders": "12",
+          "gmv": "24078690",
+          "orderShare": 2.6,
+          "growthPercent": 200
+        },
+        {
+          "sellerId": "seller-50",
+          "sellerCode": "SL0001343",
+          "sellerName": "TRẦM HƯƠNG KHÁNH HOÀ 5",
+          "category": "Nhà cửa và Đời sống",
+          "orders": "11",
+          "gmv": "32997600",
+          "orderShare": 2.4,
+          "growthPercent": 22.2
+        },
+        {
+          "sellerId": "seller-58",
+          "sellerCode": "SL0001399",
+          "sellerName": "BÁNH PÍA SÓC TRĂNG XƯA 6",
+          "category": "Mẹ & Bé",
+          "orders": "11",
+          "gmv": "18779130",
+          "orderShare": 2.4,
+          "growthPercent": 83.3
+        },
+        {
+          "sellerId": "seller-38",
+          "sellerCode": "SL0001259",
+          "sellerName": "BÁNH PÍA SÓC TRĂNG XƯA 4",
+          "category": "Nhà cửa và Đời sống",
+          "orders": "10",
+          "gmv": "27587740",
+          "orderShare": 2.2,
+          "growthPercent": 150
+        },
+        {
+          "sellerId": "seller-5",
+          "sellerCode": "SL0001028",
+          "sellerName": "MỘC HƯƠNG COSMETICS",
+          "category": "Sở thích & sưu tầm",
+          "orders": "10",
+          "gmv": "22937120",
+          "orderShare": 2.2,
+          "growthPercent": 66.7
+        }
+      ]
+    },
+    {
+      "periodKey": "2026-04",
+      "periodLabel": "Tháng 4/2026",
+      "startDate": "2026-04-01",
+      "endDate": "2026-04-30",
+      "status": "FINAL",
+      "orders": {
+        "value": "457",
+        "previousValue": "455",
+        "growthPercent": 0.4
+      },
+      "buyers": {
+        "value": "192",
+        "previousValue": "164",
+        "growthPercent": 17.1
+      },
+      "gmv": {
+        "value": "911612480",
+        "previousValue": "917127070",
+        "growthPercent": -0.6
+      },
+      "activeSellers": {
+        "value": "60",
+        "previousValue": "60",
+        "growthPercent": 0
+      },
+      "aov": "1994776",
+      "topBuyersByOrders": [
+        {
+          "customerId": "customer-80",
+          "customerName": "Phạm Bảo Thư",
+          "orders": "7",
+          "value": "15986880"
+        },
+        {
+          "customerId": "customer-23",
+          "customerName": "Hoàng Hải Linh",
+          "orders": "6",
+          "value": "11064570"
+        },
+        {
+          "customerId": "customer-113",
+          "customerName": "Hoàng Hải Linh",
+          "orders": "5",
+          "value": "12698160"
+        },
+        {
+          "customerId": "customer-67",
+          "customerName": "Lê Anh Kiệt",
+          "orders": "5",
+          "value": "12288930"
+        },
+        {
+          "customerId": "customer-27",
+          "customerName": "Lê Anh Kiệt",
+          "orders": "5",
+          "value": "11595410"
+        },
+        {
+          "customerId": "customer-162",
+          "customerName": "Bùi Ngọc Bảo",
+          "orders": "5",
+          "value": "11567140"
+        },
+        {
+          "customerId": "customer-88",
+          "customerName": "Ngô Quốc Nguyên",
+          "orders": "5",
+          "value": "10586670"
+        },
+        {
+          "customerId": "customer-9",
+          "customerName": "Đặng Đức Hải",
+          "orders": "5",
+          "value": "10418740"
+        },
+        {
+          "customerId": "customer-208",
+          "customerName": "Ngô Quốc Nguyên",
+          "orders": "5",
+          "value": "8998600"
+        },
+        {
+          "customerId": "customer-19",
+          "customerName": "Đặng Đức Hải",
+          "orders": "5",
+          "value": "8477600"
+        }
+      ],
+      "topBuyersByValue": [
+        {
+          "customerId": "customer-80",
+          "customerName": "Phạm Bảo Thư",
+          "orders": "7",
+          "value": "15986880"
+        },
+        {
+          "customerId": "customer-26",
+          "customerName": "Vũ Gia Vinh",
+          "orders": "3",
+          "value": "13006760"
+        },
+        {
+          "customerId": "customer-113",
+          "customerName": "Hoàng Hải Linh",
+          "orders": "5",
+          "value": "12698160"
+        },
+        {
+          "customerId": "customer-133",
+          "customerName": "Hoàng Hải Linh",
+          "orders": "4",
+          "value": "12293110"
+        },
+        {
+          "customerId": "customer-67",
+          "customerName": "Lê Anh Kiệt",
+          "orders": "5",
+          "value": "12288930"
+        },
+        {
+          "customerId": "customer-89",
+          "customerName": "Đặng Đức Hải",
+          "orders": "4",
+          "value": "11976260"
+        },
+        {
+          "customerId": "customer-27",
+          "customerName": "Lê Anh Kiệt",
+          "orders": "5",
+          "value": "11595410"
+        },
+        {
+          "customerId": "customer-162",
+          "customerName": "Bùi Ngọc Bảo",
+          "orders": "5",
+          "value": "11567140"
+        },
+        {
+          "customerId": "customer-23",
+          "customerName": "Hoàng Hải Linh",
+          "orders": "6",
+          "value": "11064570"
+        },
+        {
+          "customerId": "customer-160",
+          "customerName": "Phạm Bảo Thư",
+          "orders": "3",
+          "value": "10871900"
+        }
+      ],
+      "topSellersByOrders": [
+        {
+          "sellerId": "seller-7",
+          "sellerCode": "SL0001042",
+          "sellerName": "MÂY TRE PHÚ VINH",
+          "category": "Thực phẩm & Đồ uống",
+          "orders": "14",
+          "gmv": "27006530",
+          "orderShare": 3.1,
+          "growthPercent": 133.3
+        },
+        {
+          "sellerId": "seller-57",
+          "sellerCode": "SL0001392",
+          "sellerName": "MÂY TRE PHÚ VINH 6",
+          "category": "Sắc đẹp",
+          "orders": "13",
+          "gmv": "18911460",
+          "orderShare": 2.8,
+          "growthPercent": 333.3
+        },
+        {
+          "sellerId": "seller-48",
+          "sellerCode": "SL0001329",
+          "sellerName": "BÁNH PÍA SÓC TRĂNG XƯA 5",
+          "category": "Thời trang",
+          "orders": "12",
+          "gmv": "36967910",
+          "orderShare": 2.6,
+          "growthPercent": 71.4
+        },
+        {
+          "sellerId": "seller-43",
+          "sellerCode": "SL0001294",
+          "sellerName": "CÔNG TY CỔ PHẦN CÀ PHÊ ĐẤT ĐỎ 5",
+          "category": "Thực phẩm & Đồ uống",
+          "orders": "12",
+          "gmv": "16200730",
+          "orderShare": 2.6,
+          "growthPercent": 200
+        },
+        {
+          "sellerId": "seller-11",
+          "sellerCode": "SL0001070",
+          "sellerName": "CÔNG TY TNHH GỐM LAM BÁT TRÀNG 2",
+          "category": "Sở thích & sưu tầm",
+          "orders": "12",
+          "gmv": "16002360",
+          "orderShare": 2.6,
+          "growthPercent": 0
+        },
+        {
+          "sellerId": "seller-59",
+          "sellerCode": "SL0001406",
+          "sellerName": "CÔNG TY TNHH ĐỒ CHƠI GỖ BÉ NA 6",
+          "category": "Sở thích & sưu tầm",
+          "orders": "11",
+          "gmv": "27085540",
+          "orderShare": 2.4,
+          "growthPercent": 57.1
+        },
+        {
+          "sellerId": "seller-12",
+          "sellerCode": "SL0001077",
+          "sellerName": "HỘ KINH DOANH YẾN SÀO KHÁNH PHONG 2",
+          "category": "Thời trang",
+          "orders": "11",
+          "gmv": "24849710",
+          "orderShare": 2.4,
+          "growthPercent": 37.5
+        },
+        {
+          "sellerId": "seller-15",
+          "sellerCode": "SL0001098",
+          "sellerName": "MỘC HƯƠNG COSMETICS 2",
+          "category": "Sắc đẹp",
+          "orders": "11",
+          "gmv": "23807850",
+          "orderShare": 2.4,
+          "growthPercent": 57.1
+        },
+        {
+          "sellerId": "seller-18",
+          "sellerCode": "SL0001119",
+          "sellerName": "BÁNH PÍA SÓC TRĂNG XƯA 2",
+          "category": "Thời trang",
+          "orders": "11",
+          "gmv": "20026280",
+          "orderShare": 2.4,
+          "growthPercent": 37.5
+        },
+        {
+          "sellerId": "seller-52",
+          "sellerCode": "SL0001357",
+          "sellerName": "HỘ KINH DOANH YẾN SÀO KHÁNH PHONG 6",
+          "category": "Mẹ & Bé",
+          "orders": "11",
+          "gmv": "14525970",
+          "orderShare": 2.4,
+          "growthPercent": 57.1
+        }
+      ]
+    },
+    {
+      "periodKey": "2026-05",
+      "periodLabel": "Tháng 5/2026",
+      "startDate": "2026-05-01",
+      "endDate": "2026-05-31",
+      "status": "FINAL",
+      "orders": {
+        "value": "515",
+        "previousValue": "457",
+        "growthPercent": 12.7
+      },
+      "buyers": {
+        "value": "226",
+        "previousValue": "192",
+        "growthPercent": 17.7
+      },
+      "gmv": {
+        "value": "932368580",
+        "previousValue": "911612480",
+        "growthPercent": 2.3
+      },
+      "activeSellers": {
+        "value": "60",
+        "previousValue": "60",
+        "growthPercent": 0
+      },
+      "aov": "1810424",
+      "topBuyersByOrders": [
+        {
+          "customerId": "customer-228",
+          "customerName": "Ngô Quốc Nguyên",
+          "orders": "7",
+          "value": "10762240"
+        },
+        {
+          "customerId": "customer-38",
+          "customerName": "Ngô Quốc Nguyên",
+          "orders": "6",
+          "value": "12542800"
+        },
+        {
+          "customerId": "customer-66",
+          "customerName": "Vũ Gia Vinh",
+          "orders": "6",
+          "value": "5182640"
+        },
+        {
+          "customerId": "customer-224",
+          "customerName": "Trần Tuấn Huy",
+          "orders": "5",
+          "value": "12663790"
+        },
+        {
+          "customerId": "customer-183",
+          "customerName": "Hoàng Hải Linh",
+          "orders": "5",
+          "value": "11459190"
+        },
+        {
+          "customerId": "customer-172",
+          "customerName": "Bùi Ngọc Bảo",
+          "orders": "5",
+          "value": "9125270"
+        },
+        {
+          "customerId": "customer-75",
+          "customerName": "Đỗ Thảo Mai",
+          "orders": "5",
+          "value": "8547680"
+        },
+        {
+          "customerId": "customer-130",
+          "customerName": "Phạm Bảo Thư",
+          "orders": "5",
+          "value": "7044800"
+        },
+        {
+          "customerId": "customer-155",
+          "customerName": "Đỗ Thảo Mai",
+          "orders": "5",
+          "value": "6988490"
+        },
+        {
+          "customerId": "customer-246",
+          "customerName": "Vũ Gia Vinh",
+          "orders": "4",
+          "value": "15491180"
+        }
+      ],
+      "topBuyersByValue": [
+        {
+          "customerId": "customer-246",
+          "customerName": "Vũ Gia Vinh",
+          "orders": "4",
+          "value": "15491180"
+        },
+        {
+          "customerId": "customer-149",
+          "customerName": "Đặng Đức Hải",
+          "orders": "3",
+          "value": "12944030"
+        },
+        {
+          "customerId": "customer-225",
+          "customerName": "Đỗ Thảo Mai",
+          "orders": "3",
+          "value": "12819280"
+        },
+        {
+          "customerId": "customer-224",
+          "customerName": "Trần Tuấn Huy",
+          "orders": "5",
+          "value": "12663790"
+        },
+        {
+          "customerId": "customer-38",
+          "customerName": "Ngô Quốc Nguyên",
+          "orders": "6",
+          "value": "12542800"
+        },
+        {
+          "customerId": "customer-217",
+          "customerName": "Lê Anh Kiệt",
+          "orders": "4",
+          "value": "11822650"
+        },
+        {
+          "customerId": "customer-183",
+          "customerName": "Hoàng Hải Linh",
+          "orders": "5",
+          "value": "11459190"
+        },
+        {
+          "customerId": "customer-85",
+          "customerName": "Đỗ Thảo Mai",
+          "orders": "4",
+          "value": "11151760"
+        },
+        {
+          "customerId": "customer-215",
+          "customerName": "Đỗ Thảo Mai",
+          "orders": "4",
+          "value": "11041810"
+        },
+        {
+          "customerId": "customer-78",
+          "customerName": "Ngô Quốc Nguyên",
+          "orders": "3",
+          "value": "10879270"
+        }
+      ],
+      "topSellersByOrders": [
+        {
+          "sellerId": "seller-52",
+          "sellerCode": "SL0001357",
+          "sellerName": "HỘ KINH DOANH YẾN SÀO KHÁNH PHONG 6",
+          "category": "Mẹ & Bé",
+          "orders": "18",
+          "gmv": "30748110",
+          "orderShare": 3.5,
+          "growthPercent": 63.6
+        },
+        {
+          "sellerId": "seller-44",
+          "sellerCode": "SL0001301",
+          "sellerName": "CÔNG TY TNHH TRÀ TÂN CƯƠNG XANH 5",
+          "category": "Nhà cửa và Đời sống",
+          "orders": "15",
+          "gmv": "21610120",
+          "orderShare": 2.9,
+          "growthPercent": 87.5
+        },
+        {
+          "sellerId": "seller-16",
+          "sellerCode": "SL0001105",
+          "sellerName": "CÔNG TY TNHH NƯỚC MẮM CỬA BIỂN 2",
+          "category": "Mẹ & Bé",
+          "orders": "15",
+          "gmv": "17911210",
+          "orderShare": 2.9,
+          "growthPercent": 114.3
+        },
+        {
+          "sellerId": "seller-58",
+          "sellerCode": "SL0001399",
+          "sellerName": "BÁNH PÍA SÓC TRĂNG XƯA 6",
+          "category": "Mẹ & Bé",
+          "orders": "14",
+          "gmv": "23304090",
+          "orderShare": 2.7,
+          "growthPercent": 133.3
+        },
+        {
+          "sellerId": "seller-31",
+          "sellerCode": "SL0001210",
+          "sellerName": "CÔNG TY TNHH GỐM LAM BÁT TRÀNG 4",
+          "category": "Thực phẩm & Đồ uống",
+          "orders": "13",
+          "gmv": "27892620",
+          "orderShare": 2.5,
+          "growthPercent": 62.5
+        },
+        {
+          "sellerId": "seller-49",
+          "sellerCode": "SL0001336",
+          "sellerName": "CÔNG TY TNHH ĐỒ CHƠI GỖ BÉ NA 5",
+          "category": "Thực phẩm & Đồ uống",
+          "orders": "12",
+          "gmv": "27887710",
+          "orderShare": 2.3,
+          "growthPercent": 33.3
+        },
+        {
+          "sellerId": "seller-20",
+          "sellerCode": "SL0001133",
+          "sellerName": "TRẦM HƯƠNG KHÁNH HOÀ 2",
+          "category": "Nhà cửa và Đời sống",
+          "orders": "12",
+          "gmv": "27115100",
+          "orderShare": 2.3,
+          "growthPercent": 71.4
+        },
+        {
+          "sellerId": "seller-43",
+          "sellerCode": "SL0001294",
+          "sellerName": "CÔNG TY CỔ PHẦN CÀ PHÊ ĐẤT ĐỎ 5",
+          "category": "Thực phẩm & Đồ uống",
+          "orders": "12",
+          "gmv": "26392590",
+          "orderShare": 2.3,
+          "growthPercent": 0
+        },
+        {
+          "sellerId": "seller-41",
+          "sellerCode": "SL0001280",
+          "sellerName": "CÔNG TY TNHH GỐM LAM BÁT TRÀNG 5",
+          "category": "Sở thích & sưu tầm",
+          "orders": "12",
+          "gmv": "19408420",
+          "orderShare": 2.3,
+          "growthPercent": 50
+        },
+        {
+          "sellerId": "seller-9",
+          "sellerCode": "SL0001056",
+          "sellerName": "CÔNG TY TNHH ĐỒ CHƠI GỖ BÉ NA",
+          "category": "Sắc đẹp",
+          "orders": "12",
+          "gmv": "19202450",
+          "orderShare": 2.3,
+          "growthPercent": 140
+        }
+      ]
+    },
+    {
+      "periodKey": "2026-06",
+      "periodLabel": "Tháng 6/2026",
+      "startDate": "2026-06-01",
+      "endDate": "2026-06-30",
+      "status": "FINAL",
+      "orders": {
+        "value": "479",
+        "previousValue": "515",
+        "growthPercent": -7
+      },
+      "buyers": {
+        "value": "240",
+        "previousValue": "226",
+        "growthPercent": 6.2
+      },
+      "gmv": {
+        "value": "1001762410",
+        "previousValue": "932368580",
+        "growthPercent": 7.4
+      },
+      "activeSellers": {
+        "value": "60",
+        "previousValue": "60",
+        "growthPercent": 0
+      },
+      "aov": "2091362",
+      "topBuyersByOrders": [
+        {
+          "customerId": "customer-29",
+          "customerName": "Đặng Đức Hải",
+          "orders": "6",
+          "value": "22293030"
+        },
+        {
+          "customerId": "customer-7",
+          "customerName": "Lê Anh Kiệt",
+          "orders": "6",
+          "value": "14876580"
+        },
+        {
+          "customerId": "customer-255",
+          "customerName": "Đỗ Thảo Mai",
+          "orders": "5",
+          "value": "11878800"
+        },
+        {
+          "customerId": "customer-103",
+          "customerName": "Hoàng Hải Linh",
+          "orders": "5",
+          "value": "10055100"
+        },
+        {
+          "customerId": "customer-60",
+          "customerName": "Phạm Bảo Thư",
+          "orders": "5",
+          "value": "9544760"
+        },
+        {
+          "customerId": "customer-174",
+          "customerName": "Trần Tuấn Huy",
+          "orders": "5",
+          "value": "8309350"
+        },
+        {
+          "customerId": "customer-58",
+          "customerName": "Ngô Quốc Nguyên",
+          "orders": "4",
+          "value": "11366430"
+        },
+        {
+          "customerId": "customer-254",
+          "customerName": "Trần Tuấn Huy",
+          "orders": "4",
+          "value": "10375130"
+        },
+        {
+          "customerId": "customer-257",
+          "customerName": "Lê Anh Kiệt",
+          "orders": "4",
+          "value": "9987270"
+        },
+        {
+          "customerId": "customer-33",
+          "customerName": "Hoàng Hải Linh",
+          "orders": "4",
+          "value": "9291760"
+        }
+      ],
+      "topBuyersByValue": [
+        {
+          "customerId": "customer-29",
+          "customerName": "Đặng Đức Hải",
+          "orders": "6",
+          "value": "22293030"
+        },
+        {
+          "customerId": "customer-7",
+          "customerName": "Lê Anh Kiệt",
+          "orders": "6",
+          "value": "14876580"
+        },
+        {
+          "customerId": "customer-22",
+          "customerName": "Bùi Ngọc Bảo",
+          "orders": "3",
+          "value": "12967340"
+        },
+        {
+          "customerId": "customer-151",
+          "customerName": "Nguyễn Minh Anh",
+          "orders": "3",
+          "value": "12482400"
+        },
+        {
+          "customerId": "customer-165",
+          "customerName": "Đỗ Thảo Mai",
+          "orders": "3",
+          "value": "12014910"
+        },
+        {
+          "customerId": "customer-61",
+          "customerName": "Nguyễn Minh Anh",
+          "orders": "3",
+          "value": "11892610"
+        },
+        {
+          "customerId": "customer-255",
+          "customerName": "Đỗ Thảo Mai",
+          "orders": "5",
+          "value": "11878800"
+        },
+        {
+          "customerId": "customer-58",
+          "customerName": "Ngô Quốc Nguyên",
+          "orders": "4",
+          "value": "11366430"
+        },
+        {
+          "customerId": "customer-232",
+          "customerName": "Bùi Ngọc Bảo",
+          "orders": "3",
+          "value": "11051700"
+        },
+        {
+          "customerId": "customer-254",
+          "customerName": "Trần Tuấn Huy",
+          "orders": "4",
+          "value": "10375130"
+        }
+      ],
+      "topSellersByOrders": [
+        {
+          "sellerId": "seller-28",
+          "sellerCode": "SL0001189",
+          "sellerName": "BÁNH PÍA SÓC TRĂNG XƯA 3",
+          "category": "Mẹ & Bé",
+          "orders": "15",
+          "gmv": "39878520",
+          "orderShare": 3.1,
+          "growthPercent": 275
+        },
+        {
+          "sellerId": "seller-3",
+          "sellerCode": "SL0001014",
+          "sellerName": "CÔNG TY CỔ PHẦN CÀ PHÊ ĐẤT ĐỎ",
+          "category": "Sắc đẹp",
+          "orders": "13",
+          "gmv": "35187970",
+          "orderShare": 2.7,
+          "growthPercent": 85.7
+        },
+        {
+          "sellerId": "seller-47",
+          "sellerCode": "SL0001322",
+          "sellerName": "MÂY TRE PHÚ VINH 5",
+          "category": "Sở thích & sưu tầm",
+          "orders": "12",
+          "gmv": "29221260",
+          "orderShare": 2.5,
+          "growthPercent": 71.4
+        },
+        {
+          "sellerId": "seller-7",
+          "sellerCode": "SL0001042",
+          "sellerName": "MÂY TRE PHÚ VINH",
+          "category": "Thực phẩm & Đồ uống",
+          "orders": "12",
+          "gmv": "28418110",
+          "orderShare": 2.5,
+          "growthPercent": 33.3
+        },
+        {
+          "sellerId": "seller-1",
+          "sellerCode": "SL0001000",
+          "sellerName": "CÔNG TY TNHH GỐM LAM BÁT TRÀNG",
+          "category": "Thực phẩm & Đồ uống",
+          "orders": "12",
+          "gmv": "25015490",
+          "orderShare": 2.5,
+          "growthPercent": 200
+        },
+        {
+          "sellerId": "seller-23",
+          "sellerCode": "SL0001154",
+          "sellerName": "CÔNG TY CỔ PHẦN CÀ PHÊ ĐẤT ĐỎ 3",
+          "category": "Sở thích & sưu tầm",
+          "orders": "12",
+          "gmv": "22642050",
+          "orderShare": 2.5,
+          "growthPercent": 9.1
+        },
+        {
+          "sellerId": "seller-30",
+          "sellerCode": "SL0001203",
+          "sellerName": "TRẦM HƯƠNG KHÁNH HOÀ 3",
+          "category": "Thời trang",
+          "orders": "12",
+          "gmv": "21951180",
+          "orderShare": 2.5,
+          "growthPercent": 200
+        },
+        {
+          "sellerId": "seller-60",
+          "sellerCode": "SL0001413",
+          "sellerName": "TRẦM HƯƠNG KHÁNH HOÀ 6",
+          "category": "Thời trang",
+          "orders": "11",
+          "gmv": "23297640",
+          "orderShare": 2.3,
+          "growthPercent": 83.3
+        },
+        {
+          "sellerId": "seller-10",
+          "sellerCode": "SL0001063",
+          "sellerName": "TRẦM HƯƠNG KHÁNH HOÀ",
+          "category": "Mẹ & Bé",
+          "orders": "11",
+          "gmv": "22981030",
+          "orderShare": 2.3,
+          "growthPercent": 120
+        },
+        {
+          "sellerId": "seller-38",
+          "sellerCode": "SL0001259",
+          "sellerName": "BÁNH PÍA SÓC TRĂNG XƯA 4",
+          "category": "Nhà cửa và Đời sống",
+          "orders": "11",
+          "gmv": "20998690",
+          "orderShare": 2.3,
+          "growthPercent": 22.2
+        }
+      ]
+    },
+    {
+      "periodKey": "2026-07",
+      "periodLabel": "Tháng 7/2026",
+      "startDate": "2026-07-01",
+      "endDate": "2026-07-31",
+      "status": "FINAL",
+      "orders": {
+        "value": "528",
+        "previousValue": "479",
+        "growthPercent": 10.2
+      },
+      "buyers": {
+        "value": "254",
+        "previousValue": "240",
+        "growthPercent": 5.8
+      },
+      "gmv": {
+        "value": "1092651140",
+        "previousValue": "1001762410",
+        "growthPercent": 9.1
+      },
+      "activeSellers": {
+        "value": "60",
+        "previousValue": "60",
+        "growthPercent": 0
+      },
+      "aov": "2069415",
+      "topBuyersByOrders": [
+        {
+          "customerId": "customer-228",
+          "customerName": "Ngô Quốc Nguyên",
+          "orders": "6",
+          "value": "16101740"
+        },
+        {
+          "customerId": "customer-231",
+          "customerName": "Nguyễn Minh Anh",
+          "orders": "6",
+          "value": "14348800"
+        },
+        {
+          "customerId": "customer-57",
+          "customerName": "Lê Anh Kiệt",
+          "orders": "6",
+          "value": "12123390"
+        },
+        {
+          "customerId": "customer-65",
+          "customerName": "Đỗ Thảo Mai",
+          "orders": "6",
+          "value": "7530810"
+        },
+        {
+          "customerId": "customer-240",
+          "customerName": "Phạm Bảo Thư",
+          "orders": "5",
+          "value": "8503700"
+        },
+        {
+          "customerId": "customer-20",
+          "customerName": "Phạm Bảo Thư",
+          "orders": "5",
+          "value": "8336400"
+        },
+        {
+          "customerId": "customer-116",
+          "customerName": "Vũ Gia Vinh",
+          "orders": "5",
+          "value": "5934490"
+        },
+        {
+          "customerId": "customer-89",
+          "customerName": "Đặng Đức Hải",
+          "orders": "4",
+          "value": "12956000"
+        },
+        {
+          "customerId": "customer-52",
+          "customerName": "Bùi Ngọc Bảo",
+          "orders": "4",
+          "value": "12836450"
+        },
+        {
+          "customerId": "customer-305",
+          "customerName": "Đỗ Thảo Mai",
+          "orders": "4",
+          "value": "12065530"
+        }
+      ],
+      "topBuyersByValue": [
+        {
+          "customerId": "customer-228",
+          "customerName": "Ngô Quốc Nguyên",
+          "orders": "6",
+          "value": "16101740"
+        },
+        {
+          "customerId": "customer-231",
+          "customerName": "Nguyễn Minh Anh",
+          "orders": "6",
+          "value": "14348800"
+        },
+        {
+          "customerId": "customer-89",
+          "customerName": "Đặng Đức Hải",
+          "orders": "4",
+          "value": "12956000"
+        },
+        {
+          "customerId": "customer-52",
+          "customerName": "Bùi Ngọc Bảo",
+          "orders": "4",
+          "value": "12836450"
+        },
+        {
+          "customerId": "customer-54",
+          "customerName": "Trần Tuấn Huy",
+          "orders": "3",
+          "value": "12377080"
+        },
+        {
+          "customerId": "customer-57",
+          "customerName": "Lê Anh Kiệt",
+          "orders": "6",
+          "value": "12123390"
+        },
+        {
+          "customerId": "customer-305",
+          "customerName": "Đỗ Thảo Mai",
+          "orders": "4",
+          "value": "12065530"
+        },
+        {
+          "customerId": "customer-97",
+          "customerName": "Lê Anh Kiệt",
+          "orders": "3",
+          "value": "12063140"
+        },
+        {
+          "customerId": "customer-294",
+          "customerName": "Trần Tuấn Huy",
+          "orders": "4",
+          "value": "12022240"
+        },
+        {
+          "customerId": "customer-182",
+          "customerName": "Bùi Ngọc Bảo",
+          "orders": "4",
+          "value": "11981120"
+        }
+      ],
+      "topSellersByOrders": [
+        {
+          "sellerId": "seller-17",
+          "sellerCode": "SL0001112",
+          "sellerName": "MÂY TRE PHÚ VINH 2",
+          "category": "Sở thích & sưu tầm",
+          "orders": "15",
+          "gmv": "36758970",
+          "orderShare": 2.8,
+          "growthPercent": 87.5
+        },
+        {
+          "sellerId": "seller-50",
+          "sellerCode": "SL0001343",
+          "sellerName": "TRẦM HƯƠNG KHÁNH HOÀ 5",
+          "category": "Nhà cửa và Đời sống",
+          "orders": "15",
+          "gmv": "36143860",
+          "orderShare": 2.8,
+          "growthPercent": 87.5
+        },
+        {
+          "sellerId": "seller-48",
+          "sellerCode": "SL0001329",
+          "sellerName": "BÁNH PÍA SÓC TRĂNG XƯA 5",
+          "category": "Thời trang",
+          "orders": "14",
+          "gmv": "35079490",
+          "orderShare": 2.7,
+          "growthPercent": 180
+        },
+        {
+          "sellerId": "seller-34",
+          "sellerCode": "SL0001231",
+          "sellerName": "CÔNG TY TNHH TRÀ TÂN CƯƠNG XANH 4",
+          "category": "Mẹ & Bé",
+          "orders": "14",
+          "gmv": "23206680",
+          "orderShare": 2.7,
+          "growthPercent": 40
+        },
+        {
+          "sellerId": "seller-57",
+          "sellerCode": "SL0001392",
+          "sellerName": "MÂY TRE PHÚ VINH 6",
+          "category": "Sắc đẹp",
+          "orders": "13",
+          "gmv": "32076370",
+          "orderShare": 2.5,
+          "growthPercent": 225
+        },
+        {
+          "sellerId": "seller-42",
+          "sellerCode": "SL0001287",
+          "sellerName": "HỘ KINH DOANH YẾN SÀO KHÁNH PHONG 5",
+          "category": "Thời trang",
+          "orders": "13",
+          "gmv": "26812940",
+          "orderShare": 2.5,
+          "growthPercent": 85.7
+        },
+        {
+          "sellerId": "seller-60",
+          "sellerCode": "SL0001413",
+          "sellerName": "TRẦM HƯƠNG KHÁNH HOÀ 6",
+          "category": "Thời trang",
+          "orders": "12",
+          "gmv": "25702390",
+          "orderShare": 2.3,
+          "growthPercent": 9.1
+        },
+        {
+          "sellerId": "seller-14",
+          "sellerCode": "SL0001091",
+          "sellerName": "CÔNG TY TNHH TRÀ TÂN CƯƠNG XANH 2",
+          "category": "Nhà cửa và Đời sống",
+          "orders": "12",
+          "gmv": "23679180",
+          "orderShare": 2.3,
+          "growthPercent": 71.4
+        },
+        {
+          "sellerId": "seller-15",
+          "sellerCode": "SL0001098",
+          "sellerName": "MỘC HƯƠNG COSMETICS 2",
+          "category": "Sắc đẹp",
+          "orders": "12",
+          "gmv": "21633220",
+          "orderShare": 2.3,
+          "growthPercent": 20
+        },
+        {
+          "sellerId": "seller-58",
+          "sellerCode": "SL0001399",
+          "sellerName": "BÁNH PÍA SÓC TRĂNG XƯA 6",
+          "category": "Mẹ & Bé",
+          "orders": "12",
+          "gmv": "21553030",
+          "orderShare": 2.3,
+          "growthPercent": 140
+        }
+      ]
+    },
+    {
+      "periodKey": "2026-08",
+      "periodLabel": "Tháng 8/2026",
+      "startDate": "2026-08-01",
+      "endDate": "2026-08-31",
+      "status": "FINAL",
+      "orders": {
+        "value": "548",
+        "previousValue": "528",
+        "growthPercent": 3.8
+      },
+      "buyers": {
+        "value": "267",
+        "previousValue": "254",
+        "growthPercent": 5.1
+      },
+      "gmv": {
+        "value": "1123706030",
+        "previousValue": "1092651140",
+        "growthPercent": 2.8
+      },
+      "activeSellers": {
+        "value": "60",
+        "previousValue": "60",
+        "growthPercent": 0
+      },
+      "aov": "2050558",
+      "topBuyersByOrders": [
+        {
+          "customerId": "customer-128",
+          "customerName": "Ngô Quốc Nguyên",
+          "orders": "8",
+          "value": "19822180"
+        },
+        {
+          "customerId": "customer-267",
+          "customerName": "Lê Anh Kiệt",
+          "orders": "5",
+          "value": "13529760"
+        },
+        {
+          "customerId": "customer-209",
+          "customerName": "Đặng Đức Hải",
+          "orders": "5",
+          "value": "11936880"
+        },
+        {
+          "customerId": "customer-205",
+          "customerName": "Đỗ Thảo Mai",
+          "orders": "5",
+          "value": "11850170"
+        },
+        {
+          "customerId": "customer-91",
+          "customerName": "Nguyễn Minh Anh",
+          "orders": "5",
+          "value": "10580060"
+        },
+        {
+          "customerId": "customer-76",
+          "customerName": "Vũ Gia Vinh",
+          "orders": "5",
+          "value": "10300870"
+        },
+        {
+          "customerId": "customer-202",
+          "customerName": "Bùi Ngọc Bảo",
+          "orders": "5",
+          "value": "9516860"
+        },
+        {
+          "customerId": "customer-286",
+          "customerName": "Vũ Gia Vinh",
+          "orders": "4",
+          "value": "17258710"
+        },
+        {
+          "customerId": "customer-183",
+          "customerName": "Hoàng Hải Linh",
+          "orders": "4",
+          "value": "16141210"
+        },
+        {
+          "customerId": "customer-78",
+          "customerName": "Ngô Quốc Nguyên",
+          "orders": "4",
+          "value": "14094990"
+        }
+      ],
+      "topBuyersByValue": [
+        {
+          "customerId": "customer-128",
+          "customerName": "Ngô Quốc Nguyên",
+          "orders": "8",
+          "value": "19822180"
+        },
+        {
+          "customerId": "customer-286",
+          "customerName": "Vũ Gia Vinh",
+          "orders": "4",
+          "value": "17258710"
+        },
+        {
+          "customerId": "customer-183",
+          "customerName": "Hoàng Hải Linh",
+          "orders": "4",
+          "value": "16141210"
+        },
+        {
+          "customerId": "customer-253",
+          "customerName": "Hoàng Hải Linh",
+          "orders": "3",
+          "value": "14856950"
+        },
+        {
+          "customerId": "customer-78",
+          "customerName": "Ngô Quốc Nguyên",
+          "orders": "4",
+          "value": "14094990"
+        },
+        {
+          "customerId": "customer-267",
+          "customerName": "Lê Anh Kiệt",
+          "orders": "5",
+          "value": "13529760"
+        },
+        {
+          "customerId": "customer-129",
+          "customerName": "Đặng Đức Hải",
+          "orders": "4",
+          "value": "12304590"
+        },
+        {
+          "customerId": "customer-209",
+          "customerName": "Đặng Đức Hải",
+          "orders": "5",
+          "value": "11936880"
+        },
+        {
+          "customerId": "customer-205",
+          "customerName": "Đỗ Thảo Mai",
+          "orders": "5",
+          "value": "11850170"
+        },
+        {
+          "customerId": "customer-259",
+          "customerName": "Đặng Đức Hải",
+          "orders": "3",
+          "value": "11516640"
+        }
+      ],
+      "topSellersByOrders": [
+        {
+          "sellerId": "seller-50",
+          "sellerCode": "SL0001343",
+          "sellerName": "TRẦM HƯƠNG KHÁNH HOÀ 5",
+          "category": "Nhà cửa và Đời sống",
+          "orders": "21",
+          "gmv": "47990500",
+          "orderShare": 3.8,
+          "growthPercent": 40
+        },
+        {
+          "sellerId": "seller-57",
+          "sellerCode": "SL0001392",
+          "sellerName": "MÂY TRE PHÚ VINH 6",
+          "category": "Sắc đẹp",
+          "orders": "15",
+          "gmv": "32710840",
+          "orderShare": 2.7,
+          "growthPercent": 15.4
+        },
+        {
+          "sellerId": "seller-5",
+          "sellerCode": "SL0001028",
+          "sellerName": "MỘC HƯƠNG COSMETICS",
+          "category": "Sở thích & sưu tầm",
+          "orders": "14",
+          "gmv": "27240680",
+          "orderShare": 2.6,
+          "growthPercent": 40
+        },
+        {
+          "sellerId": "seller-31",
+          "sellerCode": "SL0001210",
+          "sellerName": "CÔNG TY TNHH GỐM LAM BÁT TRÀNG 4",
+          "category": "Thực phẩm & Đồ uống",
+          "orders": "13",
+          "gmv": "28872810",
+          "orderShare": 2.4,
+          "growthPercent": 30
+        },
+        {
+          "sellerId": "seller-15",
+          "sellerCode": "SL0001098",
+          "sellerName": "MỘC HƯƠNG COSMETICS 2",
+          "category": "Sắc đẹp",
+          "orders": "13",
+          "gmv": "27034150",
+          "orderShare": 2.4,
+          "growthPercent": 8.3
+        },
+        {
+          "sellerId": "seller-32",
+          "sellerCode": "SL0001217",
+          "sellerName": "HỘ KINH DOANH YẾN SÀO KHÁNH PHONG 4",
+          "category": "Nhà cửa và Đời sống",
+          "orders": "13",
+          "gmv": "23812360",
+          "orderShare": 2.4,
+          "growthPercent": 44.4
+        },
+        {
+          "sellerId": "seller-36",
+          "sellerCode": "SL0001245",
+          "sellerName": "CÔNG TY TNHH NƯỚC MẮM CỬA BIỂN 4",
+          "category": "Thời trang",
+          "orders": "13",
+          "gmv": "22178280",
+          "orderShare": 2.4,
+          "growthPercent": 160
+        },
+        {
+          "sellerId": "seller-20",
+          "sellerCode": "SL0001133",
+          "sellerName": "TRẦM HƯƠNG KHÁNH HOÀ 2",
+          "category": "Nhà cửa và Đời sống",
+          "orders": "12",
+          "gmv": "26793140",
+          "orderShare": 2.2,
+          "growthPercent": 50
+        },
+        {
+          "sellerId": "seller-42",
+          "sellerCode": "SL0001287",
+          "sellerName": "HỘ KINH DOANH YẾN SÀO KHÁNH PHONG 5",
+          "category": "Thời trang",
+          "orders": "12",
+          "gmv": "24797700",
+          "orderShare": 2.2,
+          "growthPercent": -7.7
+        },
+        {
+          "sellerId": "seller-54",
+          "sellerCode": "SL0001371",
+          "sellerName": "CÔNG TY TNHH TRÀ TÂN CƯƠNG XANH 6",
+          "category": "Thời trang",
+          "orders": "12",
+          "gmv": "16454260",
+          "orderShare": 2.2,
+          "growthPercent": 20
+        }
+      ]
+    },
+    {
+      "periodKey": "2026-09",
+      "periodLabel": "Tháng 9/2026",
+      "startDate": "2026-09-01",
+      "endDate": "2026-09-30",
+      "status": "FINAL",
+      "orders": {
+        "value": "557",
+        "previousValue": "548",
+        "growthPercent": 1.6
+      },
+      "buyers": {
+        "value": "291",
+        "previousValue": "267",
+        "growthPercent": 9
+      },
+      "gmv": {
+        "value": "1144986060",
+        "previousValue": "1123706030",
+        "growthPercent": 1.9
+      },
+      "activeSellers": {
+        "value": "60",
+        "previousValue": "60",
+        "growthPercent": 0
+      },
+      "aov": "2055630",
+      "topBuyersByOrders": [
+        {
+          "customerId": "customer-285",
+          "customerName": "Đỗ Thảo Mai",
+          "orders": "5",
+          "value": "19042950"
+        },
+        {
+          "customerId": "customer-84",
+          "customerName": "Trần Tuấn Huy",
+          "orders": "5",
+          "value": "16986200"
+        },
+        {
+          "customerId": "customer-358",
+          "customerName": "Ngô Quốc Nguyên",
+          "orders": "5",
+          "value": "10043340"
+        },
+        {
+          "customerId": "customer-283",
+          "customerName": "Hoàng Hải Linh",
+          "orders": "5",
+          "value": "9356740"
+        },
+        {
+          "customerId": "customer-124",
+          "customerName": "Trần Tuấn Huy",
+          "orders": "5",
+          "value": "4201320"
+        },
+        {
+          "customerId": "customer-310",
+          "customerName": "Phạm Bảo Thư",
+          "orders": "4",
+          "value": "13816840"
+        },
+        {
+          "customerId": "customer-206",
+          "customerName": "Vũ Gia Vinh",
+          "orders": "4",
+          "value": "13656670"
+        },
+        {
+          "customerId": "customer-196",
+          "customerName": "Vũ Gia Vinh",
+          "orders": "4",
+          "value": "12903610"
+        },
+        {
+          "customerId": "customer-134",
+          "customerName": "Trần Tuấn Huy",
+          "orders": "4",
+          "value": "11679870"
+        },
+        {
+          "customerId": "customer-141",
+          "customerName": "Nguyễn Minh Anh",
+          "orders": "4",
+          "value": "11539850"
+        }
+      ],
+      "topBuyersByValue": [
+        {
+          "customerId": "customer-285",
+          "customerName": "Đỗ Thảo Mai",
+          "orders": "5",
+          "value": "19042950"
+        },
+        {
+          "customerId": "customer-84",
+          "customerName": "Trần Tuấn Huy",
+          "orders": "5",
+          "value": "16986200"
+        },
+        {
+          "customerId": "customer-310",
+          "customerName": "Phạm Bảo Thư",
+          "orders": "4",
+          "value": "13816840"
+        },
+        {
+          "customerId": "customer-206",
+          "customerName": "Vũ Gia Vinh",
+          "orders": "4",
+          "value": "13656670"
+        },
+        {
+          "customerId": "customer-99",
+          "customerName": "Đặng Đức Hải",
+          "orders": "3",
+          "value": "13379680"
+        },
+        {
+          "customerId": "customer-196",
+          "customerName": "Vũ Gia Vinh",
+          "orders": "4",
+          "value": "12903610"
+        },
+        {
+          "customerId": "customer-339",
+          "customerName": "Đặng Đức Hải",
+          "orders": "3",
+          "value": "12743450"
+        },
+        {
+          "customerId": "customer-134",
+          "customerName": "Trần Tuấn Huy",
+          "orders": "4",
+          "value": "11679870"
+        },
+        {
+          "customerId": "customer-38",
+          "customerName": "Ngô Quốc Nguyên",
+          "orders": "3",
+          "value": "11659340"
+        },
+        {
+          "customerId": "customer-141",
+          "customerName": "Nguyễn Minh Anh",
+          "orders": "4",
+          "value": "11539850"
+        }
+      ],
+      "topSellersByOrders": [
+        {
+          "sellerId": "seller-15",
+          "sellerCode": "SL0001098",
+          "sellerName": "MỘC HƯƠNG COSMETICS 2",
+          "category": "Sắc đẹp",
+          "orders": "14",
+          "gmv": "41662030",
+          "orderShare": 2.5,
+          "growthPercent": 7.7
+        },
+        {
+          "sellerId": "seller-4",
+          "sellerCode": "SL0001021",
+          "sellerName": "CÔNG TY TNHH TRÀ TÂN CƯƠNG XANH",
+          "category": "Mẹ & Bé",
+          "orders": "14",
+          "gmv": "34095380",
+          "orderShare": 2.5,
+          "growthPercent": 100
+        },
+        {
+          "sellerId": "seller-13",
+          "sellerCode": "SL0001084",
+          "sellerName": "CÔNG TY CỔ PHẦN CÀ PHÊ ĐẤT ĐỎ 2",
+          "category": "Thực phẩm & Đồ uống",
+          "orders": "14",
+          "gmv": "33857420",
+          "orderShare": 2.5,
+          "growthPercent": 100
+        },
+        {
+          "sellerId": "seller-54",
+          "sellerCode": "SL0001371",
+          "sellerName": "CÔNG TY TNHH TRÀ TÂN CƯƠNG XANH 6",
+          "category": "Thời trang",
+          "orders": "14",
+          "gmv": "31428030",
+          "orderShare": 2.5,
+          "growthPercent": 16.7
+        },
+        {
+          "sellerId": "seller-49",
+          "sellerCode": "SL0001336",
+          "sellerName": "CÔNG TY TNHH ĐỒ CHƠI GỖ BÉ NA 5",
+          "category": "Thực phẩm & Đồ uống",
+          "orders": "14",
+          "gmv": "20319230",
+          "orderShare": 2.5,
+          "growthPercent": 180
+        },
+        {
+          "sellerId": "seller-58",
+          "sellerCode": "SL0001399",
+          "sellerName": "BÁNH PÍA SÓC TRĂNG XƯA 6",
+          "category": "Mẹ & Bé",
+          "orders": "13",
+          "gmv": "24062590",
+          "orderShare": 2.3,
+          "growthPercent": 62.5
+        },
+        {
+          "sellerId": "seller-38",
+          "sellerCode": "SL0001259",
+          "sellerName": "BÁNH PÍA SÓC TRĂNG XƯA 4",
+          "category": "Nhà cửa và Đời sống",
+          "orders": "13",
+          "gmv": "23221360",
+          "orderShare": 2.3,
+          "growthPercent": 44.4
+        },
+        {
+          "sellerId": "seller-22",
+          "sellerCode": "SL0001147",
+          "sellerName": "HỘ KINH DOANH YẾN SÀO KHÁNH PHONG 3",
+          "category": "Mẹ & Bé",
+          "orders": "12",
+          "gmv": "30346530",
+          "orderShare": 2.2,
+          "growthPercent": 9.1
+        },
+        {
+          "sellerId": "seller-35",
+          "sellerCode": "SL0001238",
+          "sellerName": "MỘC HƯƠNG COSMETICS 4",
+          "category": "Sở thích & sưu tầm",
+          "orders": "12",
+          "gmv": "25262760",
+          "orderShare": 2.2,
+          "growthPercent": 100
+        },
+        {
+          "sellerId": "seller-41",
+          "sellerCode": "SL0001280",
+          "sellerName": "CÔNG TY TNHH GỐM LAM BÁT TRÀNG 5",
+          "category": "Sở thích & sưu tầm",
+          "orders": "12",
+          "gmv": "24693110",
+          "orderShare": 2.2,
+          "growthPercent": 33.3
+        }
+      ]
+    },
+    {
+      "periodKey": "2026-10",
+      "periodLabel": "Tháng 10/2026",
+      "startDate": "2026-10-01",
+      "endDate": "2026-10-31",
+      "status": "FINAL",
+      "orders": {
+        "value": "501",
+        "previousValue": "557",
+        "growthPercent": -10.1
+      },
+      "buyers": {
+        "value": "285",
+        "previousValue": "291",
+        "growthPercent": -2.1
+      },
+      "gmv": {
+        "value": "958581430",
+        "previousValue": "1144986060",
+        "growthPercent": -16.3
+      },
+      "activeSellers": {
+        "value": "60",
+        "previousValue": "60",
+        "growthPercent": 0
+      },
+      "aov": "1913336",
+      "topBuyersByOrders": [
+        {
+          "customerId": "customer-176",
+          "customerName": "Vũ Gia Vinh",
+          "orders": "5",
+          "value": "12302140"
+        },
+        {
+          "customerId": "customer-353",
+          "customerName": "Hoàng Hải Linh",
+          "orders": "5",
+          "value": "11612480"
+        },
+        {
+          "customerId": "customer-213",
+          "customerName": "Hoàng Hải Linh",
+          "orders": "5",
+          "value": "10592430"
+        },
+        {
+          "customerId": "customer-351",
+          "customerName": "Nguyễn Minh Anh",
+          "orders": "5",
+          "value": "8766590"
+        },
+        {
+          "customerId": "customer-44",
+          "customerName": "Trần Tuấn Huy",
+          "orders": "5",
+          "value": "5787330"
+        },
+        {
+          "customerId": "customer-198",
+          "customerName": "Ngô Quốc Nguyên",
+          "orders": "4",
+          "value": "12048640"
+        },
+        {
+          "customerId": "customer-241",
+          "customerName": "Nguyễn Minh Anh",
+          "orders": "4",
+          "value": "10162700"
+        },
+        {
+          "customerId": "customer-292",
+          "customerName": "Bùi Ngọc Bảo",
+          "orders": "4",
+          "value": "7611610"
+        },
+        {
+          "customerId": "customer-211",
+          "customerName": "Nguyễn Minh Anh",
+          "orders": "4",
+          "value": "7173670"
+        },
+        {
+          "customerId": "customer-170",
+          "customerName": "Phạm Bảo Thư",
+          "orders": "4",
+          "value": "6725720"
+        }
+      ],
+      "topBuyersByValue": [
+        {
+          "customerId": "customer-176",
+          "customerName": "Vũ Gia Vinh",
+          "orders": "5",
+          "value": "12302140"
+        },
+        {
+          "customerId": "customer-198",
+          "customerName": "Ngô Quốc Nguyên",
+          "orders": "4",
+          "value": "12048640"
+        },
+        {
+          "customerId": "customer-353",
+          "customerName": "Hoàng Hải Linh",
+          "orders": "5",
+          "value": "11612480"
+        },
+        {
+          "customerId": "customer-356",
+          "customerName": "Vũ Gia Vinh",
+          "orders": "3",
+          "value": "10866710"
+        },
+        {
+          "customerId": "customer-213",
+          "customerName": "Hoàng Hải Linh",
+          "orders": "5",
+          "value": "10592430"
+        },
+        {
+          "customerId": "customer-241",
+          "customerName": "Nguyễn Minh Anh",
+          "orders": "4",
+          "value": "10162700"
+        },
+        {
+          "customerId": "customer-21",
+          "customerName": "Nguyễn Minh Anh",
+          "orders": "3",
+          "value": "9890380"
+        },
+        {
+          "customerId": "customer-370",
+          "customerName": "Phạm Bảo Thư",
+          "orders": "3",
+          "value": "9532380"
+        },
+        {
+          "customerId": "customer-296",
+          "customerName": "Vũ Gia Vinh",
+          "orders": "3",
+          "value": "9060680"
+        },
+        {
+          "customerId": "customer-274",
+          "customerName": "Trần Tuấn Huy",
+          "orders": "3",
+          "value": "8992160"
+        }
+      ],
+      "topSellersByOrders": [
+        {
+          "sellerId": "seller-3",
+          "sellerCode": "SL0001014",
+          "sellerName": "CÔNG TY CỔ PHẦN CÀ PHÊ ĐẤT ĐỎ",
+          "category": "Sắc đẹp",
+          "orders": "15",
+          "gmv": "34621160",
+          "orderShare": 3,
+          "growthPercent": 150
+        },
+        {
+          "sellerId": "seller-53",
+          "sellerCode": "SL0001364",
+          "sellerName": "CÔNG TY CỔ PHẦN CÀ PHÊ ĐẤT ĐỎ 6",
+          "category": "Sở thích & sưu tầm",
+          "orders": "15",
+          "gmv": "24377510",
+          "orderShare": 3,
+          "growthPercent": 114.3
+        },
+        {
+          "sellerId": "seller-1",
+          "sellerCode": "SL0001000",
+          "sellerName": "CÔNG TY TNHH GỐM LAM BÁT TRÀNG",
+          "category": "Thực phẩm & Đồ uống",
+          "orders": "14",
+          "gmv": "20977340",
+          "orderShare": 2.8,
+          "growthPercent": 100
+        },
+        {
+          "sellerId": "seller-57",
+          "sellerCode": "SL0001392",
+          "sellerName": "MÂY TRE PHÚ VINH 6",
+          "category": "Sắc đẹp",
+          "orders": "13",
+          "gmv": "26016980",
+          "orderShare": 2.6,
+          "growthPercent": 62.5
+        },
+        {
+          "sellerId": "seller-22",
+          "sellerCode": "SL0001147",
+          "sellerName": "HỘ KINH DOANH YẾN SÀO KHÁNH PHONG 3",
+          "category": "Mẹ & Bé",
+          "orders": "13",
+          "gmv": "22681010",
+          "orderShare": 2.6,
+          "growthPercent": 8.3
+        },
+        {
+          "sellerId": "seller-29",
+          "sellerCode": "SL0001196",
+          "sellerName": "CÔNG TY TNHH ĐỒ CHƠI GỖ BÉ NA 3",
+          "category": "Sở thích & sưu tầm",
+          "orders": "12",
+          "gmv": "30164920",
+          "orderShare": 2.4,
+          "growthPercent": 9.1
+        },
+        {
+          "sellerId": "seller-15",
+          "sellerCode": "SL0001098",
+          "sellerName": "MỘC HƯƠNG COSMETICS 2",
+          "category": "Sắc đẹp",
+          "orders": "12",
+          "gmv": "26494320",
+          "orderShare": 2.4,
+          "growthPercent": -14.3
+        },
+        {
+          "sellerId": "seller-47",
+          "sellerCode": "SL0001322",
+          "sellerName": "MÂY TRE PHÚ VINH 5",
+          "category": "Sở thích & sưu tầm",
+          "orders": "12",
+          "gmv": "22330840",
+          "orderShare": 2.4,
+          "growthPercent": 33.3
+        },
+        {
+          "sellerId": "seller-50",
+          "sellerCode": "SL0001343",
+          "sellerName": "TRẦM HƯƠNG KHÁNH HOÀ 5",
+          "category": "Nhà cửa và Đời sống",
+          "orders": "12",
+          "gmv": "21258560",
+          "orderShare": 2.4,
+          "growthPercent": 0
+        },
+        {
+          "sellerId": "seller-45",
+          "sellerCode": "SL0001308",
+          "sellerName": "MỘC HƯƠNG COSMETICS 5",
+          "category": "Sắc đẹp",
+          "orders": "12",
+          "gmv": "20263440",
+          "orderShare": 2.4,
+          "growthPercent": 20
+        }
+      ]
+    }
+  ]
+}

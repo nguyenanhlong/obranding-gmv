@@ -1,0 +1,168 @@
+{
+  "items": [
+    {
+      "id": "order-5401",
+      "publicId": "2626092900005401AB",
+      "placedAt": "2026-09-29T12:44:19+07:00",
+      "status": "COMPLETED",
+      "sellerId": "seller-59",
+      "sellerCode": "SL0001406",
+      "sellerName": "CÔNG TY TNHH ĐỒ CHƠI GỖ BÉ NA 6",
+      "customerId": "customer-358",
+      "customerName": "Ngô Quốc Nguyên",
+      "category": "Sở thích & sưu tầm",
+      "region": "Tỉnh An Giang",
+      "itemCount": 2,
+      "payment": "PREPAID",
+      "discounts": [
+        {
+          "label": "Giảm giá SP",
+          "amount": 18960
+        },
+        {
+          "label": "Voucher shop",
+          "amount": 14220
+        }
+      ],
+      "total": {
+        "amount": 465820,
+        "currency": "VND"
+      }
+    },
+    {
+      "id": "order-5355",
+      "publicId": "2626092600005355AB",
+      "placedAt": "2026-09-26T15:35:51+07:00",
+      "status": "COMPLETED",
+      "sellerId": "seller-23",
+      "sellerCode": "SL0001154",
+      "sellerName": "CÔNG TY CỔ PHẦN CÀ PHÊ ĐẤT ĐỎ 3",
+      "customerId": "customer-358",
+      "customerName": "Ngô Quốc Nguyên",
+      "category": "Sở thích & sưu tầm",
+      "region": "Tỉnh An Giang",
+      "itemCount": 4,
+      "payment": "COD",
+      "discounts": [
+        {
+          "label": "Giảm giá SP",
+          "amount": 152480
+        },
+        {
+          "label": "Voucher shop",
+          "amount": 114360
+        },
+        {
+          "label": "Hỗ trợ ship",
+          "amount": 20000
+        }
+      ],
+      "total": {
+        "amount": 3525160,
+        "currency": "VND"
+      }
+    },
+    {
+      "id": "order-5303",
+      "publicId": "2626092400005303AB",
+      "placedAt": "2026-09-24T21:01:47+07:00",
+      "status": "COMPLETED",
+      "sellerId": "seller-27",
+      "sellerCode": "SL0001182",
+      "sellerName": "MÂY TRE PHÚ VINH 3",
+      "customerId": "customer-358",
+      "customerName": "Ngô Quốc Nguyên",
+      "category": "Sắc đẹp",
+      "region": "Tỉnh An Giang",
+      "itemCount": 2,
+      "payment": "COD",
+      "discounts": [
+        {
+          "label": "Giảm giá SP",
+          "amount": 47200
+        },
+        {
+          "label": "Voucher shop",
+          "amount": 35400
+        }
+      ],
+      "total": {
+        "amount": 1122400,
+        "currency": "VND"
+      }
+    },
+    {
+      "id": "order-4991",
+      "publicId": "2626090800004991AB",
+      "placedAt": "2026-09-08T17:46:57+07:00",
+      "status": "COMPLETED",
+      "sellerId": "seller-50",
+      "sellerCode": "SL0001343",
+      "sellerName": "TRẦM HƯƠNG KHÁNH HOÀ 5",
+      "customerId": "customer-358",
+      "customerName": "Ngô Quốc Nguyên",
+      "category": "Nhà cửa và Đời sống",
+      "region": "Tỉnh An Giang",
+      "itemCount": 4,
+      "payment": "COD",
+      "discounts": [
+        {
+          "label": "Giảm giá SP",
+          "amount": 76480
+        },
+        {
+          "label": "Voucher shop",
+          "amount": 57360
+        },
+        {
+          "label": "Hỗ trợ ship",
+          "amount": 20000
+        }
+      ],
+      "total": {
+        "amount": 1783160,
+        "currency": "VND"
+      }
+    },
+    {
+      "id": "order-4848",
+      "publicId": "2626090100004848AB",
+      "placedAt": "2026-09-01T16:31:57+07:00",
+      "status": "COMPLETED",
+      "sellerId": "seller-32",
+      "sellerCode": "SL0001217",
+      "sellerName": "HỘ KINH DOANH YẾN SÀO KHÁNH PHONG 4",
+      "customerId": "customer-358",
+      "customerName": "Ngô Quốc Nguyên",
+      "category": "Nhà cửa và Đời sống",
+      "region": "Tỉnh An Giang",
+      "itemCount": 3,
+      "payment": "COD",
+      "discounts": [
+        {
+          "label": "Giảm giá SP",
+          "amount": 139200
+        },
+        {
+          "label": "Voucher shop",
+          "amount": 104400
+        },
+        {
+          "label": "Voucher sàn",
+          "amount": 69600
+        },
+        {
+          "label": "Hỗ trợ ship",
+          "amount": 20000
+        }
+      ],
+      "total": {
+        "amount": 3146800,
+        "currency": "VND"
+      }
+    }
+  ],
+  "total": 5,
+  "page": 1,
+  "pageSize": 10
+}

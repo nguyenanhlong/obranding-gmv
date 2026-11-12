@@ -1,5 +1,10 @@
 # Long — FE-B · M2 Chi tiết kỳ + M6 Chi tiết đơn
 
+> **Cập nhật 12/11/2026:** M2 đã dùng API 6 (6 KPI + distribution theo unit, 3 tab có số đếm);
+> danh sách đơn vẫn mock (chờ API 2) và đã tách `listOrders()` để thay một chỗ.
+> M6 giữ nguyên mock (chờ API 5). Chi tiết: `docs/doi-chieu/ket-qua-doi-chieu.md`.
+
+
 Nhánh: `feat/fe-b-long` · Route: `/growth/period`, `/orders/[orderId]`
 
 ## Phạm vi

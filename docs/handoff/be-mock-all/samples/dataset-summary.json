@@ -1,0 +1,38 @@
+{
+  "generated_at": "2026-11-12T04:54:39.911Z",
+  "total_orders": 5952,
+  "total_customers": 389,
+  "total_sellers": 60,
+  "date_range": {
+    "from": "2025-11-01",
+    "to": "2026-10-27"
+  },
+  "by_status": {
+    "COMPLETED": 4640,
+    "PREPARING": 467,
+    "PENDING": 360,
+    "NEEDS_RESOLUTION": 167,
+    "CANCELLED": 318
+  },
+  "by_month": {
+    "2025-11": 388,
+    "2025-12": 422,
+    "2026-01": 465,
+    "2026-02": 425,
+    "2026-03": 488,
+    "2026-04": 474,
+    "2026-05": 539,
+    "2026-06": 513,
+    "2026-07": 562,
+    "2026-08": 571,
+    "2026-09": 586,
+    "2026-10": 519
+  },
+  "notes": [
+    "Mỗi đơn là một đơn con theo nhà bán (mô phỏng parent_order_id IS NOT NULL).",
+    "placedAt ghi kèm +07:00 nên cắt 10 ký tự đầu ra đúng ngày Việt Nam.",
+    "Số tiền là integer VND, đã trừ ưu đãi và cộng phí ship.",
+    "Dataset sinh deterministic: cùng seed nên chạy lại ra cùng số.",
+    "Sample M4 lấy customer đầu tiên trong kỳ; M5 lấy seller đầu tiên trong kỳ."
+  ]
+}

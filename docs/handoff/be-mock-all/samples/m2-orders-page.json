@@ -1,0 +1,341 @@
+{
+  "items": [
+    {
+      "id": "order-5418",
+      "publicId": "2626093000005418AB",
+      "placedAt": "2026-09-30T22:15:14+07:00",
+      "status": "COMPLETED",
+      "sellerId": "seller-53",
+      "sellerCode": "SL0001364",
+      "sellerName": "CÔNG TY CỔ PHẦN CÀ PHÊ ĐẤT ĐỎ 6",
+      "customerId": "customer-105",
+      "customerName": "Đỗ Thảo Mai",
+      "category": "Sở thích & sưu tầm",
+      "region": "Thành phố Hà Nội",
+      "itemCount": 3,
+      "payment": "COD",
+      "discounts": [
+        {
+          "label": "Giảm giá SP",
+          "amount": 99120
+        },
+        {
+          "label": "Voucher shop",
+          "amount": 74340
+        },
+        {
+          "label": "Hỗ trợ ship",
+          "amount": 20000
+        }
+      ],
+      "total": {
+        "amount": 2309540,
+        "currency": "VND"
+      }
+    },
+    {
+      "id": "order-5415",
+      "publicId": "2626093000005415AB",
+      "placedAt": "2026-09-30T21:17:36+07:00",
+      "status": "COMPLETED",
+      "sellerId": "seller-15",
+      "sellerCode": "SL0001098",
+      "sellerName": "MỘC HƯƠNG COSMETICS 2",
+      "customerId": "customer-370",
+      "customerName": "Phạm Bảo Thư",
+      "category": "Sắc đẹp",
+      "region": "Thành phố Hồ Chí Minh",
+      "itemCount": 3,
+      "payment": "PREPAID",
+      "discounts": [
+        {
+          "label": "Thẻ Sành",
+          "amount": 124050
+        },
+        {
+          "label": "Voucher shop",
+          "amount": 74430
+        },
+        {
+          "label": "Hỗ trợ ship",
+          "amount": 20000
+        }
+      ],
+      "total": {
+        "amount": 2287520,
+        "currency": "VND"
+      }
+    },
+    {
+      "id": "order-5427",
+      "publicId": "2626093000005427AB",
+      "placedAt": "2026-09-30T20:41:00+07:00",
+      "status": "COMPLETED",
+      "sellerId": "seller-53",
+      "sellerCode": "SL0001364",
+      "sellerName": "CÔNG TY CỔ PHẦN CÀ PHÊ ĐẤT ĐỎ 6",
+      "customerId": "customer-15",
+      "customerName": "Đỗ Thảo Mai",
+      "category": "Sở thích & sưu tầm",
+      "region": "Tỉnh Đắk Lắk",
+      "itemCount": 4,
+      "payment": "COD",
+      "discounts": [
+        {
+          "label": "Giảm giá SP",
+          "amount": 48800
+        },
+        {
+          "label": "Voucher shop",
+          "amount": 36600
+        },
+        {
+          "label": "Voucher sàn",
+          "amount": 24400
+        }
+      ],
+      "total": {
+        "amount": 1135200,
+        "currency": "VND"
+      }
+    },
+    {
+      "id": "order-5432",
+      "publicId": "2626093000005432AB",
+      "placedAt": "2026-09-30T19:48:01+07:00",
+      "status": "PENDING",
+      "sellerId": "seller-5",
+      "sellerCode": "SL0001028",
+      "sellerName": "MỘC HƯƠNG COSMETICS",
+      "customerId": "customer-252",
+      "customerName": "Bùi Ngọc Bảo",
+      "category": "Sở thích & sưu tầm",
+      "region": "Thành phố Cần Thơ",
+      "itemCount": 1,
+      "payment": "PREPAID",
+      "discounts": [
+        {
+          "label": "Giảm giá SP",
+          "amount": 60920
+        },
+        {
+          "label": "Voucher shop",
+          "amount": 45690
+        },
+        {
+          "label": "Voucher sàn",
+          "amount": 30460
+        }
+      ],
+      "total": {
+        "amount": 1410930,
+        "currency": "VND"
+      }
+    },
+    {
+      "id": "order-5417",
+      "publicId": "2626093000005417AB",
+      "placedAt": "2026-09-30T19:29:25+07:00",
+      "status": "PENDING",
+      "sellerId": "seller-60",
+      "sellerCode": "SL0001413",
+      "sellerName": "TRẦM HƯƠNG KHÁNH HOÀ 6",
+      "customerId": "customer-152",
+      "customerName": "Bùi Ngọc Bảo",
+      "category": "Thời trang",
+      "region": "Tỉnh Bắc Ninh",
+      "itemCount": 4,
+      "payment": "COD",
+      "discounts": [
+        {
+          "label": "Giảm giá SP",
+          "amount": 165920
+        },
+        {
+          "label": "Voucher shop",
+          "amount": 124440
+        },
+        {
+          "label": "Voucher sàn",
+          "amount": 82960
+        },
+        {
+          "label": "Hỗ trợ ship",
+          "amount": 20000
+        }
+      ],
+      "total": {
+        "amount": 3779680,
+        "currency": "VND"
+      }
+    },
+    {
+      "id": "order-5420",
+      "publicId": "2626093000005420AB",
+      "placedAt": "2026-09-30T19:06:45+07:00",
+      "status": "COMPLETED",
+      "sellerId": "seller-58",
+      "sellerCode": "SL0001399",
+      "sellerName": "BÁNH PÍA SÓC TRĂNG XƯA 6",
+      "customerId": "customer-48",
+      "customerName": "Ngô Quốc Nguyên",
+      "category": "Mẹ & Bé",
+      "region": "Tỉnh Bắc Ninh",
+      "itemCount": 1,
+      "payment": "COD",
+      "discounts": [
+        {
+          "label": "Giảm giá SP",
+          "amount": 28600
+        },
+        {
+          "label": "Voucher shop",
+          "amount": 21450
+        },
+        {
+          "label": "Hỗ trợ ship",
+          "amount": 20000
+        }
+      ],
+      "total": {
+        "amount": 669950,
+        "currency": "VND"
+      }
+    },
+    {
+      "id": "order-5429",
+      "publicId": "2626093000005429AB",
+      "placedAt": "2026-09-30T18:43:25+07:00",
+      "status": "COMPLETED",
+      "sellerId": "seller-48",
+      "sellerCode": "SL0001329",
+      "sellerName": "BÁNH PÍA SÓC TRĂNG XƯA 5",
+      "customerId": "customer-276",
+      "customerName": "Vũ Gia Vinh",
+      "category": "Thời trang",
+      "region": "Thành phố Cần Thơ",
+      "itemCount": 1,
+      "payment": "COD",
+      "discounts": [
+        {
+          "label": "Giảm giá SP",
+          "amount": 17720
+        },
+        {
+          "label": "Voucher shop",
+          "amount": 13290
+        },
+        {
+          "label": "Hỗ trợ ship",
+          "amount": 20000
+        }
+      ],
+      "total": {
+        "amount": 416990,
+        "currency": "VND"
+      }
+    },
+    {
+      "id": "order-5424",
+      "publicId": "2626093000005424AB",
+      "placedAt": "2026-09-30T18:17:21+07:00",
+      "status": "COMPLETED",
+      "sellerId": "seller-46",
+      "sellerCode": "SL0001315",
+      "sellerName": "CÔNG TY TNHH NƯỚC MẮM CỬA BIỂN 5",
+      "customerId": "customer-53",
+      "customerName": "Hoàng Hải Linh",
+      "category": "Mẹ & Bé",
+      "region": "Tỉnh Đồng Tháp",
+      "itemCount": 3,
+      "payment": "PREPAID",
+      "discounts": [
+        {
+          "label": "Giảm giá SP",
+          "amount": 171960
+        },
+        {
+          "label": "Voucher shop",
+          "amount": 128970
+        }
+      ],
+      "total": {
+        "amount": 4023070,
+        "currency": "VND"
+      }
+    },
+    {
+      "id": "order-5425",
+      "publicId": "2626093000005425AB",
+      "placedAt": "2026-09-30T18:14:58+07:00",
+      "status": "COMPLETED",
+      "sellerId": "seller-24",
+      "sellerCode": "SL0001161",
+      "sellerName": "CÔNG TY TNHH TRÀ TÂN CƯƠNG XANH 3",
+      "customerId": "customer-376",
+      "customerName": "Vũ Gia Vinh",
+      "category": "Thời trang",
+      "region": "Tỉnh Bắc Ninh",
+      "itemCount": 1,
+      "payment": "COD",
+      "discounts": [
+        {
+          "label": "Giảm giá SP",
+          "amount": 14640
+        },
+        {
+          "label": "Voucher shop",
+          "amount": 10980
+        },
+        {
+          "label": "Voucher sàn",
+          "amount": 7320
+        },
+        {
+          "label": "Hỗ trợ ship",
+          "amount": 20000
+        }
+      ],
+      "total": {
+        "amount": 338060,
+        "currency": "VND"
+      }
+    },
+    {
+      "id": "order-5421",
+      "publicId": "2626093000005421AB",
+      "placedAt": "2026-09-30T15:57:10+07:00",
+      "status": "COMPLETED",
+      "sellerId": "seller-30",
+      "sellerCode": "SL0001203",
+      "sellerName": "TRẦM HƯƠNG KHÁNH HOÀ 3",
+      "customerId": "customer-223",
+      "customerName": "Hoàng Hải Linh",
+      "category": "Thời trang",
+      "region": "Tỉnh Đắk Lắk",
+      "itemCount": 2,
+      "payment": "COD",
+      "discounts": [
+        {
+          "label": "Giảm giá SP",
+          "amount": 69280
+        },
+        {
+          "label": "Voucher shop",
+          "amount": 51960
+        },
+        {
+          "label": "Hỗ trợ ship",
+          "amount": 20000
+        }
+      ],
+      "total": {
+        "amount": 1615760,
+        "currency": "VND"
+      }
+    }
+  ],
+  "total": 586,
+  "page": 1,
+  "pageSize": 10
+}

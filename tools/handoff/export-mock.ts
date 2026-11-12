@@ -125,7 +125,8 @@ async function loadMockCopy<T>(rel: string, exportName: string): Promise<T> {
 }
 
 async function main(): Promise<void> {
-  rmSync(OUT, { recursive: true, force: true });
+  rmSync(join(OUT, 'reference'), { recursive: true, force: true });
+  rmSync(join(OUT, 'samples'), { recursive: true, force: true });
   mkdirSync(OUT, { recursive: true });
 
   for (const rel of COPY_FILES) {

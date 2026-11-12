@@ -1,5 +1,10 @@
 # Phuc — FE-C · M4 Chi tiết user + M5 Chi tiết nhà bán
 
+> **Cập nhật 12/11/2026:** M4 dùng API 8, M5 dùng API 7 (series theo unit DAY/MONTH/QUARTER,
+> bỏ totalValueDelta, thêm buyerType/phoneMasked/mainCategory/ordersPerBuyer).
+> Danh sách đơn vẫn mock (chờ API 2). Chi tiết: `docs/doi-chieu/ket-qua-doi-chieu.md`.
+
+
 Nhánh: `feat/fe-c-phuc` · Route: `/growth/customers/[customerId]`, `/growth/sellers/[sellerId]`
 
 ## Phạm vi

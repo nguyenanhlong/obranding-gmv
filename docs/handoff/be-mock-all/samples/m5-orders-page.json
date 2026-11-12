@@ -1,0 +1,333 @@
+{
+  "items": [
+    {
+      "id": "order-5400",
+      "publicId": "2626092900005400AB",
+      "placedAt": "2026-09-29T22:02:43+07:00",
+      "status": "COMPLETED",
+      "sellerId": "seller-4",
+      "sellerCode": "SL0001021",
+      "sellerName": "CÔNG TY TNHH TRÀ TÂN CƯƠNG XANH",
+      "customerId": "customer-134",
+      "customerName": "Trần Tuấn Huy",
+      "category": "Mẹ & Bé",
+      "region": "Tỉnh An Giang",
+      "itemCount": 4,
+      "payment": "COD",
+      "discounts": [
+        {
+          "label": "Giảm giá SP",
+          "amount": 247840
+        },
+        {
+          "label": "Voucher shop",
+          "amount": 185880
+        },
+        {
+          "label": "Hỗ trợ ship",
+          "amount": 20000
+        }
+      ],
+      "total": {
+        "amount": 5742280,
+        "currency": "VND"
+      }
+    },
+    {
+      "id": "order-5409",
+      "publicId": "2626092900005409AB",
+      "placedAt": "2026-09-29T20:49:24+07:00",
+      "status": "COMPLETED",
+      "sellerId": "seller-4",
+      "sellerCode": "SL0001021",
+      "sellerName": "CÔNG TY TNHH TRÀ TÂN CƯƠNG XANH",
+      "customerId": "customer-334",
+      "customerName": "Trần Tuấn Huy",
+      "category": "Mẹ & Bé",
+      "region": "Tỉnh An Giang",
+      "itemCount": 3,
+      "payment": "COD",
+      "discounts": [
+        {
+          "label": "Giảm giá SP",
+          "amount": 125880
+        },
+        {
+          "label": "Voucher shop",
+          "amount": 94410
+        }
+      ],
+      "total": {
+        "amount": 2951710,
+        "currency": "VND"
+      }
+    },
+    {
+      "id": "order-5376",
+      "publicId": "2626092800005376AB",
+      "placedAt": "2026-09-28T10:29:25+07:00",
+      "status": "COMPLETED",
+      "sellerId": "seller-4",
+      "sellerCode": "SL0001021",
+      "sellerName": "CÔNG TY TNHH TRÀ TÂN CƯƠNG XANH",
+      "customerId": "customer-218",
+      "customerName": "Ngô Quốc Nguyên",
+      "category": "Mẹ & Bé",
+      "region": "Thành phố Hồ Chí Minh",
+      "itemCount": 3,
+      "payment": "COD",
+      "discounts": [
+        {
+          "label": "Giảm giá SP",
+          "amount": 166200
+        },
+        {
+          "label": "Voucher shop",
+          "amount": 124650
+        },
+        {
+          "label": "Voucher sàn",
+          "amount": 83100
+        }
+      ],
+      "total": {
+        "amount": 3806050,
+        "currency": "VND"
+      }
+    },
+    {
+      "id": "order-5357",
+      "publicId": "2626092700005357AB",
+      "placedAt": "2026-09-27T21:37:09+07:00",
+      "status": "COMPLETED",
+      "sellerId": "seller-4",
+      "sellerCode": "SL0001021",
+      "sellerName": "CÔNG TY TNHH TRÀ TÂN CƯƠNG XANH",
+      "customerId": "customer-182",
+      "customerName": "Bùi Ngọc Bảo",
+      "category": "Mẹ & Bé",
+      "region": "Tỉnh An Giang",
+      "itemCount": 2,
+      "payment": "COD",
+      "discounts": [
+        {
+          "label": "Giảm giá SP",
+          "amount": 110960
+        },
+        {
+          "label": "Voucher shop",
+          "amount": 83220
+        },
+        {
+          "label": "Voucher sàn",
+          "amount": 55480
+        },
+        {
+          "label": "Hỗ trợ ship",
+          "amount": 20000
+        }
+      ],
+      "total": {
+        "amount": 2529340,
+        "currency": "VND"
+      }
+    },
+    {
+      "id": "order-5282",
+      "publicId": "2626092300005282AB",
+      "placedAt": "2026-09-23T11:48:05+07:00",
+      "status": "PENDING",
+      "sellerId": "seller-4",
+      "sellerCode": "SL0001021",
+      "sellerName": "CÔNG TY TNHH TRÀ TÂN CƯƠNG XANH",
+      "customerId": "customer-74",
+      "customerName": "Trần Tuấn Huy",
+      "category": "Mẹ & Bé",
+      "region": "Thành phố Hồ Chí Minh",
+      "itemCount": 1,
+      "payment": "PREPAID",
+      "discounts": [
+        {
+          "label": "Giảm giá SP",
+          "amount": 28040
+        },
+        {
+          "label": "Voucher shop",
+          "amount": 21030
+        },
+        {
+          "label": "Hỗ trợ ship",
+          "amount": 20000
+        }
+      ],
+      "total": {
+        "amount": 656930,
+        "currency": "VND"
+      }
+    },
+    {
+      "id": "order-5231",
+      "publicId": "2626092000005231AB",
+      "placedAt": "2026-09-20T21:52:42+07:00",
+      "status": "COMPLETED",
+      "sellerId": "seller-4",
+      "sellerCode": "SL0001021",
+      "sellerName": "CÔNG TY TNHH TRÀ TÂN CƯƠNG XANH",
+      "customerId": "customer-299",
+      "customerName": "Đặng Đức Hải",
+      "category": "Mẹ & Bé",
+      "region": "Thành phố Đà Nẵng",
+      "itemCount": 2,
+      "payment": "COD",
+      "discounts": [
+        {
+          "label": "Giảm giá SP",
+          "amount": 134080
+        },
+        {
+          "label": "Voucher shop",
+          "amount": 100560
+        }
+      ],
+      "total": {
+        "amount": 3142360,
+        "currency": "VND"
+      }
+    },
+    {
+      "id": "order-5230",
+      "publicId": "2626092000005230AB",
+      "placedAt": "2026-09-20T18:27:16+07:00",
+      "status": "COMPLETED",
+      "sellerId": "seller-4",
+      "sellerCode": "SL0001021",
+      "sellerName": "CÔNG TY TNHH TRÀ TÂN CƯƠNG XANH",
+      "customerId": "customer-178",
+      "customerName": "Ngô Quốc Nguyên",
+      "category": "Mẹ & Bé",
+      "region": "Thành phố Hồ Chí Minh",
+      "itemCount": 2,
+      "payment": "PREPAID",
+      "discounts": [
+        {
+          "label": "Giảm giá SP",
+          "amount": 79040
+        },
+        {
+          "label": "Voucher shop",
+          "amount": 59280
+        },
+        {
+          "label": "Hỗ trợ ship",
+          "amount": 20000
+        }
+      ],
+      "total": {
+        "amount": 1842680,
+        "currency": "VND"
+      }
+    },
+    {
+      "id": "order-5196",
+      "publicId": "2626091800005196AB",
+      "placedAt": "2026-09-18T14:10:18+07:00",
+      "status": "CANCELLED",
+      "sellerId": "seller-4",
+      "sellerCode": "SL0001021",
+      "sellerName": "CÔNG TY TNHH TRÀ TÂN CƯƠNG XANH",
+      "customerId": "customer-340",
+      "customerName": "Phạm Bảo Thư",
+      "category": "Mẹ & Bé",
+      "region": "Thành phố Cần Thơ",
+      "itemCount": 1,
+      "payment": "COD",
+      "discounts": [
+        {
+          "label": "Thẻ Sành",
+          "amount": 31100
+        },
+        {
+          "label": "Voucher shop",
+          "amount": 18660
+        },
+        {
+          "label": "Hỗ trợ ship",
+          "amount": 20000
+        }
+      ],
+      "total": {
+        "amount": 552240,
+        "currency": "VND"
+      }
+    },
+    {
+      "id": "order-5169",
+      "publicId": "2626091700005169AB",
+      "placedAt": "2026-09-17T14:07:39+07:00",
+      "status": "COMPLETED",
+      "sellerId": "seller-4",
+      "sellerCode": "SL0001021",
+      "sellerName": "CÔNG TY TNHH TRÀ TÂN CƯƠNG XANH",
+      "customerId": "customer-214",
+      "customerName": "Trần Tuấn Huy",
+      "category": "Mẹ & Bé",
+      "region": "Tỉnh An Giang",
+      "itemCount": 4,
+      "payment": "COD",
+      "discounts": [
+        {
+          "label": "Giảm giá SP",
+          "amount": 164960
+        },
+        {
+          "label": "Voucher shop",
+          "amount": 123720
+        },
+        {
+          "label": "Hỗ trợ ship",
+          "amount": 20000
+        }
+      ],
+      "total": {
+        "amount": 3815320,
+        "currency": "VND"
+      }
+    },
+    {
+      "id": "order-5019",
+      "publicId": "2626090900005019AB",
+      "placedAt": "2026-09-09T21:48:20+07:00",
+      "status": "COMPLETED",
+      "sellerId": "seller-4",
+      "sellerCode": "SL0001021",
+      "sellerName": "CÔNG TY TNHH TRÀ TÂN CƯƠNG XANH",
+      "customerId": "customer-210",
+      "customerName": "Phạm Bảo Thư",
+      "category": "Mẹ & Bé",
+      "region": "Thành phố Hồ Chí Minh",
+      "itemCount": 1,
+      "payment": "COD",
+      "discounts": [
+        {
+          "label": "Thẻ Sành",
+          "amount": 18600
+        },
+        {
+          "label": "Voucher shop",
+          "amount": 11160
+        },
+        {
+          "label": "Hỗ trợ ship",
+          "amount": 20000
+        }
+      ],
+      "total": {
+        "amount": 347240,
+        "currency": "VND"
+      }
+    }
+  ],
+  "total": 15,
+  "page": 1,
+  "pageSize": 10
+}

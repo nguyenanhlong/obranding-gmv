@@ -1,0 +1,257 @@
+{
+  "period": {
+    "periodKey": "2026-09",
+    "periodLabel": "Tháng 9/2026",
+    "groupBy": "MONTH",
+    "startDate": "2026-09-01",
+    "endDate": "2026-09-30",
+    "status": "FINAL"
+  },
+  "kpis": {
+    "orders": {
+      "value": "557",
+      "previousValue": "527",
+      "growthPercent": 5.7
+    },
+    "gmv": {
+      "value": "1144986060",
+      "previousValue": "1071740760",
+      "growthPercent": 6.8
+    },
+    "buyers": {
+      "value": "291",
+      "previousValue": "264",
+      "growthPercent": 10.2
+    },
+    "activeSellers": {
+      "value": "60",
+      "previousValue": "60",
+      "growthPercent": 0
+    },
+    "aov": "2055630",
+    "newBuyers": "31",
+    "newBuyerRate": 10.7
+  },
+  "distribution": {
+    "unit": "DAY",
+    "buckets": [
+      {
+        "key": "2026-09-01",
+        "label": "Ngày 1",
+        "shortLabel": "1",
+        "orders": "15",
+        "isFuture": false
+      },
+      {
+        "key": "2026-09-02",
+        "label": "Ngày 2",
+        "shortLabel": "2",
+        "orders": "16",
+        "isFuture": false
+      },
+      {
+        "key": "2026-09-03",
+        "label": "Ngày 3",
+        "shortLabel": "3",
+        "orders": "15",
+        "isFuture": false
+      },
+      {
+        "key": "2026-09-04",
+        "label": "Ngày 4",
+        "shortLabel": "4",
+        "orders": "17",
+        "isFuture": false
+      },
+      {
+        "key": "2026-09-05",
+        "label": "Ngày 5",
+        "shortLabel": "5",
+        "orders": "24",
+        "isFuture": false
+      },
+      {
+        "key": "2026-09-06",
+        "label": "Ngày 6",
+        "shortLabel": "6",
+        "orders": "25",
+        "isFuture": false
+      },
+      {
+        "key": "2026-09-07",
+        "label": "Ngày 7",
+        "shortLabel": "7",
+        "orders": "16",
+        "isFuture": false
+      },
+      {
+        "key": "2026-09-08",
+        "label": "Ngày 8",
+        "shortLabel": "8",
+        "orders": "19",
+        "isFuture": false
+      },
+      {
+        "key": "2026-09-09",
+        "label": "Ngày 9",
+        "shortLabel": "9",
+        "orders": "16",
+        "isFuture": false
+      },
+      {
+        "key": "2026-09-10",
+        "label": "Ngày 10",
+        "shortLabel": "10",
+        "orders": "13",
+        "isFuture": false
+      },
+      {
+        "key": "2026-09-11",
+        "label": "Ngày 11",
+        "shortLabel": "11",
+        "orders": "18",
+        "isFuture": false
+      },
+      {
+        "key": "2026-09-12",
+        "label": "Ngày 12",
+        "shortLabel": "12",
+        "orders": "25",
+        "isFuture": false
+      },
+      {
+        "key": "2026-09-13",
+        "label": "Ngày 13",
+        "shortLabel": "13",
+        "orders": "25",
+        "isFuture": false
+      },
+      {
+        "key": "2026-09-14",
+        "label": "Ngày 14",
+        "shortLabel": "14",
+        "orders": "12",
+        "isFuture": false
+      },
+      {
+        "key": "2026-09-15",
+        "label": "Ngày 15",
+        "shortLabel": "15",
+        "orders": "18",
+        "isFuture": false
+      },
+      {
+        "key": "2026-09-16",
+        "label": "Ngày 16",
+        "shortLabel": "16",
+        "orders": "21",
+        "isFuture": false
+      },
+      {
+        "key": "2026-09-17",
+        "label": "Ngày 17",
+        "shortLabel": "17",
+        "orders": "19",
+        "isFuture": false
+      },
+      {
+        "key": "2026-09-18",
+        "label": "Ngày 18",
+        "shortLabel": "18",
+        "orders": "18",
+        "isFuture": false
+      },
+      {
+        "key": "2026-09-19",
+        "label": "Ngày 19",
+        "shortLabel": "19",
+        "orders": "20",
+        "isFuture": false
+      },
+      {
+        "key": "2026-09-20",
+        "label": "Ngày 20",
+        "shortLabel": "20",
+        "orders": "21",
+        "isFuture": false
+      },
+      {
+        "key": "2026-09-21",
+        "label": "Ngày 21",
+        "shortLabel": "21",
+        "orders": "16",
+        "isFuture": false
+      },
+      {
+        "key": "2026-09-22",
+        "label": "Ngày 22",
+        "shortLabel": "22",
+        "orders": "15",
+        "isFuture": false
+      },
+      {
+        "key": "2026-09-23",
+        "label": "Ngày 23",
+        "shortLabel": "23",
+        "orders": "17",
+        "isFuture": false
+      },
+      {
+        "key": "2026-09-24",
+        "label": "Ngày 24",
+        "shortLabel": "24",
+        "orders": "21",
+        "isFuture": false
+      },
+      {
+        "key": "2026-09-25",
+        "label": "Ngày 25",
+        "shortLabel": "25",
+        "orders": "20",
+        "isFuture": false
+      },
+      {
+        "key": "2026-09-26",
+        "label": "Ngày 26",
+        "shortLabel": "26",
+        "orders": "22",
+        "isFuture": false
+      },
+      {
+        "key": "2026-09-27",
+        "label": "Ngày 27",
+        "shortLabel": "27",
+        "orders": "17",
+        "isFuture": false
+      },
+      {
+        "key": "2026-09-28",
+        "label": "Ngày 28",
+        "shortLabel": "28",
+        "orders": "22",
+        "isFuture": false
+      },
+      {
+        "key": "2026-09-29",
+        "label": "Ngày 29",
+        "shortLabel": "29",
+        "orders": "17",
+        "isFuture": false
+      },
+      {
+        "key": "2026-09-30",
+        "label": "Ngày 30",
+        "shortLabel": "30",
+        "orders": "17",
+        "isFuture": false
+      }
+    ],
+    "peak": {
+      "key": "2026-09-06",
+      "label": "Ngày 6",
+      "shortLabel": "6",
+      "orders": "25",
+      "isFuture": false
+    }
+  }
+}
