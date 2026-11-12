@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { parseFilters, parsePageSize, parsePositiveInt } from '@/platform/reports/filters';
 import { filtersToQueryString, entityRangeError } from '@/platform/reports/filters';
+import { ReportApiError } from '@/platform/reports/http';
 import { formatDate } from '@/platform/format/date';
 import { formatCompactMoney, formatCount } from '@/platform/format/money';
 import { formatPercent } from '@/platform/format/percent';
@@ -48,10 +49,24 @@ export default async function SellerPage({ params, searchParams }: PageProps) {
   const q = typeof sp.q === 'string' && sp.q ? sp.q : undefined;
   const status = typeof sp.status === 'string' && sp.status ? sp.status : undefined;
 
-  const summary = await getSellerSummary(sellerId, filters);
-  if (!summary) notFound();
-
-  const orders = await listSellerOrders(sellerId, filters, { page, pageSize, bucket, q, status });
+  let summary: Awaited<ReturnType<typeof getSellerSummary>> = null;
+  let orders: Awaited<ReturnType<typeof listSellerOrders>>;
+  try {
+    summary = await getSellerSummary(sellerId, filters);
+    if (!summary) notFound();
+    orders = await listSellerOrders(sellerId, filters, { page, pageSize, bucket, q, status });
+  } catch (error) {
+    if (error instanceof ReportApiError) {
+      return (
+        <div className="space-y-5">
+          <h1 className="text-xl font-semibold text-slate-900">Chi tiết nhà bán</h1>
+          <ReportFilter filters={filters} />
+          <EmptyState title="Không tải được dữ liệu nhà bán" description={error.userMessage} />
+        </div>
+      );
+    }
+    throw error;
+  }
 
   const qs = filtersToQueryString(filters);
   const totalPages = Math.max(1, Math.ceil(orders.total / pageSize));

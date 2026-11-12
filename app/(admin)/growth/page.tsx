@@ -1,14 +1,13 @@
-import { parseFilters, parsePositiveInt } from '@/platform/reports/filters';
+import { parseFilters } from '@/platform/reports/filters';
 import { clampToToday, filtersToQueryString, growthRangeError } from '@/platform/reports/filters';
+import { ReportApiError } from '@/platform/reports/http';
 import { GROUP_BY_LABEL } from '@/platform/reports/labels';
 import { ChartFrame } from '@/platform/ui/chart-frame';
 import { EmptyState } from '@/platform/ui/empty-state';
 import { ReportFilter } from '@/platform/ui/report-filter';
 import { GrowthKpiRow } from '@/features/growth-overview/components/growth-kpis';
-import { GrowthLine } from '@/features/growth-overview/components/growth-line';
+import { GrowthHub } from '@/features/growth-overview/components/growth-hub';
 import { PeriodTable } from '@/features/growth-overview/components/period-table';
-import { TopBuyersPanel } from '@/features/growth-overview/components/top-buyers';
-import { TopSellersTable } from '@/features/growth-overview/components/top-sellers-table';
 import { kpisOf } from '@/features/growth-overview/contracts';
 import { getGrowthReport } from '@/features/growth-overview/server/queries';
 
@@ -21,10 +20,18 @@ type PageProps = {
 export default async function GrowthPage({ searchParams }: PageProps) {
   const sp = await searchParams;
   const filters = parseFilters(sp);
-  const topN = parsePositiveInt(sp.topN, 3, 10);
   const rangeError = growthRangeError(filters);
 
-  const report = rangeError ? null : await getGrowthReport(filters);
+  let report: Awaited<ReturnType<typeof getGrowthReport>> | null = null;
+  let apiError: string | null = null;
+  if (!rangeError) {
+    try {
+      report = await getGrowthReport(filters);
+    } catch (error) {
+      if (error instanceof ReportApiError) apiError = error.userMessage;
+      else throw error;
+    }
+  }
   const selection = report ? kpisOf(report) : null;
   const groupBy = report?.meta.groupBy ?? filters.period.toUpperCase();
   const qs = filtersToQueryString(filters);
@@ -58,10 +65,10 @@ export default async function GrowthPage({ searchParams }: PageProps) {
 
       <ReportFilter filters={filters} />
 
-      {rangeError || !report ? (
+      {rangeError || apiError || !report ? (
         <EmptyState
-          title="Khoảng thời gian vượt giới hạn của API"
-          description={rangeError ?? 'Không tải được dữ liệu.'}
+          title={apiError ? 'Không tải được báo cáo tăng trưởng' : 'Khoảng thời gian vượt giới hạn của API'}
+          description={apiError ?? rangeError ?? 'Không tải được dữ liệu.'}
         />
       ) : (
         <>
@@ -69,42 +76,15 @@ export default async function GrowthPage({ searchParams }: PageProps) {
 
           <ChartFrame
             title="Tăng trưởng theo kỳ"
-            description={
-              selection?.approximate
-                ? 'Kỳ đang diễn ra · số liệu tạm tính, % so với đoạn tương ứng của kỳ trước'
-                : 'Số liệu theo kỳ đã chốt gần nhất'
-            }
+            description="Bấm một mốc để ghim kỳ: 4 chỉ số và 3 danh sách top cập nhật theo kỳ đó"
           >
-            <GrowthLine periods={report.periods} groupBy={groupBy} back={back} />
-          </ChartFrame>
-
-          <ChartFrame
-            title={`Top ${topN} nhà bán theo số đơn`}
-            description={selection ? selection.period.label : undefined}
-            actions={
-              <div className="flex gap-1">
-                {[3, 5, 10].map((n) => (
-                  <a
-                    key={n}
-                    href={`/growth?${qs}&topN=${n}`}
-                    className={`rounded px-2 py-1 text-xs ${
-                      n === topN ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-600'
-                    }`}
-                  >
-                    Top {n}
-                  </a>
-                ))}
-              </div>
-            }
-          >
-            <TopSellersTable period={selection?.period ?? null} topN={topN} groupBy={groupBy} range={linkRange} />
-          </ChartFrame>
-
-          <ChartFrame
-            title="Top user mua hàng"
-            description="API 1 trả sẵn 10 dòng mỗi danh sách · API 3 (danh sách đầy đủ) chưa có hợp đồng"
-          >
-            <TopBuyersPanel period={selection?.period ?? null} groupBy={groupBy} range={linkRange} />
+            <GrowthHub
+              periods={report.periods}
+              groupBy={groupBy}
+              back={back}
+              linkRange={linkRange}
+              initialKey={selection?.period.key ?? report.periods[report.periods.length - 1]?.key ?? ''}
+            />
           </ChartFrame>
 
           <ChartFrame title="Số liệu theo kỳ" description="Kỳ mới nhất ở trên cùng">

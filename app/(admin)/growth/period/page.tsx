@@ -6,11 +6,13 @@ import {
   parsePositiveInt,
 } from '@/platform/reports/filters';
 import { filtersToQueryString, periodRangeError } from '@/platform/reports/filters';
+import { ReportApiError } from '@/platform/reports/http';
 import { formatDate } from '@/platform/format/date';
 import { todayIn } from '@/platform/time';
 import { formatCompactMoney, formatCount } from '@/platform/format/money';
 import { formatPercent } from '@/platform/format/percent';
-import type { Delta } from '@/contracts/base';
+import type { Delta, Page } from '@/contracts/base';
+import type { GrowthOrderRow } from '@/platform/reports/orders/contracts';
 import { ChartFrame } from '@/platform/ui/chart-frame';
 import { EmptyState } from '@/platform/ui/empty-state';
 import { KpiCard } from '@/platform/ui/kpi-card';
@@ -34,6 +36,7 @@ import {
   GROUP_BY_LABEL,
   UNIT_TITLE,
   type PeriodMetric,
+  type PeriodSummary,
 } from '@/features/period-detail/contracts';
 import {
   getPeriodSummary,
@@ -89,29 +92,46 @@ export default async function PeriodPage({ searchParams }: PageProps) {
   const sortBy: BuyerSortBy = sp.sortBy === 'TOTAL_VALUE' ? 'TOTAL_VALUE' : 'ORDER_COUNT';
 
   // Badge của tab luôn là số của lần tải đầu q rỗng (API 3/4), API 2 orders lấy từ API 6.
-  const [summary, orders, buyerBadge, sellerBadge] = await Promise.all([
-    getPeriodSummary(filters),
-    tab === 'orders'
-      ? listPeriodOrders(filters, { page, pageSize, q, status })
-      : Promise.resolve(null),
-    listPeriodBuyers(filters, { page: 1, pageSize: 10, q: '', sortBy: 'ORDER_COUNT' }),
-    listPeriodSellers(filters, { page: 1, pageSize: 10, q: '' }),
-  ]);
-
+  let summary: PeriodSummary;
+  let orders: Page<GrowthOrderRow> | null = null;
+  let buyerBadge: PeriodBuyerPage;
+  let sellerBadge: PeriodSellerPage;
   let buyers: PeriodBuyerPage | null = null;
-  if (tab === 'buyers') {
-    const needReload = Boolean(q) || sortBy !== 'ORDER_COUNT' || page !== 1 || pageSize !== 10;
-    buyers = needReload
-      ? await listPeriodBuyers(filters, { page, pageSize, q, sortBy })
-      : buyerBadge;
-  }
-
   let sellers: PeriodSellerPage | null = null;
-  if (tab === 'sellers') {
-    const needReload = Boolean(q) || page !== 1 || pageSize !== 10;
-    sellers = needReload
-      ? await listPeriodSellers(filters, { page, pageSize, q })
-      : sellerBadge;
+
+  try {
+    [summary, orders, buyerBadge, sellerBadge] = await Promise.all([
+      getPeriodSummary(filters),
+      tab === 'orders'
+        ? listPeriodOrders(filters, { page, pageSize, q, status })
+        : Promise.resolve(null),
+      listPeriodBuyers(filters, { page: 1, pageSize: 10, q: '', sortBy: 'ORDER_COUNT' }),
+      listPeriodSellers(filters, { page: 1, pageSize: 10, q: '' }),
+    ]);
+
+    if (tab === 'buyers') {
+      const needReload = Boolean(q) || sortBy !== 'ORDER_COUNT' || page !== 1 || pageSize !== 10;
+      buyers = needReload
+        ? await listPeriodBuyers(filters, { page, pageSize, q, sortBy })
+        : buyerBadge;
+    }
+
+    if (tab === 'sellers') {
+      const needReload = Boolean(q) || page !== 1 || pageSize !== 10;
+      sellers = needReload
+        ? await listPeriodSellers(filters, { page, pageSize, q })
+        : sellerBadge;
+    }
+  } catch (error) {
+    if (error instanceof ReportApiError) {
+      return (
+        <div className="space-y-5">
+          <h1 className="text-xl font-semibold text-slate-900">Chi tiết kỳ</h1>
+          <EmptyState title="Không tải được dữ liệu kỳ" description={error.userMessage} />
+        </div>
+      );
+    }
+    throw error;
   }
 
   const { period, kpis, distribution } = summary;

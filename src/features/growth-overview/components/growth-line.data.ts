@@ -1,3 +1,4 @@
+import { formatSignedPercent } from '@/platform/format/percent';
 import type { GrowthPeriod, GrowthMetricKey } from '../contracts';
 
 export const METRIC_LABEL: Record<GrowthMetricKey, string> = {
@@ -12,6 +13,8 @@ export type GrowthLineDatum = {
   axisLabel: string;
   value: number;
   growthPercent: number | null;
+  /** nhãn % dưới mốc, rỗng khi kỳ trước = 0 */
+  growthLabel: string;
   status: GrowthPeriod['status'];
   startDate: string;
   endDate: string;
@@ -51,6 +54,8 @@ export function toGrowthLineData(
     axisLabel: axisLabelOf(p.key, groupBy),
     value: p[metric].value,
     growthPercent: p[metric].growthPercent,
+    growthLabel:
+      p[metric].growthPercent === null ? '' : formatSignedPercent(p[metric].growthPercent),
     status: p.status,
     startDate: p.startDate,
     endDate: p.endDate,

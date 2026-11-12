@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import {
   CartesianGrid,
+  LabelList,
   Line,
   LineChart,
   ResponsiveContainer,
@@ -23,22 +24,42 @@ type GrowthLineProps = {
   groupBy: string;
   /** bộ lọc gốc để nút quay lại giữ đúng filter */
   back?: Back;
+  /** kỳ đang ghim trên panel */
+  selectedKey?: string;
+  /** khi có, bấm mốc chỉ đổi kỳ đang chọn thay vì điều hướng */
+  onSelect?: (period: GrowthPeriod) => void;
   height?: number;
 };
 
 const METRICS: GrowthMetricKey[] = ['orders', 'buyers', 'gmv'];
 
+function dotColor(status: GrowthLineDatum['status']): string {
+  return status === 'PROVISIONAL' ? '#f59e0b' : '#4f46e5';
+}
+
 /**
  * Biểu đồ đường theo ô "Chỉ số tăng trưởng". Đổi chỉ số bằng state client,
  * không gọi lại API (hợp đồng API 1 mục 3.5).
  */
-export function GrowthLine({ periods, groupBy, back, height = 320 }: GrowthLineProps) {
+export function GrowthLine({
+  periods,
+  groupBy,
+  back,
+  selectedKey,
+  onSelect,
+  height = 320,
+}: GrowthLineProps) {
   const [metric, setMetric] = useState<GrowthMetricKey>('orders');
   const router = useRouter();
   const data = toGrowthLineData(periods, metric, groupBy);
   const isMoney = metric === 'gmv';
 
   const openPeriod = (point: GrowthLineDatum) => {
+    const period = periods.find((p) => p.key === point.key);
+    if (period && onSelect) {
+      onSelect(period);
+      return;
+    }
     const qs = new URLSearchParams({
       from: point.startDate,
       to: point.endDate,
@@ -68,11 +89,15 @@ export function GrowthLine({ periods, groupBy, back, height = 320 }: GrowthLineP
             {METRIC_LABEL[m]}
           </button>
         ))}
+        <span className="ml-2 flex items-center gap-1 text-[11px] text-slate-400">
+          <span className="inline-block size-2 rounded-full bg-indigo-600" /> đã chốt
+          <span className="ml-1 inline-block size-2 rounded-full bg-amber-500" /> tạm tính
+        </span>
       </div>
 
       <div style={{ height }} className="w-full">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data} margin={{ top: 8, right: 12, bottom: 0, left: 0 }}>
+          <LineChart data={data} margin={{ top: 8, right: 12, bottom: 18, left: 0 }}>
             <CartesianGrid stroke="#e2e8f0" strokeDasharray="3 3" vertical={false} />
             <XAxis
               dataKey="axisLabel"
@@ -92,7 +117,7 @@ export function GrowthLine({ periods, groupBy, back, height = 320 }: GrowthLineP
             />
             <Tooltip
               contentStyle={{ borderRadius: 8, border: '1px solid #e2e8f0', fontSize: 12 }}
-              formatter={(value, name, item) => {
+              formatter={(value, _name, item) => {
                 const point = item?.payload as { growthPercent?: number | null; status?: string };
                 const text = isMoney
                   ? formatCompactMoney(Number(value))
@@ -110,16 +135,43 @@ export function GrowthLine({ periods, groupBy, back, height = 320 }: GrowthLineP
               dataKey="value"
               stroke="#4f46e5"
               strokeWidth={2}
-              dot={{ r: 2, strokeWidth: 0, fill: '#4f46e5' }}
+              dot={(props) => {
+                const { cx, cy, payload, index } = props as {
+                  cx: number;
+                  cy: number;
+                  payload: GrowthLineDatum;
+                  index: number;
+                };
+                const active = payload.key === selectedKey;
+                return (
+                  <circle
+                    key={`dot-${payload.key}-${index}`}
+                    cx={cx}
+                    cy={cy}
+                    r={active ? 4.5 : 2.5}
+                    fill={dotColor(payload.status)}
+                    stroke={active ? '#eef2ff' : 'none'}
+                    strokeWidth={active ? 3 : 0}
+                  />
+                );
+              }}
               activeDot={{ r: 5, cursor: 'pointer' }}
               onClick={(entry) => openPeriod(entry as unknown as GrowthLineDatum)}
-            />
+            >
+              <LabelList
+                dataKey="growthLabel"
+                position="bottom"
+                offset={8}
+                className="fill-slate-400"
+                fontSize={10}
+              />
+            </Line>
           </LineChart>
         </ResponsiveContainer>
       </div>
 
       <p className="text-xs text-slate-500">
-        Rê chuột để xem số liệu · bấm một mốc để mở chi tiết kỳ
+        Rê chuột để xem số liệu · bấm một mốc để ghim kỳ vào panel bên dưới
       </p>
     </div>
   );
