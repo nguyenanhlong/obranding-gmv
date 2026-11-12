@@ -1,38 +1,87 @@
-import type { Money, OrderRow, Page, Period } from '@/contracts/base';
+import type { OrderRow, Page } from '@/contracts/base';
 import type { ReportFilters } from '@/platform/reports/filters';
-import type { Delta } from '@/contracts/base';
 
-export type KpiValue = { value: number; delta: Delta };
+export type PeriodStatus = 'FINAL' | 'PROVISIONAL';
 
-export type PeriodKpis = {
-  orders: KpiValue;
-  gmv: KpiValue & { money: Money };
-  buyers: KpiValue;
-  sellers: KpiValue;
-  aov: KpiValue & { money: Money };
-  /** 0..1 */
-  newBuyerRate: number;
+export type PeriodMetric = {
+  value: number;
+  previousValue: number | null;
+  /** 0..1, null khi kỳ trước = 0 */
+  growthPercent: number | null;
 };
 
-export type DailyBucket = { date: string; orders: number };
-
-export type PeriodDetail = {
-  range: { from: string; to: string };
-  period: Period;
-  kpis: PeriodKpis;
-  daily: DailyBucket[];
-  peak: DailyBucket | null;
-  orders: Page<OrderRow>;
+export type PeriodInfo = {
+  key: string;
+  label: string;
+  /** DAY | WEEK | MONTH | QUARTER | YEAR */
+  groupBy: string;
+  startDate: string;
+  endDate: string;
+  status: PeriodStatus;
 };
 
-export type PeriodQuery = {
+export type DistributionUnit = 'HOUR' | 'WEEKDAY' | 'DAY' | 'WEEK' | 'MONTH';
+
+export type DistributionBucket = {
+  key: string;
+  label: string;
+  shortLabel: string;
+  orders: number;
+  /** mốc chưa tới (chỉ có ở kỳ PROVISIONAL) */
+  isFuture: boolean;
+};
+
+export type PeriodSummary = {
+  period: PeriodInfo;
+  kpis: {
+    orders: PeriodMetric;
+    gmv: PeriodMetric;
+    buyers: PeriodMetric;
+    activeSellers: PeriodMetric;
+    /** VND */
+    aov: number;
+    newBuyers: number;
+    /** 0..1 */
+    newBuyerRate: number;
+  };
+  distribution: {
+    unit: DistributionUnit;
+    buckets: DistributionBucket[];
+    peak: DistributionBucket | null;
+  };
+};
+
+export type PeriodOrderQuery = {
   page: number;
   pageSize: number;
   q?: string;
   status?: string;
 };
 
-/** Khớp endpoint GET /admin/order-reports/growth/period (M3) */
+/**
+ * Nguồn dữ liệu của M2, tách đôi theo hợp đồng:
+ * - getSummary  → API 6 (/growth/period-summary)
+ * - listOrders  → API 2 (chưa có hợp đồng, hiện là mock)
+ */
 export interface PeriodSource {
-  getDetail(f: ReportFilters, q: PeriodQuery): Promise<PeriodDetail>;
+  getSummary(f: ReportFilters): Promise<PeriodSummary>;
+  listOrders(f: ReportFilters, q: PeriodOrderQuery): Promise<Page<OrderRow>>;
 }
+
+/** Nhãn đơn vị kỳ của BE → tiếng Việt, dùng cho dòng "Chu kỳ …" */
+export const GROUP_BY_LABEL: Record<string, string> = {
+  DAY: 'ngày',
+  WEEK: 'tuần',
+  MONTH: 'tháng',
+  QUARTER: 'quý',
+  YEAR: 'năm',
+};
+
+/** Tiêu đề biểu đồ theo unit của API 6 */
+export const UNIT_TITLE: Record<DistributionUnit, string> = {
+  HOUR: 'Phân bổ đơn hàng theo giờ',
+  WEEKDAY: 'Phân bổ đơn hàng theo ngày trong tuần',
+  DAY: 'Phân bổ đơn hàng theo ngày',
+  WEEK: 'Phân bổ đơn hàng theo tuần',
+  MONTH: 'Phân bổ đơn hàng theo tháng',
+};

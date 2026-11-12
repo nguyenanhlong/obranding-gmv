@@ -157,3 +157,31 @@ export function assertEntityRange(f: ReportFilters): void {
   const span = diffDays(f.from, f.to);
   if (span > 1096) throw new FilterError('Khoảng thời gian tối đa 1096 ngày');
 }
+
+/** Dùng ở page: trả message thay vì ném lỗi, để hiển thị EmptyState thay vì error boundary. */
+export function growthRangeError(f: ReportFilters): string | null {
+  try {
+    assertGrowthRange(f);
+    return null;
+  } catch (error) {
+    return error instanceof FilterError ? error.message : 'Khoảng thời gian không hợp lệ';
+  }
+}
+
+export function periodRangeError(f: ReportFilters): string | null {
+  try {
+    assertPeriodRange(f);
+    return null;
+  } catch (error) {
+    return error instanceof FilterError ? error.message : 'Khoảng thời gian không hợp lệ';
+  }
+}
+
+export function entityRangeError(f: ReportFilters): string | null {
+  try {
+    assertEntityRange(f);
+    return null;
+  } catch (error) {
+    return error instanceof FilterError ? error.message : 'Khoảng thời gian không hợp lệ';
+  }
+}

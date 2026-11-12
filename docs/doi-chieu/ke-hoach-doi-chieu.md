@@ -53,17 +53,17 @@ Ghi chú phạm vi:
 | 25 | FE-B (Long) | API 2 | Bảng đơn ở Chi tiết kỳ | Trung bình | — | Chờ hợp đồng | `period-detail; platform/ui/order-table.tsx` |
 | 26 | FE-B (Long) | API 3, API 4 | Tab User mua / Nhà bán ở Chi tiết kỳ | Thấp | — | Chờ hợp đồng | `period-detail` |
 | 27 | FE-B (Long) | API 5 | Chi tiết đơn hàng | Thấp | — | Chờ hợp đồng | `src/features/order-detail/` |
-| 28 | FE-B (Long) | API 6 | Endpoint | Cao | P3 | Làm | `src/features/period-detail/server/period.http.ts (mới), source.ts` |
-| 29 | FE-B (Long) | API 6 | Tham số | Cao | P3 | Làm | `period.http.ts; app/(admin)/growth/period/page.tsx` |
-| 30 | FE-B (Long) | API 6 | Phần đầu trang | Trung bình | P3 | Làm | `app/(admin)/growth/period/page.tsx` |
-| 31 | FE-B (Long) | API 6 | KPI so với kỳ trước | Trung bình | P3 | Làm | `period.mock.ts; mapper; page` |
-| 32 | FE-B (Long) | API 6 | Định nghĩa khách mới | Trung bình | P3 | Làm | `src/platform/mock/aggregate.ts (newBuyerRate); period.mock.ts` |
-| 33 | FE-B (Long) | API 6 | Biểu đồ phân bổ | Cao | P3 | Làm | `contracts.ts; components/daily-bars.tsx` |
-| 34 | FE-B (Long) | API 6 | Dòng "Cao nhất" | Thấp | P3 | Làm | `components/daily-bars.tsx` |
+| 28 | FE-B (Long) | API 6 | Endpoint | Cao | P3 | Xong | `src/features/period-detail/server/period.http.ts (mới), source.ts` |
+| 29 | FE-B (Long) | API 6 | Tham số | Cao | P3 | Xong | `period.http.ts; app/(admin)/growth/period/page.tsx` |
+| 30 | FE-B (Long) | API 6 | Phần đầu trang | Trung bình | P3 | Xong | `app/(admin)/growth/period/page.tsx` |
+| 31 | FE-B (Long) | API 6 | KPI so với kỳ trước | Trung bình | P3 | Xong | `period.mock.ts; mapper; page` |
+| 32 | FE-B (Long) | API 6 | Định nghĩa khách mới | Trung bình | P3 | Xong | `src/platform/mock/aggregate.ts (newBuyerRate); period.mock.ts` |
+| 33 | FE-B (Long) | API 6 | Biểu đồ phân bổ | Cao | P3 | Xong | `contracts.ts; components/daily-bars.tsx` |
+| 34 | FE-B (Long) | API 6 | Dòng "Cao nhất" | Thấp | P3 | Xong | `components/daily-bars.tsx` |
 | 35 | FE-B (Long) | API 6 | 3 tab Đơn hàng / User mua / Nhà bán | Trung bình | P3 | Làm một phần | `app/(admin)/growth/period/page.tsx` |
-| 36 | FE-B (Long) | API 6 | Link sang Chi tiết nhà bán / user từ tab | Trung bình | P3 | Làm | `page tab Nhà bán / User` |
-| 37 | FE-B (Long) | API 6 | Nhận link từ trang tổng quan | Cao | P3 | Làm | `page.tsx` |
-| 38 | FE-B (Long) | API 6 | Lỗi gõ class | Thấp | P3 | Làm | `app/(admin)/growth/period/page.tsx` |
+| 36 | FE-B (Long) | API 6 | Link sang Chi tiết nhà bán / user từ tab | Trung bình | P3 | Xong | `page tab Nhà bán / User` |
+| 37 | FE-B (Long) | API 6 | Nhận link từ trang tổng quan | Cao | P3 | Xong | `page.tsx` |
+| 38 | FE-B (Long) | API 6 | Lỗi gõ class | Thấp | P3 | Xong | `app/(admin)/growth/period/page.tsx` |
 | 39 | FE-C (Phúc) | API 7 | Endpoint | Cao | P4 | Làm | `src/features/seller-detail/server/seller.http.ts (mới), source.ts` |
 | 40 | FE-C (Phúc) | API 7 | Thông tin nhà bán | Thấp | P4 | Làm | `contracts.ts; page` |
 | 41 | FE-C (Phúc) | API 7 | Tỉ lệ hoàn thành | Trung bình | P4 | Làm | `seller.mock.ts` |

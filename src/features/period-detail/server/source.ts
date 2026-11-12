@@ -1,11 +1,17 @@
 import 'server-only';
-import { pickSource } from '@/platform/reports/source';
-import type { PeriodSource } from '../contracts';
+import type { ReportFilters } from '@/platform/reports/filters';
+import { isMockMode } from '@/platform/reports/source';
+import type { PeriodOrderQuery, PeriodSource } from '../contracts';
 import { periodMockSource } from './period.mock';
+import { periodHttpSource } from './period.http';
 
 /**
- * TODO (FE-B): khi BE bàn giao, thêm `period.http.ts` implement `PeriodSource`
- * bằng `reportFetch('/admin/order-reports/growth/period', ...)` rồi đổi ở đây.
- * Không sửa page/component.
+ * M2 dùng 2 nguồn:
+ * - summary: API 6 (mock hoặc http theo DATA_SOURCE)
+ * - orders:  API 2 chưa có hợp đồng → luôn mock, TODO thay khi BE xong
  */
-export const periodSource: PeriodSource = pickSource(periodMockSource, periodMockSource);
+export const periodSource: PeriodSource = {
+  getSummary: (f: ReportFilters) =>
+    isMockMode() ? periodMockSource.getSummary(f) : periodHttpSource.getSummary(f),
+  listOrders: (f: ReportFilters, q: PeriodOrderQuery) => periodMockSource.listOrders(f, q),
+};

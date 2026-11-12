@@ -1,7 +1,7 @@
 import { csvResponse, toCsv } from '@/platform/reports/csv';
 import { rejectUnsupportedFormat } from '@/platform/reports/export';
 import { parseFilters, searchParamsToRecord } from '@/platform/reports/filters';
-import { getPeriodDetail } from '@/features/period-detail/server/queries';
+import { listPeriodOrders } from '@/features/period-detail/server/queries';
 
 export const dynamic = 'force-dynamic';
 
@@ -13,9 +13,10 @@ export async function GET(req: Request) {
   if (blocked) return blocked;
 
   const filters = parseFilters(searchParamsToRecord(url.searchParams));
-  const detail = await getPeriodDetail(filters, { page: 1, pageSize: MAX_EXPORT_ROWS });
+  // TODO API 2: danh sách đơn vẫn lấy từ mock; đổi sang API 2 khi có hợp đồng.
+  const detail = await listPeriodOrders(filters, { page: 1, pageSize: MAX_EXPORT_ROWS });
 
-  const rows = detail.orders.items.map((o) => ({
+  const rows = detail.items.map((o) => ({
     ma_don: o.publicId,
     ngay_dat: o.placedAt,
     ma_nha_ban: o.sellerCode,

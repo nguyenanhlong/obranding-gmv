@@ -20,6 +20,7 @@ import type { SellerSource } from '@/features/seller-detail/contracts';
 import type { OrderSource } from '@/features/order-detail/contracts';
 import { DATASET_FROM, DATASET_TO, allOrders } from '@/platform/mock/dataset';
 import { buildRawGrowthReport } from '@/features/growth-overview/server/growth.raw';
+import { buildRawPeriodSummary } from '@/features/period-detail/server/period.raw';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const OUT = join(ROOT, 'docs', 'handoff', 'be-mock-all');
@@ -36,7 +37,7 @@ const FILTERS_GROWTH: ReportFilters = {
 const FILTERS_PERIOD: ReportFilters = {
   from: '2026-09-01',
   to: '2026-09-30',
-  period: 'day',
+  period: 'month',
   tz: 'Asia/Ho_Chi_Minh',
 };
 
@@ -55,6 +56,9 @@ const COPY_FILES = [
   // M2
   'src/features/period-detail/contracts.ts',
   'src/features/period-detail/server/period.mock.ts',
+  'src/features/period-detail/server/period.raw.ts',
+  'src/features/period-detail/server/period.schema.ts',
+  'src/features/period-detail/server/period.mapper.ts',
   // M4
   'src/features/buyer-detail/contracts.ts',
   'src/features/buyer-detail/server/buyer.mock.ts',
@@ -143,11 +147,14 @@ async function main(): Promise<void> {
   // (số dạng chuỗi, % đã ×100). View model của FE đi qua mapper riêng.
   writeJson('samples/m1-growth-report.json', buildRawGrowthReport(FILTERS_GROWTH));
 
-  // ── M2: chi tiết kỳ
-  const periodDetail = await period.getDetail(FILTERS_PERIOD, { page: 1, pageSize: 10 });
-  writeJson('samples/m2-period-detail.json', {
-    ...periodDetail,
-    orders: { ...periodDetail.orders, items: periodDetail.orders.items.map(toOrderRow) },
+  // ── M2: chi tiết kỳ — summary xuất THÔ đúng hợp đồng API 6, danh sách đơn là mock (API 2)
+  const periodSummary = buildRawPeriodSummary(FILTERS_PERIOD);
+  writeJson('samples/m2-period-summary.json', periodSummary);
+
+  const periodOrders = await period.listOrders(FILTERS_PERIOD, { page: 1, pageSize: 10 });
+  writeJson('samples/m2-orders-page.json', {
+    ...periodOrders,
+    items: periodOrders.items.map(toOrderRow),
   });
 
   // chọn user và seller có nhiều đơn nhất trong kỳ để sample có dữ liệu phong phú
@@ -187,7 +194,7 @@ async function main(): Promise<void> {
   }
 
   // ── M6: chi tiết đơn
-  const firstOrder = periodDetail.orders.items[0];
+  const firstOrder = periodOrders.items[0];
   if (firstOrder) {
     const orderDetail = await order.get(firstOrder.publicId);
     if (orderDetail) {

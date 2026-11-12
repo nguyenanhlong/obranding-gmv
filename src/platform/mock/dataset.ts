@@ -115,7 +115,9 @@ function buildOrders(): MockOrder[] {
     for (let k = 0; k < count; k += 1) {
       seq += 1;
       const seller = sellers[Math.floor(rand() * sellers.length)] ?? sellers[0]!;
-      const customer = customers[Math.floor(rand() * customers.length)] ?? customers[0]!;
+      // Bể khách nở dần theo thời gian để tỉ lệ khách mới có ý nghĩa
+      const poolSize = Math.min(customers.length, 40 + Math.floor(dayIndex * 1.05));
+      const customer = customers[Math.floor(rand() * poolSize)] ?? customers[0]!;
 
       const r = rand();
       const status: OrderStatus =
