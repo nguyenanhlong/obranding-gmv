@@ -1,32 +1,74 @@
-import type { Money, OrderRow, Page, Period } from '@/contracts/base';
+import type { OrderRow, Page } from '@/contracts/base';
 import type { ReportFilters } from '@/platform/reports/filters';
+import type { SeriesUnit } from '@/platform/reports/series';
+
+export type SellerInfo = {
+  id: string;
+  code: string;
+  name: string;
+  /** danh mục chính trong khoảng, null khi không có đơn */
+  mainCategory: string | null;
+};
 
 export type SellerKpis = {
   orders: number;
-  gmv: Money;
+  /** VND */
+  gmv: number;
   buyers: number;
-  aov: Money;
+  /** VND */
+  aov: number;
+  completedOrders: number;
   /** 0..1 */
   completionRate: number;
-  /** số đơn / số user tham gia mua */
-  ordersPerUser: number;
+  /** 2 chữ số thập phân */
+  ordersPerBuyer: number;
 };
 
-export type SellerDetail = {
-  seller: { id: string; code: string; name: string; category: string };
-  range: { from: string; to: string };
-  period: Period;
+export type SellerSeriesBucket = {
+  key: string;
+  label: string;
+  shortLabel: string;
+  startDate: string;
+  endDate: string;
+  orders: number;
+  gmv: number;
+  buyers: number;
+};
+
+export type SellerSummary = {
+  seller: SellerInfo;
   kpis: SellerKpis;
-  monthly: { bucket: string; orders: number; gmv: number; buyers: number }[];
-  orders: Page<OrderRow>;
+  series: { unit: SeriesUnit; buckets: SellerSeriesBucket[] };
 };
 
-/** Khớp endpoint GET /admin/order-reports/growth/sellers/:sellerId (M3) */
+export type SellerOrderQuery = {
+  page: number;
+  pageSize: number;
+  /** lọc theo một mốc trên biểu đồ */
+  from?: string;
+  to?: string;
+};
+
+/** API 7 trả summary; danh sách đơn là API 2 (chưa có hợp đồng). */
 export interface SellerSource {
-  getDetail(
+  getSummary(sellerId: string, f: ReportFilters): Promise<SellerSummary | null>;
+  listOrders(
     sellerId: string,
     f: ReportFilters,
-    page: number,
-    pageSize: number,
-  ): Promise<SellerDetail | null>;
+    q: SellerOrderQuery,
+  ): Promise<Page<OrderRow>>;
 }
+
+export const SELLER_SERIES_TITLE: Record<SeriesUnit, string> = {
+  DAY: 'theo ngày',
+  MONTH: 'theo tháng',
+  QUARTER: 'theo quý',
+};
+
+export type SellerMetricKey = 'orders' | 'gmv' | 'buyers';
+
+export const SELLER_METRIC_LABEL: Record<SellerMetricKey, string> = {
+  orders: 'Số đơn',
+  gmv: 'GMV',
+  buyers: 'User mua',
+};

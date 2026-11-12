@@ -1,7 +1,7 @@
 import { csvResponse, toCsv } from '@/platform/reports/csv';
 import { rejectUnsupportedFormat } from '@/platform/reports/export';
 import { parseFilters, searchParamsToRecord } from '@/platform/reports/filters';
-import { getBuyerDetail } from '@/features/buyer-detail/server/queries';
+import { listBuyerOrders } from '@/features/buyer-detail/server/queries';
 
 export const dynamic = 'force-dynamic';
 
@@ -14,10 +14,10 @@ export async function GET(req: Request, ctx: RouteContext) {
 
   const { customerId } = await ctx.params;
   const filters = parseFilters(searchParamsToRecord(url.searchParams));
-  const detail = await getBuyerDetail(customerId, filters, 1, 5000);
-  if (!detail) return new Response('not found', { status: 404 });
+  const detail = await listBuyerOrders(customerId, filters, { page: 1, pageSize: 5000 });
+  if (detail.items.length === 0) return new Response('not found', { status: 404 });
 
-  const rows = detail.orders.items.map((o) => ({
+  const rows = detail.items.map((o) => ({
     ma_don: o.publicId,
     ngay_dat: o.placedAt,
     nha_ban: o.sellerName,

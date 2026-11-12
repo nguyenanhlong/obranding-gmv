@@ -22,6 +22,8 @@ export function TopSellersTable({ period, topN, groupBy }: TopSellersTableProps)
     from: period.startDate,
     to: period.endDate,
     period: groupBy.toLowerCase(),
+    defFrom: period.startDate,
+    defTo: period.endDate,
   }).toString();
 
   const columns: Column<TopSeller>[] = [

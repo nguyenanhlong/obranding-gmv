@@ -1,36 +1,87 @@
-import type { Money, OrderRow, Page, Period } from '@/contracts/base';
+import type { OrderRow, Page } from '@/contracts/base';
 import type { ReportFilters } from '@/platform/reports/filters';
-import type { Delta } from '@/contracts/base';
+import type { SeriesUnit } from '@/platform/reports/series';
+
+export type BuyerType = 'NEW' | 'RETURNING';
+
+export type BuyerInfo = {
+  id: string;
+  name: string;
+  phoneMasked: string | null;
+  province: string | null;
+  buyerType: BuyerType;
+};
 
 export type BuyerKpis = {
-  orders: number;
-  totalValue: Money;
-  aov: Money;
-  /** 0..1 */
+  /** gồm cả đơn huỷ */
+  totalOrders: number;
+  /** không gồm đơn huỷ */
+  validOrders: number;
+  cancelledOrders: number;
+  /** VND, không gồm đơn huỷ */
+  totalValue: number;
+  /** VND */
+  aov: number;
+  completedOrders: number;
+  /** 0..1, tính trên totalOrders (đơn huỷ là không hoàn thành) */
   completionRate: number;
-  sellerCount: number;
-  lastOrderAt: string | null;
+  sellersCount: number;
   firstOrderAt: string | null;
+  lastOrderAt: string | null;
 };
 
-export type BuyerDetail = {
-  customer: { id: string; name: string; phone: string; region: string };
-  range: { from: string; to: string };
-  period: Period;
+export type BuyerSeriesBucket = {
+  key: string;
+  label: string;
+  shortLabel: string;
+  startDate: string;
+  endDate: string;
+  /** số đơn không huỷ trong mốc */
+  orders: number;
+  /** VND */
+  value: number;
+};
+
+export type BuyerTopSeller = {
+  sellerId: string;
+  sellerCode: string;
+  sellerName: string;
+  orders: number;
+  value: number;
+};
+
+export type BuyerSummary = {
+  customer: BuyerInfo;
   kpis: BuyerKpis;
-  monthly: { bucket: string; amount: number; orders: number }[];
-  topSellers: { sellerId: string; sellerName: string; orders: number; gmv: Money }[];
-  orders: Page<OrderRow>;
-  /** % tăng trưởng giá trị mua so với kỳ trước */
-  totalValueDelta: Delta;
+  series: { unit: SeriesUnit; buckets: BuyerSeriesBucket[] };
+  /** tối đa 5, xếp theo giá trị giảm dần */
+  topSellers: BuyerTopSeller[];
 };
 
-/** Khớp endpoint GET /admin/order-reports/growth/customers/:customerId (M3) */
+export type BuyerOrderQuery = {
+  page: number;
+  pageSize: number;
+  from?: string;
+  to?: string;
+};
+
+/** API 8 trả summary; danh sách đơn là API 2 (chưa có hợp đồng). */
 export interface BuyerSource {
-  getDetail(
+  getSummary(customerId: string, f: ReportFilters): Promise<BuyerSummary | null>;
+  listOrders(
     customerId: string,
     f: ReportFilters,
-    page: number,
-    pageSize: number,
-  ): Promise<BuyerDetail | null>;
+    q: BuyerOrderQuery,
+  ): Promise<Page<OrderRow>>;
 }
+
+export const BUYER_SERIES_TITLE: Record<SeriesUnit, string> = {
+  DAY: 'Giá trị mua theo ngày',
+  MONTH: 'Giá trị mua theo tháng',
+  QUARTER: 'Giá trị mua theo quý',
+};
+
+export const BUYER_TYPE_LABEL: Record<BuyerType, string> = {
+  NEW: 'Khách mới',
+  RETURNING: 'Quay lại',
+};

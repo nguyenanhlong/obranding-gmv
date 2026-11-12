@@ -64,30 +64,30 @@ Ghi chú phạm vi:
 | 36 | FE-B (Long) | API 6 | Link sang Chi tiết nhà bán / user từ tab | Trung bình | P3 | Xong | `page tab Nhà bán / User` |
 | 37 | FE-B (Long) | API 6 | Nhận link từ trang tổng quan | Cao | P3 | Xong | `page.tsx` |
 | 38 | FE-B (Long) | API 6 | Lỗi gõ class | Thấp | P3 | Xong | `app/(admin)/growth/period/page.tsx` |
-| 39 | FE-C (Phúc) | API 7 | Endpoint | Cao | P4 | Làm | `src/features/seller-detail/server/seller.http.ts (mới), source.ts` |
-| 40 | FE-C (Phúc) | API 7 | Thông tin nhà bán | Thấp | P4 | Làm | `contracts.ts; page` |
-| 41 | FE-C (Phúc) | API 7 | Tỉ lệ hoàn thành | Trung bình | P4 | Làm | `seller.mock.ts` |
-| 42 | FE-C (Phúc) | API 7 | KPI đặt tên | Thấp | P4 | Làm | `contracts.ts` |
-| 43 | FE-C (Phúc) | API 7 | Biểu đồ | Cao | P4 | Làm | `contracts.ts; seller.mock.ts; page` |
-| 44 | FE-C (Phúc) | API 7 | Nút Số đơn / GMV / User mua | Trung bình | P4 | Làm | `page / component chart mới` |
-| 45 | FE-C (Phúc) | API 7 | Bấm mốc để lọc đơn | Trung bình | P4 | Làm | `page` |
-| 46 | FE-C (Phúc) | API 7 | Nút "Về mặc định" | Thấp | P4 | Làm | `page; platform/ui/report-filter.tsx` |
-| 47 | FE-C (Phúc) | API 7 | Bỏ so sánh kỳ trước | Thấp | P4 | Làm | `contracts.ts` |
-| 48 | FE-C (Phúc) | API 7, API 8 | Nhận link từ trang khác | Trung bình | P4 | Làm | `page seller / customer` |
+| 39 | FE-C (Phúc) | API 7 | Endpoint | Cao | P4 | Xong | `src/features/seller-detail/server/seller.http.ts (mới), source.ts` |
+| 40 | FE-C (Phúc) | API 7 | Thông tin nhà bán | Thấp | P4 | Xong | `contracts.ts; page` |
+| 41 | FE-C (Phúc) | API 7 | Tỉ lệ hoàn thành | Trung bình | P4 | Xong | `seller.mock.ts` |
+| 42 | FE-C (Phúc) | API 7 | KPI đặt tên | Thấp | P4 | Xong | `contracts.ts` |
+| 43 | FE-C (Phúc) | API 7 | Biểu đồ | Cao | P4 | Xong | `contracts.ts; seller.mock.ts; page` |
+| 44 | FE-C (Phúc) | API 7 | Nút Số đơn / GMV / User mua | Trung bình | P4 | Xong | `page / component chart mới` |
+| 45 | FE-C (Phúc) | API 7 | Bấm mốc để lọc đơn | Trung bình | P4 | Xong | `page` |
+| 46 | FE-C (Phúc) | API 7 | Nút "Về mặc định" | Thấp | P4 | Xong | `page; platform/ui/report-filter.tsx` |
+| 47 | FE-C (Phúc) | API 7 | Bỏ so sánh kỳ trước | Thấp | P4 | Xong | `contracts.ts` |
+| 48 | FE-C (Phúc) | API 7, API 8 | Nhận link từ trang khác | Trung bình | P4 | Xong | `page seller / customer` |
 | 49 | FE-C (Phúc) | API 8 | Số đơn ở API 8 | Thấp | — | Ghi chú | `—` |
-| 50 | FE-C (Phúc) | API 8 | Endpoint và tên đường dẫn | Cao | P4 | Làm | `src/features/buyer-detail/server/buyer.http.ts (mới), source.ts` |
-| 51 | FE-C (Phúc) | API 8 | Thông tin khách | Trung bình | P4 | Làm | `contracts.ts; page` |
-| 52 | FE-C (Phúc) | API 8 | Số đơn | Trung bình | P4 | Làm | `contracts.ts; buyer.mock.ts; page` |
-| 53 | FE-C (Phúc) | API 8 | Giá trị TB/đơn | Thấp | P4 | Làm | `mapper` |
-| 54 | FE-C (Phúc) | API 8 | % tăng trưởng giá trị mua | Trung bình | P4 | Làm | `contracts.ts; buyer.mock.ts; page` |
-| 55 | FE-C (Phúc) | API 8 | Nhà bán mua nhiều nhất | Trung bình | P4 | Làm | `buyer.mock.ts; page` |
-| 56 | FE-C (Phúc) | API 8 | Biểu đồ giá trị mua | Trung bình | P4 | Làm | `contracts.ts; page` |
-| 57 | FE-C (Phúc) | API 8 | Ngày đơn đầu / gần nhất | Thấp | P4 | Làm | `buyer.mock.ts` |
-| 58 | FE-A + FE-B | API 6 | Link sang Chi tiết kỳ (API 6) | Cao | P5 | Làm | `growth-line.tsx (FE-1); app/(admin)/growth/period (FE-B)` |
-| 59 | FE-A + FE-C | API 7 | Link sang Chi tiết nhà bán (API 7) | Trung bình | P5 | Làm | `top-sellers-table.tsx; panel kỳ` |
-| 60 | FE-A + FE-C | API 8 | Link sang Chi tiết user (API 8) | Trung bình | P5 | Làm | `panel kỳ` |
+| 50 | FE-C (Phúc) | API 8 | Endpoint và tên đường dẫn | Cao | P4 | Xong | `src/features/buyer-detail/server/buyer.http.ts (mới), source.ts` |
+| 51 | FE-C (Phúc) | API 8 | Thông tin khách | Trung bình | P4 | Xong | `contracts.ts; page` |
+| 52 | FE-C (Phúc) | API 8 | Số đơn | Trung bình | P4 | Xong | `contracts.ts; buyer.mock.ts; page` |
+| 53 | FE-C (Phúc) | API 8 | Giá trị TB/đơn | Thấp | P4 | Xong | `mapper` |
+| 54 | FE-C (Phúc) | API 8 | % tăng trưởng giá trị mua | Trung bình | P4 | Xong | `contracts.ts; buyer.mock.ts; page` |
+| 55 | FE-C (Phúc) | API 8 | Nhà bán mua nhiều nhất | Trung bình | P4 | Xong | `buyer.mock.ts; page` |
+| 56 | FE-C (Phúc) | API 8 | Biểu đồ giá trị mua | Trung bình | P4 | Xong | `contracts.ts; page` |
+| 57 | FE-C (Phúc) | API 8 | Ngày đơn đầu / gần nhất | Thấp | P4 | Xong | `buyer.mock.ts` |
+| 58 | FE-A + FE-B | API 6 | Link sang Chi tiết kỳ (API 6) | Cao | P5 | Xong | `growth-line.tsx (FE-1); app/(admin)/growth/period (FE-B)` |
+| 59 | FE-A + FE-C | API 7 | Link sang Chi tiết nhà bán (API 7) | Trung bình | P5 | Xong | `top-sellers-table.tsx; panel kỳ` |
+| 60 | FE-A + FE-C | API 8 | Link sang Chi tiết user (API 8) | Trung bình | P5 | Xong | `panel kỳ` |
 | 61 | Cả nhóm | Chung | Tên tham số trên URL | Thấp | P1 | Xong | `src/platform/reports/filters.ts` |
-| 62 | Cả nhóm | Chung | Danh sách đơn nằm trong getDetail | Cao | P5 | Làm | `contracts.ts của period/seller/buyer` |
+| 62 | Cả nhóm | Chung | Danh sách đơn nằm trong getDetail | Cao | P5 | Xong | `contracts.ts của period/seller/buyer` |
 
 ## Việc cần chốt trước khi sang P1 (đã chốt — P1 xong 12/11/2026)
 

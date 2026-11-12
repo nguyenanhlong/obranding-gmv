@@ -1,56 +1,37 @@
 import 'server-only';
-import { bucketOf } from '@/platform/time';
-import { filterRange, groupBy, totalsOf } from '@/platform/mock/aggregate';
+import type { OrderRow } from '@/contracts/base';
+import type { ReportFilters } from '@/platform/reports/filters';
 import { allOrders } from '@/platform/mock/dataset';
-import type { SellerDetail, SellerSource } from '../contracts';
+import type { SellerOrderQuery, SellerSource } from '../contracts';
+import { mapSellerSummary } from './seller.mapper';
+import { buildRawSellerSummary } from './seller.raw';
+
+function inRange(row: OrderRow, from: string, to: string): boolean {
+  const day = row.placedAt.slice(0, 10);
+  return day >= from && day <= to;
+}
 
 export const sellerMockSource: SellerSource = {
-  async getDetail(sellerId, f, page, pageSize): Promise<SellerDetail | null> {
-    const all = allOrders();
-    const mine = all.filter((o) => o.sellerId === sellerId);
-    if (mine.length === 0) return null;
+  async getSummary(sellerId: string, f: ReportFilters) {
+    const raw = buildRawSellerSummary(sellerId, f.from, f.to);
+    return raw ? mapSellerSummary(raw) : null;
+  },
 
-    const orders = filterRange(mine, f.from, f.to);
-    const counted = orders.filter((o) => o.status !== 'CANCELLED');
-    const totals = totalsOf(orders);
-    const completed = orders.filter((o) => o.status === 'COMPLETED').length;
+  /** TODO (chờ API 2): danh sách đơn của nhà bán vẫn là mock. */
+  async listOrders(sellerId, f, q: SellerOrderQuery) {
+    const from = q.from ?? f.from;
+    const to = q.to ?? f.to;
 
-    const monthlyMap = groupBy(counted, (o) => bucketOf(o.placedAt.slice(0, 10), 'month'));
-    const monthly = [...monthlyMap.entries()]
-      .sort(([a], [b]) => (a < b ? -1 : 1))
-      .map(([bucket, rows]) => {
-        const t = totalsOf(rows);
-        return { bucket, orders: t.orders, gmv: t.gmv, buyers: t.buyers };
-      });
+    const rows = allOrders()
+      .filter((o) => o.sellerId === sellerId && inRange(o, from, to))
+      .sort((a, b) => (a.placedAt < b.placedAt ? 1 : -1));
 
-    const sorted = [...orders].sort((a, b) => (a.placedAt < b.placedAt ? 1 : -1));
-    const start = (page - 1) * pageSize;
-    const first = mine[0];
-
+    const start = (q.page - 1) * q.pageSize;
     return {
-      seller: {
-        id: sellerId,
-        code: first?.sellerCode ?? '',
-        name: first?.sellerName ?? '',
-        category: first?.category ?? '',
-      },
-      range: { from: f.from, to: f.to },
-      period: f.period,
-      kpis: {
-        orders: totals.orders,
-        gmv: { amount: totals.gmv, currency: 'VND' },
-        buyers: totals.buyers,
-        aov: { amount: totals.aov, currency: 'VND' },
-        completionRate: orders.length === 0 ? 0 : completed / orders.length,
-        ordersPerUser: totals.buyers === 0 ? 0 : totals.orders / totals.buyers,
-      },
-      monthly,
-      orders: {
-        items: sorted.slice(start, start + pageSize),
-        total: sorted.length,
-        page,
-        pageSize,
-      },
+      items: rows.slice(start, start + q.pageSize),
+      total: rows.length,
+      page: q.page,
+      pageSize: q.pageSize,
     };
   },
 };

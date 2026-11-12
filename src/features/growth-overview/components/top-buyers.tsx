@@ -57,6 +57,8 @@ export function TopBuyersPanel({ period, groupBy }: TopBuyersPanelProps) {
     from: period.startDate,
     to: period.endDate,
     period: groupBy.toLowerCase(),
+    defFrom: period.startDate,
+    defTo: period.endDate,
   }).toString();
 
   return (

@@ -21,6 +21,8 @@ import type { OrderSource } from '@/features/order-detail/contracts';
 import { DATASET_FROM, DATASET_TO, allOrders } from '@/platform/mock/dataset';
 import { buildRawGrowthReport } from '@/features/growth-overview/server/growth.raw';
 import { buildRawPeriodSummary } from '@/features/period-detail/server/period.raw';
+import { buildRawSellerSummary } from '@/features/seller-detail/server/seller.raw';
+import { buildRawBuyerSummary } from '@/features/buyer-detail/server/buyer.raw';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const OUT = join(ROOT, 'docs', 'handoff', 'be-mock-all');
@@ -47,6 +49,7 @@ const COPY_FILES = [
   'src/platform/reports/filters.ts',
   'src/platform/mock/dataset.ts',
   'src/platform/mock/aggregate.ts',
+  'src/platform/reports/series.ts',
   // M1
   'src/features/growth-overview/contracts.ts',
   'src/features/growth-overview/server/growth.mock.ts',
@@ -62,9 +65,15 @@ const COPY_FILES = [
   // M4
   'src/features/buyer-detail/contracts.ts',
   'src/features/buyer-detail/server/buyer.mock.ts',
+  'src/features/buyer-detail/server/buyer.schema.ts',
+  'src/features/buyer-detail/server/buyer.mapper.ts',
+  'src/features/buyer-detail/server/buyer.raw.ts',
   // M5
   'src/features/seller-detail/contracts.ts',
   'src/features/seller-detail/server/seller.mock.ts',
+  'src/features/seller-detail/server/seller.schema.ts',
+  'src/features/seller-detail/server/seller.mapper.ts',
+  'src/features/seller-detail/server/seller.raw.ts',
   // M6
   'src/features/order-detail/contracts.ts',
   'src/features/order-detail/server/order.mock.ts',
@@ -175,23 +184,32 @@ async function main(): Promise<void> {
   const sampleCustomerId = countBy((o) => o.customerId) || 'customer-1';
   const sampleSellerId = countBy((o) => o.sellerId) || 'seller-1';
 
-  // ── M4: chi tiết user
-  const buyerDetail = await buyer.getDetail(sampleCustomerId, FILTERS_PERIOD, 1, 10);
-  if (buyerDetail) {
-    writeJson('samples/m4-buyer-detail.json', {
-      ...buyerDetail,
-      orders: { ...buyerDetail.orders, items: buyerDetail.orders.items.map(toOrderRow) },
-    });
-  }
+  // M4 — summary xuất THÔ (hợp đồng API 8), danh sách đơn là mock
+  const buyerSummary = buildRawBuyerSummary(sampleCustomerId, FILTERS_PERIOD.from, FILTERS_PERIOD.to);
+  if (buyerSummary) writeJson('samples/m4-buyer-summary.json', buyerSummary);
 
-  // ── M5: chi tiết nhà bán
-  const sellerDetail = await seller.getDetail(sampleSellerId, FILTERS_PERIOD, 1, 10);
-  if (sellerDetail) {
-    writeJson('samples/m5-seller-detail.json', {
-      ...sellerDetail,
-      orders: { ...sellerDetail.orders, items: sellerDetail.orders.items.map(toOrderRow) },
-    });
-  }
+  // M5 — summary THÔ (hợp đồng API 7)
+  const sellerSummary = buildRawSellerSummary(sampleSellerId, FILTERS_PERIOD.from, FILTERS_PERIOD.to);
+  if (sellerSummary) writeJson('samples/m5-seller-summary.json', sellerSummary);
+
+  // danh sách đơn của M4/M5 — mock (chờ API 2)
+  const buyerOrders = await buyer.listOrders(sampleCustomerId, FILTERS_PERIOD, {
+    page: 1,
+    pageSize: 10,
+  });
+  writeJson('samples/m4-orders-page.json', {
+    ...buyerOrders,
+    items: buyerOrders.items.map(toOrderRow),
+  });
+
+  const sellerOrders = await seller.listOrders(sampleSellerId, FILTERS_PERIOD, {
+    page: 1,
+    pageSize: 10,
+  });
+  writeJson('samples/m5-orders-page.json', {
+    ...sellerOrders,
+    items: sellerOrders.items.map(toOrderRow),
+  });
 
   // ── M6: chi tiết đơn
   const firstOrder = periodOrders.items[0];
