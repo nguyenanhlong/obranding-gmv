@@ -14,12 +14,12 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import type { ReportFilters } from '@/platform/reports/filters';
-import type { GrowthSource } from '@/features/growth-overview/contracts';
 import type { PeriodSource } from '@/features/period-detail/contracts';
 import type { BuyerSource } from '@/features/buyer-detail/contracts';
 import type { SellerSource } from '@/features/seller-detail/contracts';
 import type { OrderSource } from '@/features/order-detail/contracts';
 import { DATASET_FROM, DATASET_TO, allOrders } from '@/platform/mock/dataset';
+import { buildRawGrowthReport } from '@/features/growth-overview/server/growth.raw';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const OUT = join(ROOT, 'docs', 'handoff', 'be-mock-all');
@@ -50,6 +50,8 @@ const COPY_FILES = [
   'src/features/growth-overview/contracts.ts',
   'src/features/growth-overview/server/growth.mock.ts',
   'src/features/growth-overview/server/growth.mapper.ts',
+  'src/features/growth-overview/server/growth.raw.ts',
+  'src/features/growth-overview/server/growth.schema.ts',
   // M2
   'src/features/period-detail/contracts.ts',
   'src/features/period-detail/server/period.mock.ts',
@@ -120,10 +122,6 @@ async function main(): Promise<void> {
     console.log('  copy   ', rel);
   }
 
-  const growth = await loadMockCopy<GrowthSource>(
-    'src/features/growth-overview/server/growth.mock.ts',
-    'growthMockSource',
-  );
   const period = await loadMockCopy<PeriodSource>(
     'src/features/period-detail/server/period.mock.ts',
     'periodMockSource',
@@ -141,9 +139,9 @@ async function main(): Promise<void> {
     'orderMockSource',
   );
 
-  // ── M1: hub báo cáo tăng trưởng
-  const growthReport = await growth.getReport(FILTERS_GROWTH);
-  writeJson('samples/m1-growth-report.json', growthReport);
+  // ── M1: hub báo cáo tăng trưởng — xuất RESPONSE THÔ đúng hợp đồng BE
+  // (số dạng chuỗi, % đã ×100). View model của FE đi qua mapper riêng.
+  writeJson('samples/m1-growth-report.json', buildRawGrowthReport(FILTERS_GROWTH));
 
   // ── M2: chi tiết kỳ
   const periodDetail = await period.getDetail(FILTERS_PERIOD, { page: 1, pageSize: 10 });
