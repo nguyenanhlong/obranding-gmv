@@ -9,10 +9,12 @@ type KpiCardProps = {
   delta?: Delta;
   hint?: string;
   icon?: ReactNode;
+  /** kỳ PROVISIONAL: hiện % với tiền tố "~" */
+  approximate?: boolean;
   className?: string;
 };
 
-export function KpiCard({ label, value, delta, hint, icon, className }: KpiCardProps) {
+export function KpiCard({ label, value, delta, hint, icon, approximate, className }: KpiCardProps) {
   return (
     <div
       className={cn(
@@ -28,7 +30,7 @@ export function KpiCard({ label, value, delta, hint, icon, className }: KpiCardP
       <div className="text-2xl font-semibold tabular-nums text-slate-900">{value}</div>
 
       <div className="flex items-center gap-2">
-        {delta ? <DeltaBadge delta={delta} /> : null}
+        {delta ? <DeltaBadge delta={delta} approximate={approximate} /> : null}
         {hint ? <span className="text-xs text-slate-500">{hint}</span> : null}
       </div>
     </div>

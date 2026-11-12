@@ -28,23 +28,23 @@ Ghi chú phạm vi:
 |---|---|---|---|---|---|---|---|
 | 1 | FE-A (Chinh) | API 1 | Envelope và lỗi | Cao | P1 | Xong | `src/platform/reports/http.ts` |
 | 2 | FE-A (Chinh) | API 1 | Tên tham số query | Cao | P1 | Xong | `src/platform/reports/filters.ts; growth.http.ts` |
-| 3 | FE-A (Chinh) | API 1 | Dạng response | Cao | P2 | Làm | `server/growth.schema.ts; server/growth.mapper.ts` |
-| 4 | FE-A (Chinh) | API 1 | Cách lấy KPI | Cao | P2 | Làm | `growth.mapper.ts; components/growth-kpis.tsx` |
-| 5 | FE-A (Chinh) | API 1 | Phần trăm tăng trưởng | Trung bình | P2 | Làm | `growth.mapper.ts` |
-| 6 | FE-A (Chinh) | API 1 | Khoá và nhãn kỳ | Trung bình | P2 | Làm | `growth.mapper.ts; components/*` |
-| 7 | FE-A (Chinh) | API 1 | Kỳ so sánh (mock) | Trung bình | P2 | Làm | `server/growth.report-builder.ts` |
+| 3 | FE-A (Chinh) | API 1 | Dạng response | Cao | P2 | Xong | `server/growth.schema.ts; server/growth.mapper.ts` |
+| 4 | FE-A (Chinh) | API 1 | Cách lấy KPI | Cao | P2 | Xong | `growth.mapper.ts; components/growth-kpis.tsx` |
+| 5 | FE-A (Chinh) | API 1 | Phần trăm tăng trưởng | Trung bình | P2 | Xong | `growth.mapper.ts` |
+| 6 | FE-A (Chinh) | API 1 | Khoá và nhãn kỳ | Trung bình | P2 | Xong | `growth.mapper.ts; components/*` |
+| 7 | FE-A (Chinh) | API 1 | Kỳ so sánh (mock) | Trung bình | P2 | Xong | `server/growth.report-builder.ts` |
 | 8 | FE-A (Chinh) | API 1 | Khoảng thời gian | Trung bình | P1 | Xong | `src/features/growth-overview/periods.ts` |
-| 9 | FE-A (Chinh) | API 1 | Top nhà bán | Cao | P2 | Làm | `contracts.ts; components/top-sellers-table.tsx; page.tsx` |
-| 10 | FE-A (Chinh) | API 1 | Top user mua | Cao | P2 | Làm | `growth.schema.ts; contracts.ts; panel kỳ` |
-| 11 | FE-A (Chinh) | API 1 | Biểu đồ | Cao | P2 | Làm | `components/growth-bars.tsx → growth-line.tsx` |
-| 12 | FE-A (Chinh) | API 1 | Bảng số liệu | Trung bình | P2 | Làm | `app/(admin)/growth/page.tsx` |
-| 13 | FE-A (Chinh) | API 1 | Tooltip | Trung bình | P2 | Làm | `components/growth-line.tsx` |
-| 14 | FE-A (Chinh) | API 1 | Tên field | Thấp | P2 | Làm | `contracts.ts; app/api/exports/growth/route.ts` |
-| 15 | FE-A (Chinh) | API 1 | Số "Xem tất cả n nhà bán" | Thấp | P2 | Làm | `page.tsx; top-sellers-table.tsx` |
+| 9 | FE-A (Chinh) | API 1 | Top nhà bán | Cao | P2 | Xong | `contracts.ts; components/top-sellers-table.tsx; page.tsx` |
+| 10 | FE-A (Chinh) | API 1 | Top user mua | Cao | P2 | Xong | `growth.schema.ts; contracts.ts; panel kỳ` |
+| 11 | FE-A (Chinh) | API 1 | Biểu đồ | Cao | P2 | Xong | `components/growth-bars.tsx → growth-line.tsx` |
+| 12 | FE-A (Chinh) | API 1 | Bảng số liệu | Trung bình | P2 | Xong | `app/(admin)/growth/page.tsx` |
+| 13 | FE-A (Chinh) | API 1 | Tooltip | Trung bình | P2 | Làm một phần | `components/growth-line.tsx` |
+| 14 | FE-A (Chinh) | API 1 | Tên field | Thấp | P2 | Xong | `contracts.ts; app/api/exports/growth/route.ts` |
+| 15 | FE-A (Chinh) | API 1 | Số "Xem tất cả n nhà bán" | Thấp | P2 | Xong | `page.tsx; top-sellers-table.tsx` |
 | 16 | FE-A (Chinh) | Chung | Bộ lọc dùng chung | Trung bình | P1 | Xong | `src/platform/reports/filters.ts` |
 | 17 | FE-A (Chinh) | Chung | Delta.pct trong base.ts | Thấp | P1 | Xong | `src/contracts/base.ts; README` |
-| 18 | FE-A (Chinh) | Chung | GMV | Cao | P2 | Làm | `growth.report-builder.ts; growth.mock.ts; test` |
-| 19 | FE-A (Chinh) | Chung | Đơn hợp lệ | Thấp | P2 | Làm | `src/platform/mock/aggregate.ts` |
+| 18 | FE-A (Chinh) | Chung | GMV | Cao | P2 | Xong | `growth.report-builder.ts; growth.mock.ts; test` |
+| 19 | FE-A (Chinh) | Chung | Đơn hợp lệ | Thấp | P2 | Xong | `src/platform/mock/aggregate.ts` |
 | 20 | FE-A (Chinh) | Chung | Lỗi 404 NOT_FOUND | Trung bình | P1 | Xong | `src/platform/reports/http.ts` |
 | 21 | FE-A (Chinh) | Chung | Đơn vị phần trăm | Trung bình | P1 | Xong | `README; mapper từng slice` |
 | 22 | FE-A (Chinh) | Chung | Số dạng chuỗi | Thấp | P1 | Xong | `src/platform/reports/ (file mới parse.ts)` |

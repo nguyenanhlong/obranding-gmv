@@ -11,17 +11,35 @@ export async function GET(req: Request) {
   if (blocked) return blocked;
 
   const filters = parseFilters(searchParamsToRecord(url.searchParams));
-  const report = await getGrowthReport(filters, 10);
+  const report = await getGrowthReport(filters);
 
-  const rows = report.series.map((p) => ({
-    bucket: p.bucket,
-    orders: p.orders,
-    gmv: p.gmv,
-    buyers: p.buyers,
-    sellers: p.sellers,
-    growthPct: p.growthPct ?? '',
+  const rows = report.periods.map((p) => ({
+    period_key: p.key,
+    period_label: p.label,
+    start_date: p.startDate,
+    end_date: p.endDate,
+    status: p.status,
+    orders: p.orders.value,
+    gmv: p.gmv.value,
+    buyers: p.buyers.value,
+    active_sellers: p.activeSellers.value,
+    aov: p.aov,
+    growth_percent: p.orders.growthPercent === null ? '' : (p.orders.growthPercent * 100).toFixed(1),
   }));
 
-  const csv = toCsv(rows, ['bucket', 'orders', 'gmv', 'buyers', 'sellers', 'growthPct']);
+  const csv = toCsv(rows, [
+    'period_key',
+    'period_label',
+    'start_date',
+    'end_date',
+    'status',
+    'orders',
+    'gmv',
+    'buyers',
+    'active_sellers',
+    'aov',
+    'growth_percent',
+  ]);
+
   return csvResponse(csv, `growth-${filters.from}_${filters.to}.csv`);
 }

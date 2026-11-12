@@ -2,7 +2,16 @@ import type { Delta } from '@/contracts/base';
 import { cn } from '@/platform/ui/cn';
 import { formatSignedPercent } from '@/platform/format/percent';
 
-export function DeltaBadge({ delta, className }: { delta: Delta; className?: string }) {
+export function DeltaBadge({
+  delta,
+  approximate = false,
+  className,
+}: {
+  delta: Delta;
+  /** kỳ PROVISIONAL — BE tính % trên đoạn tương ứng, FE hiện tiền tố "~" */
+  approximate?: boolean;
+  className?: string;
+}) {
   const tone =
     delta.direction === 'up'
       ? 'bg-emerald-50 text-emerald-700'
@@ -21,7 +30,7 @@ export function DeltaBadge({ delta, className }: { delta: Delta; className?: str
       )}
     >
       <span aria-hidden>{arrow}</span>
-      {delta.pct === null ? 'mới' : formatSignedPercent(delta.pct)}
+      {delta.pct === null ? 'mới' : `${approximate ? '~' : ''}${formatSignedPercent(delta.pct)}`}
     </span>
   );
 }

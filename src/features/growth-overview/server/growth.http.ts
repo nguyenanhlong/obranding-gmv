@@ -1,18 +1,17 @@
 import 'server-only';
-import { reportFetch } from '@/platform/reports/http';
-import { filtersToQueryString } from '@/platform/reports/filters';
-import type { ReportFilters } from '@/platform/reports/filters';
+import { gatewayFetch } from '@/platform/reports/http';
+import { toApiQuery, type ReportFilters } from '@/platform/reports/filters';
 import type { GrowthReport } from '../contracts';
-import { mapGrowthReport, type RawGrowthReport } from './growth.mapper';
-
-const query = (f: ReportFilters, topN: number) => ({
-  ...Object.fromEntries(new URLSearchParams(filtersToQueryString(f))),
-  topN,
-});
+import { mapGrowthReport } from './growth.mapper';
+import { growthResponseSchema } from './growth.schema';
 
 export const growthHttpSource = {
-  async getReport(f: ReportFilters, topN: number): Promise<GrowthReport> {
-    const raw = await reportFetch<RawGrowthReport>('/admin/order-reports/growth', query(f, topN));
-    return mapGrowthReport(raw, f.period);
+  async getReport(f: ReportFilters): Promise<GrowthReport> {
+    const raw = await gatewayFetch(
+      '/admin/order-reports/growth',
+      growthResponseSchema,
+      toApiQuery(f),
+    );
+    return mapGrowthReport(raw);
   },
 };

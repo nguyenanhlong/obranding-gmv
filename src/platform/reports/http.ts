@@ -1,5 +1,4 @@
 import 'server-only';
-import type { ZodType } from 'zod';
 
 /** Lỗi có thông điệp tiếng Việt từ BE (thường là 400 INVALID_ARGUMENT). */
 export class ReportApiError extends Error {
@@ -54,7 +53,7 @@ function extractMessage(body: unknown, fallback: string): string {
  */
 export async function gatewayFetch<T>(
   path: string,
-  schema: ZodType<T>,
+  schema: { parse: (value: unknown) => T },
   query: Query = {},
 ): Promise<T> {
   const url = new URL(path, baseUrl());
