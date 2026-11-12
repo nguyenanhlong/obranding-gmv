@@ -1,6 +1,7 @@
 import { parseFilters, parsePositiveInt } from '@/platform/reports/filters';
-import { filtersToQueryString } from '@/platform/reports/filters';
+import { filtersToQueryString, growthRangeError } from '@/platform/reports/filters';
 import { ChartFrame } from '@/platform/ui/chart-frame';
+import { EmptyState } from '@/platform/ui/empty-state';
 import { ReportFilter } from '@/platform/ui/report-filter';
 import { GrowthKpiRow } from '@/features/growth-overview/components/growth-kpis';
 import { GrowthLine } from '@/features/growth-overview/components/growth-line';
@@ -20,10 +21,11 @@ export default async function GrowthPage({ searchParams }: PageProps) {
   const sp = await searchParams;
   const filters = parseFilters(sp);
   const topN = parsePositiveInt(sp.topN, 3, 10);
+  const rangeError = growthRangeError(filters);
 
-  const report = await getGrowthReport(filters);
-  const selection = kpisOf(report);
-  const groupBy = report.meta.groupBy;
+  const report = rangeError ? null : await getGrowthReport(filters);
+  const selection = report ? kpisOf(report) : null;
+  const groupBy = report?.meta.groupBy ?? filters.period.toUpperCase();
   const qs = filtersToQueryString(filters);
 
   return (
@@ -32,8 +34,8 @@ export default async function GrowthPage({ searchParams }: PageProps) {
         <div>
           <h1 className="text-xl font-semibold text-slate-900">Báo cáo tăng trưởng</h1>
           <p className="mt-0.5 text-sm text-slate-500">
-            Đơn con theo nhà bán · tính theo ngày đặt hàng · {groupBy.toLowerCase()} ·{' '}
-            {report.meta.totalPeriods} kỳ
+            Đơn con theo nhà bán · tính theo ngày đặt hàng
+            {report ? ` · ${groupBy.toLowerCase()} · ${report.meta.totalPeriods} kỳ` : ''}
           </p>
         </div>
 
@@ -53,55 +55,60 @@ export default async function GrowthPage({ searchParams }: PageProps) {
 
       <ReportFilter filters={filters} />
 
-      <GrowthKpiRow selection={selection} />
-
-      <ChartFrame
-        title="Tăng trưởng theo kỳ"
-        description={
-          selection?.approximate
-            ? 'Kỳ đang diễn ra · số liệu tạm tính, % so với đoạn tương ứng của kỳ trước'
-            : 'Số liệu theo kỳ đã chốt gần nhất'
-        }
-      >
-        <GrowthLine periods={report.periods} groupBy={groupBy} />
-      </ChartFrame>
-
-      <ChartFrame
-        title={`Top ${topN} nhà bán theo số đơn`}
-        description={selection ? selection.period.label : undefined}
-        actions={
-          <div className="flex gap-1">
-            {[3, 5, 10].map((n) => (
-              <a
-                key={n}
-                href={`/growth?${qs}&topN=${n}`}
-                className={`rounded px-2 py-1 text-xs ${
-                  n === topN ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-600'
-                }`}
-              >
-                Top {n}
-              </a>
-            ))}
-          </div>
-        }
-      >
-        <TopSellersTable
-          period={selection?.period ?? null}
-          topN={topN}
-          groupBy={groupBy}
+      {rangeError || !report ? (
+        <EmptyState
+          title="Khoảng thời gian vượt giới hạn của API"
+          description={rangeError ?? 'Không tải được dữ liệu.'}
         />
-      </ChartFrame>
+      ) : (
+        <>
+          <GrowthKpiRow selection={selection} />
 
-      <ChartFrame
-        title="Top user mua hàng"
-        description="API 1 trả sẵn 10 dòng mỗi danh sách · API 3 (danh sách đầy đủ) chưa có hợp đồng"
-      >
-        <TopBuyersPanel period={selection?.period ?? null} groupBy={groupBy} />
-      </ChartFrame>
+          <ChartFrame
+            title="Tăng trưởng theo kỳ"
+            description={
+              selection?.approximate
+                ? 'Kỳ đang diễn ra · số liệu tạm tính, % so với đoạn tương ứng của kỳ trước'
+                : 'Số liệu theo kỳ đã chốt gần nhất'
+            }
+          >
+            <GrowthLine periods={report.periods} groupBy={groupBy} />
+          </ChartFrame>
 
-      <ChartFrame title="Số liệu theo kỳ" description="Kỳ mới nhất ở trên cùng">
-        <PeriodTable periods={report.periods} groupBy={groupBy} />
-      </ChartFrame>
+          <ChartFrame
+            title={`Top ${topN} nhà bán theo số đơn`}
+            description={selection ? selection.period.label : undefined}
+            actions={
+              <div className="flex gap-1">
+                {[3, 5, 10].map((n) => (
+                  <a
+                    key={n}
+                    href={`/growth?${qs}&topN=${n}`}
+                    className={`rounded px-2 py-1 text-xs ${
+                      n === topN ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-600'
+                    }`}
+                  >
+                    Top {n}
+                  </a>
+                ))}
+              </div>
+            }
+          >
+            <TopSellersTable period={selection?.period ?? null} topN={topN} groupBy={groupBy} />
+          </ChartFrame>
+
+          <ChartFrame
+            title="Top user mua hàng"
+            description="API 1 trả sẵn 10 dòng mỗi danh sách · API 3 (danh sách đầy đủ) chưa có hợp đồng"
+          >
+            <TopBuyersPanel period={selection?.period ?? null} groupBy={groupBy} />
+          </ChartFrame>
+
+          <ChartFrame title="Số liệu theo kỳ" description="Kỳ mới nhất ở trên cùng">
+            <PeriodTable periods={report.periods} groupBy={groupBy} />
+          </ChartFrame>
+        </>
+      )}
     </div>
   );
 }

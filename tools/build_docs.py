@@ -31,9 +31,37 @@ from pptx.util import Emu, Inches, Pt as PPt
 ROOT = Path(__file__).resolve().parent.parent
 DOCS = ROOT / "docs"
 DIAG = DOCS / "diagrams"
-MD_PATH = DOCS / "plan.md"
-DOCX_PATH = DOCS / "BaoCao-TangTruong-KeHoach-FE.docx"
+MD_PATH = Path(os.environ.get("DOC_MD") or (DOCS / "plan.md"))
+DOCX_PATH = Path(
+    os.environ.get("DOC_OUT") or (DOCS / "BaoCao-TangTruong-KeHoach-FE.docx")
+)
 PPTX_PATH = DOCS / "BaoCao-TangTruong-KeHoach-FE-Review.pptx"
+
+# Cho phép đổi nội dung bìa bằng biến môi trường (dùng cho tài liệu khác)
+DOC_KICKER = os.environ.get("DOC_KICKER", "TÀI LIỆU KẾ HOẠCH KỸ THUẬT")
+DOC_TITLE = os.environ.get("DOC_TITLE", "Báo cáo tăng trưởng")
+DOC_SUBTITLE = os.environ.get("DOC_SUBTITLE", "GMV · Đơn hàng · User mua hàng")
+DOC_DESC = os.environ.get(
+    "DOC_DESC",
+    "Kế hoạch chia việc cho 3 FE theo 6 artboard của design\n"
+    "mỗi người một màn hình, không conflict khi merge",
+)
+DOC_HEADER = os.environ.get(
+    "DOC_HEADER", "Báo cáo tăng trưởng — Kế hoạch triển khai Frontend"
+)
+DOC_VERSION = os.environ.get("DOC_VERSION", "1.0 — Draft")
+DOC_DATE = os.environ.get("DOC_DATE", "04/11/2026")
+DOC_AUTHOR = os.environ.get("DOC_AUTHOR", "Tech Lead Frontend")
+DOC_TEAM = os.environ.get(
+    "DOC_TEAM", "Chinh (M1 + platform) · Long (M2 + M6) · Phuc (M4 + M5)"
+)
+DOC_STATUS = os.environ.get("DOC_STATUS", "Bản 2 — thay thế bản 1 (chia theo giả định, đã bỏ)")
+DOC_BULLETS = os.environ.get(
+    "DOC_BULLETS",
+    "6 artboard: 1 hub + 3 màn chi tiết + 1 đặc tả số liệu|"
+    "3 FE, mỗi người sở hữu trọn vẹn màn hình của mình|"
+    "Còn 5 điểm cần chốt với BE (mục 11)",
+).split("|")
 
 NAVY = RGBColor(0x1F, 0x38, 0x64)
 BLUE = RGBColor(0x2E, 0x54, 0x96)
@@ -382,7 +410,7 @@ def build_docx(blocks: list[dict]) -> None:
 
     # header / footer
     hp = sec.header.paragraphs[0]
-    hp.text = "Báo cáo tăng trưởng — Kế hoạch triển khai Frontend"
+    hp.text = DOC_HEADER
     hp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
     for r in hp.runs:
         r.font.size = Pt(8)
@@ -406,7 +434,7 @@ def build_docx(blocks: list[dict]) -> None:
     for _ in range(2):
         doc.add_paragraph()
     p = doc.add_paragraph()
-    r = p.add_run("TÀI LIỆU KẾ HOẠCH KỸ THUẬT")
+    r = p.add_run(DOC_KICKER)
     r.font.size = Pt(10)
     r.font.bold = True
     r.font.color.rgb = BLUE
@@ -414,31 +442,31 @@ def build_docx(blocks: list[dict]) -> None:
 
     p = doc.add_paragraph()
     p.paragraph_format.space_before = Pt(6)
-    r = p.add_run("Báo cáo tăng trưởng")
+    r = p.add_run(DOC_TITLE)
     r.font.size = Pt(32)
     r.font.bold = True
     r.font.color.rgb = NAVY
 
     p = doc.add_paragraph()
-    r = p.add_run("GMV · Đơn hàng · User mua hàng")
+    r = p.add_run(DOC_SUBTITLE)
     r.font.size = Pt(16)
     r.font.color.rgb = GRAY
 
     p = doc.add_paragraph()
     p.paragraph_format.space_before = Pt(10)
-    r = p.add_run("Kế hoạch chia việc cho 3 FE theo 6 artboard của design\nmỗi người một màn hình, không conflict khi merge")
+    r = p.add_run(DOC_DESC)
     r.font.size = Pt(11.5)
     r.font.color.rgb = INK
     p.paragraph_format.line_spacing = 1.4
 
     doc.add_paragraph()
     meta = [
-        ("Phiên bản", "1.0 — Draft"),
-        ("Ngày", "04/11/2026"),
-        ("Người lập", "Tech Lead Frontend"),
-        ("Team", "Chinh (M1 + platform) · Long (M2 + M6) · Phuc (M4 + M5)"),
+        ("Phiên bản", DOC_VERSION),
+        ("Ngày", DOC_DATE),
+        ("Người lập", DOC_AUTHOR),
+        ("Team", DOC_TEAM),
         ("Stack", "Next.js 15 App Router · TypeScript strict · Tailwind · shadcn/ui · Recharts · zod"),
-        ("Trạng thái", "Bản 2 — thay thế bản 1 (chia theo giả định, đã bỏ)"),
+        ("Trạng thái", DOC_STATUS),
     ]
     t = doc.add_table(rows=0, cols=2)
     t.autofit = False
@@ -463,11 +491,7 @@ def build_docx(blocks: list[dict]) -> None:
     r.font.size = Pt(9)
     r.font.bold = True
     r.font.color.rgb = BLUE
-    for line in (
-        "6 artboard: 1 hub + 3 màn chi tiết + 1 đặc tả số liệu",
-        "3 FE, mỗi người sở hữu trọn vẹn màn hình của mình",
-        "Còn 5 điểm cần chốt với BE (mục 11)",
-    ):
+    for line in DOC_BULLETS:
         p = doc.add_paragraph()
         p.paragraph_format.space_after = Pt(3)
         p.paragraph_format.left_indent = Cm(0.4)
@@ -549,7 +573,13 @@ def build_docx(blocks: list[dict]) -> None:
                     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
                     p.paragraph_format.space_before = Pt(8)
                     p.paragraph_format.space_after = Pt(10)
-                    p.add_run().add_picture(str(img), width=Cm(content_w * 0.96))
+                    pic = p.add_run().add_picture(str(img), width=Cm(content_w * 0.96))
+                    # chặn chiều cao để sơ đồ dọc không chiếm nhiều trang
+                    max_h = Cm(17.0)
+                    if pic.height > max_h:
+                        ratio = max_h / pic.height
+                        pic.width = int(pic.width * ratio)
+                        pic.height = max_h
                 else:
                     p = doc.add_paragraph()
                     para_shade(p, CODE_BG)
