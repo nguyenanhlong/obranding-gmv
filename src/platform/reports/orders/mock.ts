@@ -73,7 +73,7 @@ function toRow(order: MockOrder): GrowthOrderRow {
     sellerId: order.sellerId,
     sellerCode: order.sellerCode,
     sellerName: order.sellerName,
-    customerId: order.customerId.replace('customer-', ''),
+    customerId: order.customerId,
     customerName: order.customerName,
     primaryCategoryName: order.category,
     itemQuantity: order.itemCount,

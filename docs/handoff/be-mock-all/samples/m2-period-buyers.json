@@ -1,0 +1,130 @@
+{
+  "meta": {
+    "groupBy": "MONTH",
+    "periodKey": "2026-09",
+    "startDate": "2026-09-01",
+    "endDate": "2026-09-30",
+    "periodStatus": "FINAL",
+    "timezone": "Asia/Ho_Chi_Minh",
+    "dataAsOf": "2026-11-12T08:04:35.009Z",
+    "sortBy": "ORDER_COUNT"
+  },
+  "pagination": {
+    "page": 1,
+    "pageSize": 10,
+    "totalItems": 291,
+    "totalPages": 30
+  },
+  "items": [
+    {
+      "customerId": "customer-285",
+      "customerName": "Đỗ Thảo Mai",
+      "maskedPhone": "091****908",
+      "orderCount": "5",
+      "totalValueVnd": "19042950",
+      "aovVnd": "3808590",
+      "regionName": "Tỉnh Đồng Tháp",
+      "classification": "RETURNING",
+      "lastOrderAt": "2026-09-25T01:55:24.000Z"
+    },
+    {
+      "customerId": "customer-84",
+      "customerName": "Trần Tuấn Huy",
+      "maskedPhone": "091****371",
+      "orderCount": "5",
+      "totalValueVnd": "16986200",
+      "aovVnd": "3397240",
+      "regionName": "Thành phố Cần Thơ",
+      "classification": "RETURNING",
+      "lastOrderAt": "2026-09-28T07:14:50.000Z"
+    },
+    {
+      "customerId": "customer-358",
+      "customerName": "Ngô Quốc Nguyên",
+      "maskedPhone": "091****909",
+      "orderCount": "5",
+      "totalValueVnd": "10043340",
+      "aovVnd": "2008668",
+      "regionName": "Tỉnh An Giang",
+      "classification": "RETURNING",
+      "lastOrderAt": "2026-09-29T05:44:19.000Z"
+    },
+    {
+      "customerId": "customer-283",
+      "customerName": "Hoàng Hải Linh",
+      "maskedPhone": "091****634",
+      "orderCount": "5",
+      "totalValueVnd": "9356740",
+      "aovVnd": "1871348",
+      "regionName": "Thành phố Đà Nẵng",
+      "classification": "RETURNING",
+      "lastOrderAt": "2026-09-29T03:04:20.000Z"
+    },
+    {
+      "customerId": "customer-124",
+      "customerName": "Trần Tuấn Huy",
+      "maskedPhone": "091****851",
+      "orderCount": "5",
+      "totalValueVnd": "4201320",
+      "aovVnd": "840264",
+      "regionName": "Thành phố Cần Thơ",
+      "classification": "RETURNING",
+      "lastOrderAt": "2026-09-28T03:13:01.000Z"
+    },
+    {
+      "customerId": "customer-310",
+      "customerName": "Phạm Bảo Thư",
+      "maskedPhone": "091****333",
+      "orderCount": "4",
+      "totalValueVnd": "13816840",
+      "aovVnd": "3454210",
+      "regionName": "Tỉnh An Giang",
+      "classification": "RETURNING",
+      "lastOrderAt": "2026-09-18T07:07:04.000Z"
+    },
+    {
+      "customerId": "customer-206",
+      "customerName": "Vũ Gia Vinh",
+      "maskedPhone": "091****085",
+      "orderCount": "4",
+      "totalValueVnd": "13656670",
+      "aovVnd": "3414168",
+      "regionName": "Tỉnh An Giang",
+      "classification": "RETURNING",
+      "lastOrderAt": "2026-09-23T03:05:47.000Z"
+    },
+    {
+      "customerId": "customer-196",
+      "customerName": "Vũ Gia Vinh",
+      "maskedPhone": "091****715",
+      "orderCount": "4",
+      "totalValueVnd": "12903610",
+      "aovVnd": "3225903",
+      "regionName": "Thành phố Cần Thơ",
+      "classification": "RETURNING",
+      "lastOrderAt": "2026-09-24T00:41:57.000Z"
+    },
+    {
+      "customerId": "customer-134",
+      "customerName": "Trần Tuấn Huy",
+      "maskedPhone": "091****221",
+      "orderCount": "4",
+      "totalValueVnd": "11679870",
+      "aovVnd": "2919968",
+      "regionName": "Tỉnh An Giang",
+      "classification": "RETURNING",
+      "lastOrderAt": "2026-09-29T15:02:43.000Z"
+    },
+    {
+      "customerId": "customer-141",
+      "customerName": "Nguyễn Minh Anh",
+      "maskedPhone": "091****180",
+      "orderCount": "4",
+      "totalValueVnd": "11539850",
+      "aovVnd": "2884963",
+      "regionName": "Tỉnh Đồng Tháp",
+      "classification": "RETURNING",
+      "lastOrderAt": "2026-09-20T10:16:32.000Z"
+    }
+  ]
+}

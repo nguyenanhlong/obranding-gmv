@@ -17,6 +17,8 @@ import type { ReportFilters } from '@/platform/reports/filters';
 import type { OrderSource } from '@/features/order-detail/contracts';
 import { DATASET_FROM, DATASET_TO, allOrders } from '@/platform/mock/dataset';
 import { mockListGrowthOrders } from '@/platform/reports/orders/mock';
+import { mockListPeriodBuyers } from '@/platform/reports/period-buyers/mock';
+import { mockListPeriodSellers } from '@/platform/reports/period-sellers/mock';
 import { bucketOf } from '@/platform/time';
 import { buildRawGrowthReport } from '@/features/growth-overview/server/growth.raw';
 import { buildRawPeriodSummary } from '@/features/period-detail/server/period.raw';
@@ -55,6 +57,15 @@ const COPY_FILES = [
   'src/platform/reports/orders/schema.ts',
   'src/platform/reports/orders/mapper.ts',
   'src/platform/reports/orders/mock.ts',
+  // API 3/4 — 2 tab của M2
+  'src/platform/reports/period-buyers/contracts.ts',
+  'src/platform/reports/period-buyers/schema.ts',
+  'src/platform/reports/period-buyers/mapper.ts',
+  'src/platform/reports/period-buyers/mock.ts',
+  'src/platform/reports/period-sellers/contracts.ts',
+  'src/platform/reports/period-sellers/schema.ts',
+  'src/platform/reports/period-sellers/mapper.ts',
+  'src/platform/reports/period-sellers/mock.ts',
   // M1
   'src/features/growth-overview/contracts.ts',
   'src/features/growth-overview/server/growth.mock.ts',
@@ -163,6 +174,27 @@ async function main(): Promise<void> {
     pageSize: 10,
   });
   writeJson('samples/m2-orders-page.json', periodOrders);
+
+  // API 3/4 — 2 tab còn lại của M2
+  writeJson(
+    'samples/m2-period-buyers.json',
+    mockListPeriodBuyers({
+      groupBy: 'MONTH',
+      periodKey: bucketOf(FILTERS_PERIOD.from, 'month'),
+      sortBy: 'ORDER_COUNT',
+      page: 1,
+      pageSize: 10,
+    }),
+  );
+  writeJson(
+    'samples/m2-period-sellers.json',
+    mockListPeriodSellers({
+      groupBy: 'MONTH',
+      periodKey: bucketOf(FILTERS_PERIOD.from, 'month'),
+      page: 1,
+      pageSize: 10,
+    }),
+  );
 
   // chọn user và seller có nhiều đơn nhất trong kỳ để sample có dữ liệu phong phú
   const inRange = allOrders().filter((o) => {

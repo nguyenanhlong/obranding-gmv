@@ -1,0 +1,119 @@
+{
+  "meta": {
+    "groupBy": "MONTH",
+    "periodKey": "2026-09",
+    "startDate": "2026-09-01",
+    "endDate": "2026-09-30",
+    "periodStatus": "FINAL",
+    "timezone": "Asia/Ho_Chi_Minh",
+    "dataAsOf": "2026-11-12T08:04:35.011Z"
+  },
+  "pagination": {
+    "page": 1,
+    "pageSize": 10,
+    "totalItems": 60,
+    "totalPages": 6
+  },
+  "items": [
+    {
+      "sellerId": "seller-15",
+      "sellerCode": "SL0001098",
+      "sellerName": "MỘC HƯƠNG COSMETICS 2",
+      "primaryCategoryName": "Sắc đẹp",
+      "orderCount": "14",
+      "gmvVnd": "41662030",
+      "buyerCount": "14",
+      "gmvSharePercent": 3.6
+    },
+    {
+      "sellerId": "seller-46",
+      "sellerCode": "SL0001315",
+      "sellerName": "CÔNG TY TNHH NƯỚC MẮM CỬA BIỂN 5",
+      "primaryCategoryName": "Mẹ & Bé",
+      "orderCount": "10",
+      "gmvVnd": "34916570",
+      "buyerCount": "10",
+      "gmvSharePercent": 3
+    },
+    {
+      "sellerId": "seller-4",
+      "sellerCode": "SL0001021",
+      "sellerName": "CÔNG TY TNHH TRÀ TÂN CƯƠNG XANH",
+      "primaryCategoryName": "Mẹ & Bé",
+      "orderCount": "14",
+      "gmvVnd": "34095380",
+      "buyerCount": "13",
+      "gmvSharePercent": 3
+    },
+    {
+      "sellerId": "seller-13",
+      "sellerCode": "SL0001084",
+      "sellerName": "CÔNG TY CỔ PHẦN CÀ PHÊ ĐẤT ĐỎ 2",
+      "primaryCategoryName": "Thực phẩm & Đồ uống",
+      "orderCount": "14",
+      "gmvVnd": "33857420",
+      "buyerCount": "14",
+      "gmvSharePercent": 3
+    },
+    {
+      "sellerId": "seller-54",
+      "sellerCode": "SL0001371",
+      "sellerName": "CÔNG TY TNHH TRÀ TÂN CƯƠNG XANH 6",
+      "primaryCategoryName": "Thời trang",
+      "orderCount": "14",
+      "gmvVnd": "31428030",
+      "buyerCount": "13",
+      "gmvSharePercent": 2.7
+    },
+    {
+      "sellerId": "seller-7",
+      "sellerCode": "SL0001042",
+      "sellerName": "MÂY TRE PHÚ VINH",
+      "primaryCategoryName": "Thực phẩm & Đồ uống",
+      "orderCount": "11",
+      "gmvVnd": "31331370",
+      "buyerCount": "11",
+      "gmvSharePercent": 2.7
+    },
+    {
+      "sellerId": "seller-22",
+      "sellerCode": "SL0001147",
+      "sellerName": "HỘ KINH DOANH YẾN SÀO KHÁNH PHONG 3",
+      "primaryCategoryName": "Mẹ & Bé",
+      "orderCount": "12",
+      "gmvVnd": "30346530",
+      "buyerCount": "12",
+      "gmvSharePercent": 2.7
+    },
+    {
+      "sellerId": "seller-23",
+      "sellerCode": "SL0001154",
+      "sellerName": "CÔNG TY CỔ PHẦN CÀ PHÊ ĐẤT ĐỎ 3",
+      "primaryCategoryName": "Sở thích & sưu tầm",
+      "orderCount": "11",
+      "gmvVnd": "29949820",
+      "buyerCount": "11",
+      "gmvSharePercent": 2.6
+    },
+    {
+      "sellerId": "seller-29",
+      "sellerCode": "SL0001196",
+      "sellerName": "CÔNG TY TNHH ĐỒ CHƠI GỖ BÉ NA 3",
+      "primaryCategoryName": "Sở thích & sưu tầm",
+      "orderCount": "11",
+      "gmvVnd": "29457600",
+      "buyerCount": "11",
+      "gmvSharePercent": 2.6
+    },
+    {
+      "sellerId": "seller-44",
+      "sellerCode": "SL0001301",
+      "sellerName": "CÔNG TY TNHH TRÀ TÂN CƯƠNG XANH 5",
+      "primaryCategoryName": "Nhà cửa và Đời sống",
+      "orderCount": "11",
+      "gmvVnd": "28172860",
+      "buyerCount": "10",
+      "gmvSharePercent": 2.5
+    }
+  ]
+}

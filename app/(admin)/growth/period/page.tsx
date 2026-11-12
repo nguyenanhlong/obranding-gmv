@@ -1,5 +1,10 @@
 import Link from 'next/link';
-import { parseFilters, parsePageSize, parsePositiveInt } from '@/platform/reports/filters';
+import {
+  clampToToday,
+  parseFilters,
+  parsePageSize,
+  parsePositiveInt,
+} from '@/platform/reports/filters';
 import { filtersToQueryString, periodRangeError } from '@/platform/reports/filters';
 import { formatDate } from '@/platform/format/date';
 import { todayIn } from '@/platform/time';
@@ -10,15 +15,32 @@ import { ChartFrame } from '@/platform/ui/chart-frame';
 import { EmptyState } from '@/platform/ui/empty-state';
 import { KpiCard } from '@/platform/ui/kpi-card';
 import { OrderTable } from '@/platform/ui/order-table';
-import { ORDER_STATUS_OPTIONS, PAGE_SIZE_ORDER } from '@/platform/reports/orders/contracts';
+import {
+  ORDER_STATUS_OPTIONS,
+  PAGE_SIZE_ORDER,
+} from '@/platform/reports/orders/contracts';
+import {
+  BUYER_SORT_LABEL,
+  PAGE_SIZE_PERIOD_ENTITY,
+  type BuyerSortBy,
+  type PeriodBuyerPage,
+} from '@/platform/reports/period-buyers/contracts';
+import type { PeriodSellerPage } from '@/platform/reports/period-sellers/contracts';
 import { DistributionBars } from '@/features/period-detail/components/distribution-bars';
 import { PageSizeSelect } from '@/features/period-detail/components/page-size-select';
+import { PeriodBuyersTable } from '@/features/period-detail/components/period-buyers-table';
+import { PeriodSellersTable } from '@/features/period-detail/components/period-sellers-table';
 import {
   GROUP_BY_LABEL,
   UNIT_TITLE,
   type PeriodMetric,
 } from '@/features/period-detail/contracts';
-import { getPeriodSummary, listPeriodOrders } from '@/features/period-detail/server/queries';
+import {
+  getPeriodSummary,
+  listPeriodBuyers,
+  listPeriodOrders,
+  listPeriodSellers,
+} from '@/features/period-detail/server/queries';
 
 export const dynamic = 'force-dynamic';
 
@@ -58,16 +80,39 @@ export default async function PeriodPage({ searchParams }: PageProps) {
     );
   }
 
-  const page = parsePositiveInt(sp.page, 1, 9999);
-  const pageSize = parsePageSize(sp.pageSize, PAGE_SIZE_ORDER, 10);
-  const q = typeof sp.q === 'string' ? sp.q : undefined;
-  const status = typeof sp.status === 'string' ? sp.status : undefined;
   const tab = TABS.find((t) => t.key === sp.tab)?.key ?? 'orders';
+  const allowedPageSizes = tab === 'orders' ? PAGE_SIZE_ORDER : PAGE_SIZE_PERIOD_ENTITY;
+  const page = parsePositiveInt(sp.page, 1, 9999);
+  const pageSize = parsePageSize(sp.pageSize, allowedPageSizes, 10);
+  const q = typeof sp.q === 'string' ? sp.q.slice(0, 100) : undefined;
+  const status = typeof sp.status === 'string' ? sp.status : undefined;
+  const sortBy: BuyerSortBy = sp.sortBy === 'TOTAL_VALUE' ? 'TOTAL_VALUE' : 'ORDER_COUNT';
 
-  const [summary, orders] = await Promise.all([
+  // Badge của tab luôn là số của lần tải đầu q rỗng (API 3/4), API 2 orders lấy từ API 6.
+  const [summary, orders, buyerBadge, sellerBadge] = await Promise.all([
     getPeriodSummary(filters),
-    listPeriodOrders(filters, { page, pageSize, q, status }),
+    tab === 'orders'
+      ? listPeriodOrders(filters, { page, pageSize, q, status })
+      : Promise.resolve(null),
+    listPeriodBuyers(filters, { page: 1, pageSize: 10, q: '', sortBy: 'ORDER_COUNT' }),
+    listPeriodSellers(filters, { page: 1, pageSize: 10, q: '' }),
   ]);
+
+  let buyers: PeriodBuyerPage | null = null;
+  if (tab === 'buyers') {
+    const needReload = Boolean(q) || sortBy !== 'ORDER_COUNT' || page !== 1 || pageSize !== 10;
+    buyers = needReload
+      ? await listPeriodBuyers(filters, { page, pageSize, q, sortBy })
+      : buyerBadge;
+  }
+
+  let sellers: PeriodSellerPage | null = null;
+  if (tab === 'sellers') {
+    const needReload = Boolean(q) || page !== 1 || pageSize !== 10;
+    sellers = needReload
+      ? await listPeriodSellers(filters, { page, pageSize, q })
+      : sellerBadge;
+  }
 
   const { period, kpis, distribution } = summary;
   const qs = filtersToQueryString(filters);
@@ -75,22 +120,48 @@ export default async function PeriodPage({ searchParams }: PageProps) {
   const backFrom = (typeof sp.backFrom === 'string' && sp.backFrom) || period.startDate;
   const backToRaw = (typeof sp.backTo === 'string' && sp.backTo) || period.endDate;
   const backTo = backToRaw > today ? today : backToRaw;
-  const backPeriod = (typeof sp.backPeriod === 'string' && sp.backPeriod) || period.groupBy.toLowerCase();
-  const totalPages = Math.max(1, Math.ceil(orders.total / pageSize));
+  const backPeriod =
+    (typeof sp.backPeriod === 'string' && sp.backPeriod) || period.groupBy.toLowerCase();
+  const tabCount: Record<(typeof TABS)[number]['key'], number> = {
+    orders: kpis.orders.value,
+    buyers: buyerBadge.pagination.totalItems,
+    sellers: sellerBadge.pagination.totalItems,
+  };
   const dayOnly = period.startDate === period.endDate;
   const approximate = period.status === 'PROVISIONAL';
 
-  const tableParams = new URLSearchParams(qs);
-  tableParams.set('tab', 'orders');
-  if (q) tableParams.set('q', q);
-  if (status && status !== 'ALL') tableParams.set('status', status);
-  const tableQs = tableParams.toString();
+  // Link sang trang chi tiết: from/to = biên kỳ, to kẹp về hôm nay.
+  const linkRange = clampToToday({ from: period.startDate, to: period.endDate }, filters.tz);
+  const detailQs = new URLSearchParams({
+    from: linkRange.from,
+    to: linkRange.to,
+    period: period.groupBy.toLowerCase(),
+  }).toString();
 
-  const tabCount: Record<(typeof TABS)[number]['key'], number> = {
-    orders: kpis.orders.value,
-    buyers: kpis.buyers.value,
-    sellers: kpis.activeSellers.value,
-  };
+  const ordersQuery = new URLSearchParams(qs);
+  ordersQuery.set('tab', 'orders');
+  if (q) ordersQuery.set('q', q);
+  if (status && status !== 'ALL') ordersQuery.set('status', status);
+  const ordersQs = ordersQuery.toString();
+
+  const buyersQuery = new URLSearchParams(qs);
+  buyersQuery.set('tab', 'buyers');
+  if (q) buyersQuery.set('q', q);
+  if (sortBy !== 'ORDER_COUNT') buyersQuery.set('sortBy', sortBy);
+  const buyersQs = buyersQuery.toString();
+
+  const sellersQuery = new URLSearchParams(qs);
+  sellersQuery.set('tab', 'sellers');
+  if (q) sellersQuery.set('q', q);
+  const sellersQs = sellersQuery.toString();
+
+  const ordersTotalPages = orders ? Math.max(1, Math.ceil(orders.total / pageSize)) : 1;
+  const buyersTotalPages = buyers
+    ? Math.max(1, Math.ceil(buyers.pagination.totalItems / pageSize))
+    : 1;
+  const sellersTotalPages = sellers
+    ? Math.max(1, Math.ceil(sellers.pagination.totalItems / pageSize))
+    : 1;
 
   return (
     <div className="space-y-5">
@@ -181,7 +252,7 @@ export default async function PeriodPage({ searchParams }: PageProps) {
           {TABS.map((t) => (
             <Link
               key={t.key}
-              href={`/growth/period?${qs}&tab=${t.key}&pageSize=${pageSize}`}
+              href={`/growth/period?${qs}&tab=${t.key}`}
               className={`-mb-px border-b-2 px-3 py-2 text-sm ${
                 t.key === tab
                   ? 'border-slate-900 font-medium text-slate-900'
@@ -196,7 +267,7 @@ export default async function PeriodPage({ searchParams }: PageProps) {
           ))}
         </nav>
 
-        {tab === 'orders' ? (
+        {tab === 'orders' && orders ? (
           <>
             <form method="get" action="" className="mb-3 flex flex-wrap items-center gap-2">
               <input type="hidden" name="from" value={filters.from} />
@@ -207,8 +278,9 @@ export default async function PeriodPage({ searchParams }: PageProps) {
                 type="search"
                 name="q"
                 defaultValue={q ?? ''}
-                placeholder="Tìm kiếm"
-                className="w-56 rounded-md border border-slate-300 px-2 py-1.5 text-sm"
+                maxLength={100}
+                placeholder="Mã đơn, mã/tên khách, nhà bán"
+                className="w-64 rounded-md border border-slate-300 px-2 py-1.5 text-sm"
               />
               <select
                 name="status"
@@ -228,7 +300,7 @@ export default async function PeriodPage({ searchParams }: PageProps) {
                 Lọc
               </button>
               <span className="ml-auto text-xs text-slate-500">
-                Hiển thị {pageSize} · trang {page}/{totalPages}
+                Hiển thị {pageSize} · trang {page}/{ordersTotalPages}
               </span>
             </form>
 
@@ -241,13 +313,13 @@ export default async function PeriodPage({ searchParams }: PageProps) {
                   value={pageSize}
                   options={[...PAGE_SIZE_ORDER]}
                   basePath="/growth/period"
-                  query={tableQs}
+                  query={ordersQs}
                 />
               </div>
 
               <div className="flex items-center gap-2">
                 <Link
-                  href={`/growth/period?${tableQs}&page=${Math.max(1, page - 1)}&pageSize=${pageSize}`}
+                  href={`/growth/period?${ordersQs}&page=${Math.max(1, page - 1)}&pageSize=${pageSize}`}
                   className={`inline-flex h-8 items-center rounded-md border border-slate-300 px-3 text-sm ${
                     page <= 1 ? 'pointer-events-none opacity-40' : 'hover:bg-slate-50'
                   }`}
@@ -255,12 +327,12 @@ export default async function PeriodPage({ searchParams }: PageProps) {
                   Trước
                 </Link>
                 <span className="px-1 text-sm tabular-nums text-slate-600">
-                  Trang {page}/{totalPages}
+                  Trang {page}/{ordersTotalPages}
                 </span>
                 <Link
-                  href={`/growth/period?${tableQs}&page=${Math.min(totalPages, page + 1)}&pageSize=${pageSize}`}
+                  href={`/growth/period?${ordersQs}&page=${Math.min(ordersTotalPages, page + 1)}&pageSize=${pageSize}`}
                   className={`inline-flex h-8 items-center rounded-md border border-slate-300 px-3 text-sm ${
-                    page >= totalPages ? 'pointer-events-none opacity-40' : 'hover:bg-slate-50'
+                    page >= ordersTotalPages ? 'pointer-events-none opacity-40' : 'hover:bg-slate-50'
                   }`}
                 >
                   Tiếp tục
@@ -268,12 +340,166 @@ export default async function PeriodPage({ searchParams }: PageProps) {
               </div>
             </div>
           </>
-        ) : (
-          <EmptyState
-            title={tab === 'buyers' ? 'Danh sách user mua hàng' : 'Danh sách nhà bán'}
-            description="Chờ hợp đồng API 3/4 từ BE. Số đếm trên tab lấy từ API 6 nên đã đúng."
-          />
-        )}
+        ) : null}
+
+        {tab === 'buyers' && buyers ? (
+          <>
+            <form method="get" action="" className="mb-3 flex flex-wrap items-center gap-2">
+              <input type="hidden" name="from" value={filters.from} />
+              <input type="hidden" name="to" value={filters.to} />
+              <input type="hidden" name="period" value={filters.period} />
+              <input type="hidden" name="tab" value="buyers" />
+              {sortBy !== 'ORDER_COUNT' ? (
+                <input type="hidden" name="sortBy" value={sortBy} />
+              ) : null}
+              <input
+                type="search"
+                name="q"
+                defaultValue={q ?? ''}
+                maxLength={100}
+                placeholder="Tên, số điện thoại hoặc mã khách"
+                className="w-64 rounded-md border border-slate-300 px-2 py-1.5 text-sm"
+              />
+              <button
+                type="submit"
+                className="rounded-md bg-slate-900 px-3 py-1.5 text-sm font-medium text-white"
+              >
+                Tìm
+              </button>
+
+              <div className="ml-auto flex items-center gap-1">
+                <span className="text-xs text-slate-500">Sắp xếp:</span>
+                {(['ORDER_COUNT', 'TOTAL_VALUE'] as const).map((key) => (
+                  <Link
+                    key={key}
+                    href={`/growth/period?${qs}&tab=buyers${q ? `&q=${encodeURIComponent(q)}` : ''}${
+                      key === 'ORDER_COUNT' ? '' : `&sortBy=${key}`
+                    }`}
+                    className={`rounded-md px-2.5 py-1 text-xs font-medium ${
+                      sortBy === key
+                        ? 'bg-slate-900 text-white'
+                        : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                    }`}
+                  >
+                    {BUYER_SORT_LABEL[key]}
+                  </Link>
+                ))}
+              </div>
+            </form>
+
+            <PeriodBuyersTable
+              rows={buyers.items}
+              startIndex={(page - 1) * pageSize}
+              linkQuery={detailQs}
+            />
+
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 pt-3">
+              <div className="flex items-center gap-3">
+                <span className="text-sm text-slate-500">
+                  Kết quả {formatCount(buyers.pagination.totalItems)}
+                </span>
+                <PageSizeSelect
+                  value={pageSize}
+                  options={[...PAGE_SIZE_PERIOD_ENTITY]}
+                  basePath="/growth/period"
+                  query={buyersQs}
+                />
+              </div>
+              <div className="flex items-center gap-2">
+                <Link
+                  href={`/growth/period?${buyersQs}&page=${Math.max(1, page - 1)}&pageSize=${pageSize}`}
+                  className={`inline-flex h-8 items-center rounded-md border border-slate-300 px-3 text-sm ${
+                    page <= 1 ? 'pointer-events-none opacity-40' : 'hover:bg-slate-50'
+                  }`}
+                >
+                  Trước
+                </Link>
+                <span className="px-1 text-sm tabular-nums text-slate-600">
+                  Trang {page}/{buyersTotalPages}
+                </span>
+                <Link
+                  href={`/growth/period?${buyersQs}&page=${Math.min(buyersTotalPages, page + 1)}&pageSize=${pageSize}`}
+                  className={`inline-flex h-8 items-center rounded-md border border-slate-300 px-3 text-sm ${
+                    page >= buyersTotalPages ? 'pointer-events-none opacity-40' : 'hover:bg-slate-50'
+                  }`}
+                >
+                  Tiếp tục
+                </Link>
+              </div>
+            </div>
+          </>
+        ) : null}
+
+        {tab === 'sellers' && sellers ? (
+          <>
+            <form method="get" action="" className="mb-3 flex flex-wrap items-center gap-2">
+              <input type="hidden" name="from" value={filters.from} />
+              <input type="hidden" name="to" value={filters.to} />
+              <input type="hidden" name="period" value={filters.period} />
+              <input type="hidden" name="tab" value="sellers" />
+              <input
+                type="search"
+                name="q"
+                defaultValue={q ?? ''}
+                maxLength={100}
+                placeholder="Mã hoặc tên nhà bán"
+                className="w-64 rounded-md border border-slate-300 px-2 py-1.5 text-sm"
+              />
+              <button
+                type="submit"
+                className="rounded-md bg-slate-900 px-3 py-1.5 text-sm font-medium text-white"
+              >
+                Tìm
+              </button>
+              <span className="ml-auto text-xs text-slate-500">
+                Xếp theo GMV giảm dần · Hiển thị {pageSize} · trang {page}/{sellersTotalPages}
+              </span>
+            </form>
+
+            <PeriodSellersTable
+              rows={sellers.items}
+              startIndex={(page - 1) * pageSize}
+              linkQuery={detailQs}
+            />
+
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 pt-3">
+              <div className="flex items-center gap-3">
+                <span className="text-sm text-slate-500">
+                  Kết quả {formatCount(sellers.pagination.totalItems)}
+                </span>
+                <PageSizeSelect
+                  value={pageSize}
+                  options={[...PAGE_SIZE_PERIOD_ENTITY]}
+                  basePath="/growth/period"
+                  query={sellersQs}
+                />
+              </div>
+              <div className="flex items-center gap-2">
+                <Link
+                  href={`/growth/period?${sellersQs}&page=${Math.max(1, page - 1)}&pageSize=${pageSize}`}
+                  className={`inline-flex h-8 items-center rounded-md border border-slate-300 px-3 text-sm ${
+                    page <= 1 ? 'pointer-events-none opacity-40' : 'hover:bg-slate-50'
+                  }`}
+                >
+                  Trước
+                </Link>
+                <span className="px-1 text-sm tabular-nums text-slate-600">
+                  Trang {page}/{sellersTotalPages}
+                </span>
+                <Link
+                  href={`/growth/period?${sellersQs}&page=${Math.min(sellersTotalPages, page + 1)}&pageSize=${pageSize}`}
+                  className={`inline-flex h-8 items-center rounded-md border border-slate-300 px-3 text-sm ${
+                    page >= sellersTotalPages
+                      ? 'pointer-events-none opacity-40'
+                      : 'hover:bg-slate-50'
+                  }`}
+                >
+                  Tiếp tục
+                </Link>
+              </div>
+            </div>
+          </>
+        ) : null}
       </ChartFrame>
     </div>
   );

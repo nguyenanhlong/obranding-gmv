@@ -1,6 +1,11 @@
 import type { Page } from '@/contracts/base';
 import type { GrowthOrderRow } from '@/platform/reports/orders/contracts';
 import type { ReportFilters } from '@/platform/reports/filters';
+import type {
+  BuyerSortBy,
+  PeriodBuyerPage,
+} from '@/platform/reports/period-buyers/contracts';
+import type { PeriodSellerPage } from '@/platform/reports/period-sellers/contracts';
 
 export type PeriodStatus = 'FINAL' | 'PROVISIONAL';
 
@@ -59,14 +64,31 @@ export type PeriodOrderQuery = {
   status?: string;
 };
 
+export type PeriodBuyerQuery = {
+  page: number;
+  pageSize: number;
+  sortBy?: BuyerSortBy;
+  q?: string;
+};
+
+export type PeriodSellerQuery = {
+  page: number;
+  pageSize: number;
+  q?: string;
+};
+
 /**
- * Nguồn dữ liệu của M2, tách đôi theo hợp đồng:
- * - getSummary  → API 6 (/growth/period-summary)
- * - listOrders  → API 2 (chưa có hợp đồng, hiện là mock)
+ * Nguồn dữ liệu của M2:
+ * - getSummary   → API 6 (/growth/period-summary)
+ * - listOrders   → API 2 (scope PERIOD)
+ * - listBuyers   → API 3
+ * - listSellers  → API 4
  */
 export interface PeriodSource {
   getSummary(f: ReportFilters): Promise<PeriodSummary>;
   listOrders(f: ReportFilters, q: PeriodOrderQuery): Promise<Page<GrowthOrderRow>>;
+  listBuyers(f: ReportFilters, q: PeriodBuyerQuery): Promise<PeriodBuyerPage>;
+  listSellers(f: ReportFilters, q: PeriodSellerQuery): Promise<PeriodSellerPage>;
 }
 
 export { GROUP_BY_LABEL } from '@/platform/reports/labels';
